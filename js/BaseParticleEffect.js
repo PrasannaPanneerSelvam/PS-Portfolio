@@ -1,33 +1,36 @@
-import Particle from './Particle.js';
+import BaseParticle from './BaseParticle.js';
+
+function ParticleGenerator() {
+  return new BaseParticle(...arguments);
+}
 
 class PixelEffect {
-  #particleArray = [];
   #pixelArray = [];
   #ctx;
-  #canvas;
   #image;
-  #canvasOffset;
+  // #canvasOffset;
   #contentOffset;
   #optionalHexColor;
   #rotate;
   #noOfParticlesNotInPosition;
 
-  constructor(
-    canvasObj,
-    ctx,
-    image,
-    contentOffset = { x: 0, y: 0 },
-    rotate = false,
-    optionalHexColor = null
-  ) {
-    this.#canvas = canvasObj;
+  #particleConstructor;
+  #skipValue;
+
+  constructor(canvasObj, ctx, image, options) {
+    this._canvas = canvasObj;
     this.#ctx = ctx;
     this.#image = image;
-    this.#contentOffset = contentOffset;
-    this.#optionalHexColor = optionalHexColor;
-    this.#initiate();
+    this.#contentOffset = options.contentOffset ?? { x: 0, y: 0 };
+    this.#optionalHexColor = options.optionalHexColor ?? null;
 
-    this.#rotate = rotate;
+    this.#rotate = options.rotate ?? false;
+    this.#particleConstructor =
+      options.particleConstructor ?? ParticleGenerator;
+
+    this.#skipValue = options.skipValue ?? 1;
+
+    this.#initiate();
   }
 
   #initiate() {
@@ -48,6 +51,7 @@ class PixelEffect {
 
   #scanImageDataAndCreateParticles() {
     this.#noOfParticlesNotInPosition = 0;
+    this._particleArray = [];
 
     const data = this.#pixelArray.data,
       rowCount = this.#image.height,
@@ -55,7 +59,9 @@ class PixelEffect {
       startX = this.#contentOffset.x,
       startY = this.#contentOffset.y;
 
-    let skip = 1,
+    const Particle = this.#particleConstructor;
+
+    let skip = this.#skipValue,
       colJump = 0,
       rowJump = 0;
     for (let row = 0; row < rowCount; row++) {
@@ -78,7 +84,7 @@ class PixelEffect {
 
         if (aVal !== 0) {
           const hex = this.#optionalHexColor ?? [rVal, gVal, bVal];
-          this.#particleArray.push(new Particle(x, y, hex));
+          this._particleArray.push(Particle(x, y, hex));
           this.#noOfParticlesNotInPosition++;
         }
       }
@@ -103,8 +109,8 @@ class PixelEffect {
   }
 
   render() {
-    const arr = this.#particleArray,
-      { width, height } = this.#canvas,
+    const arr = this._particleArray,
+      { width, height } = this._canvas,
       ctx = this.#ctx;
 
     const onPositionCallback = () => {

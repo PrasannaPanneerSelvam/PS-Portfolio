@@ -1,4 +1,5 @@
-import PixelEffect from './PixelEffect.js';
+// import PixelEffect from './PixelEffect.js';
+import PixelEffect from './BaseParticleEffect.js';
 import { hexToRGBArray } from './Utils.js';
 
 const handleImages = function (canvas) {
@@ -29,29 +30,38 @@ const handleImages = function (canvas) {
     htmlImage.onload = function () {
       const xOffset = canvas.__psCenter.x - size / 2,
         yOffset = canvas.__psCenter.y - size / 2;
-      const effect = new PixelEffect(
-        canvas,
-        ctx,
-        htmlImage,
-        { x: xOffset + additionOffset.x, y: yOffset + additionOffset.y },
+      // const effect = new PixelEffect(
+      //   canvas,
+      //   ctx,
+      //   htmlImage,
+      //   { x: xOffset + additionOffset.x, y: yOffset + additionOffset.y },
+      //   rotate,
+      //   optionalHexColor
+      // );
+
+      const effect = new PixelEffect(canvas, ctx, htmlImage, {
+        contentOffset: {
+          x: xOffset + additionOffset.x,
+          y: yOffset + additionOffset.y,
+        },
         rotate,
-        optionalHexColor
-      );
+        optionalHexColor,
+      });
       effect.render();
     };
   }
   return handleImages;
 };
 
-const canvasText = document.getElementById('myCanvas'),
-  canvasOut = document.getElementById('myCanvas1');
+const canvasText = document.getElementById('loaderLogoTextCanvas'),
+  canvasOutLine = document.getElementById('loaderOutlineCanvas');
 
 const clearance = 20,
-  offset = 100;
+  logoSize = 150;
 
 handleImages(canvasText)(
   './images/logotext.png',
-  150,
+  logoSize,
   {
     x: -1,
     y: -2,
@@ -60,9 +70,9 @@ handleImages(canvasText)(
   hexToRGBArray('#31a8ff')
 );
 
-handleImages(canvasOut)(
+handleImages(canvasOutLine)(
   './images/outline.png',
-  150 + 2 * clearance,
+  logoSize + 2 * clearance,
   {
     x: 0,
     y: 0,
