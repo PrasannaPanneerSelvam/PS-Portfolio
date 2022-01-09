@@ -1,0 +1,186 @@
+function randomInRange([minVal, maxVal]) {
+  const diffVelX = maxVal - minVal;
+  return Math.random() * diffVelX + minVal;
+}
+
+class Particle {
+  #xMinRange;
+  #xMaxRange;
+  #yMinRange;
+  #yMaxRange;
+
+  #xVel;
+  #yVel;
+
+  #particleRadius;
+  #particleColor;
+
+  constructor(boundaryValues, options = {}) {
+    this.setBoundary(boundaryValues);
+
+    const maxDiff = 5;
+    this.#xVel = randomInRange([-maxDiff / 2, maxDiff / 2]);
+    this.#yVel = randomInRange([-maxDiff / 2, maxDiff / 2]);
+
+    this.#xVel = this.#xVel === 0 ? 0.01 : this.#xVel;
+    this.#yVel = this.#yVel === 0 ? 0.01 : this.#yVel;
+
+    this.#particleRadius = randomInRange([2, 3]);
+    this.#particleColor = options.particleColor ?? 'white';
+  }
+
+  setBoundary({ xMinRange, xMaxRange, yMinRange, yMaxRange }) {
+    this.x = randomInRange([xMinRange, xMaxRange]);
+    this.y = randomInRange([yMinRange, yMaxRange]);
+
+    this.#xMinRange = xMinRange;
+    this.#yMinRange = yMinRange;
+
+    this.#xMaxRange = xMaxRange;
+    this.#yMaxRange = yMaxRange;
+  }
+
+  update() {
+    if (this.#xMinRange > this.x || this.x > this.#xMaxRange) this.#xVel *= -1;
+    if (this.#yMinRange > this.y || this.y > this.#yMaxRange) this.#yVel *= -1;
+
+    this.x += this.#xVel;
+    this.y += this.#yVel;
+
+    return this;
+  }
+
+  draw(ctx) {
+    ctx.fillStyle = this.#particleColor;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.#particleRadius, 0, 360);
+    ctx.fill();
+  }
+}
+
+class Constellation {
+  #particles;
+  #ctx;
+  #canvas;
+  #canvasDimensionInfo;
+
+  #particleColor;
+  #linkColor;
+
+  constructor(canvas, options = {}) {
+    this.#canvas = canvas;
+    this.#ctx = this.#canvas.getContext('2d');
+
+    this.#particleColor = options.particleColor;
+    this.#linkColor = options.linkColor ?? 'rgba(0, 181, 255)';
+
+    this.#updateCanvasBoundaries();
+    this.#initParticles();
+  }
+
+  #updateCanvasBoundaries() {
+    const { x, y, width, height } = this.#canvas.getBoundingClientRect();
+
+    this.#canvasDimensionInfo = {
+      xMinRange: x,
+      yMinRange: y,
+
+      xMaxRange: x + width,
+      yMaxRange: y + height,
+    };
+  }
+
+  updateOnResize() {
+    this.#updateCanvasBoundaries();
+
+    for (let idx = 0; idx < this.#particles.length; idx++) {
+      this.#particles[idx].setBoundary(this.#canvasDimensionInfo);
+    }
+  }
+
+  #initParticles() {
+    this.#particles = [];
+    for (let idx = 0; idx < 50; idx++)
+      this.#particles.push(
+        new Particle(this.#canvasDimensionInfo, {
+          particleColor: this.#particleColor,
+        })
+      );
+  }
+
+  #update() {
+    function distance(x1, y1, x2, y2) {
+      const dx = x1 - x2,
+        dy = y1 - y2;
+      return Math.sqrt(dx ** 2 + dy ** 2);
+    }
+
+    for (let idx = 0; idx < this.#particles.length; idx++) {
+      this.#particles[idx].update().draw(this.#ctx);
+    }
+
+    for (let i = 0; i < this.#particles.length - 1; i++) {
+      const refParticle = this.#particles[i];
+      for (let idx = i + 1; idx < this.#particles.length; idx++) {
+        const otherParticle = this.#particles[idx],
+          dis = distance(
+            refParticle.x,
+            refParticle.y,
+            otherParticle.x,
+            otherParticle.y
+          );
+
+        const maxDistance = 150,
+          maxThickness = 1;
+
+        if (dis < maxDistance) {
+          const lineThickness = maxThickness - dis / maxDistance;
+
+          this.#ctx.strokeStyle = this.#linkColor;
+          this.#ctx.lineWidth = lineThickness;
+          this.#ctx.beginPath();
+          this.#ctx.moveTo(refParticle.x, refParticle.y);
+          this.#ctx.lineTo(otherParticle.x, otherParticle.y);
+          this.#ctx.stroke();
+        }
+      }
+    }
+  }
+
+  animate() {
+    function animation() {
+      const { xMinRange, xMaxRange, yMinRange, yMaxRange } =
+        this.#canvasDimensionInfo;
+      this.#ctx.clearRect(xMinRange, yMinRange, xMaxRange, yMaxRange);
+      this.#update();
+
+      requestAnimationFrame(animation.bind(this));
+    }
+
+    animation.call(this);
+  }
+}
+
+/************************ Driver code ***********************************/
+function mainFn() {
+  const canvasId = 'constellation-canvas';
+
+  const canvas = document.getElementById(canvasId);
+
+  const setCanvasSize = function () {
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
+  }.bind(canvas);
+
+  setCanvasSize();
+
+  const ConstellationEffect = new Constellation(canvas);
+  ConstellationEffect.animate();
+
+  window.addEventListener('resize', () => {
+    setCanvasSize();
+    ConstellationEffect.updateOnResize();
+  });
+}
+
+mainFn();
