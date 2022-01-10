@@ -18,7 +18,7 @@ class Particle {
   constructor(boundaryValues, options = {}) {
     this.setBoundary(boundaryValues);
 
-    const maxDiff = 5;
+    const maxDiff = 2;
     this.#xVel = randomInRange([-maxDiff / 2, maxDiff / 2]);
     this.#yVel = randomInRange([-maxDiff / 2, maxDiff / 2]);
 
@@ -66,6 +66,8 @@ class Constellation {
 
   #particleColor;
   #linkColor;
+  #particleNumber;
+  #stopAnimation;
 
   constructor(canvas, options = {}) {
     this.#canvas = canvas;
@@ -73,20 +75,21 @@ class Constellation {
 
     this.#particleColor = options.particleColor;
     this.#linkColor = options.linkColor ?? 'rgba(0, 181, 255)';
+    this.#stopAnimation = false;
 
     this.#updateCanvasBoundaries();
     this.#initParticles();
   }
 
   #updateCanvasBoundaries() {
-    const { x, y, width, height } = this.#canvas.getBoundingClientRect();
+    const { width, height } = this.#canvas.getBoundingClientRect();
 
     this.#canvasDimensionInfo = {
-      xMinRange: x,
-      yMinRange: y,
+      xMinRange: 0,
+      yMinRange: 0,
 
-      xMaxRange: x + width,
-      yMaxRange: y + height,
+      xMaxRange: width,
+      yMaxRange: height,
     };
   }
 
@@ -100,7 +103,8 @@ class Constellation {
 
   #initParticles() {
     this.#particles = [];
-    for (let idx = 0; idx < 50; idx++)
+    this.#particleNumber = 20;
+    for (let idx = 0; idx < this.#particleNumber; idx++)
       this.#particles.push(
         new Particle(this.#canvasDimensionInfo, {
           particleColor: this.#particleColor,
@@ -149,6 +153,8 @@ class Constellation {
 
   animate() {
     function animation() {
+      if (this.#stopAnimation) return;
+
       const { xMinRange, xMaxRange, yMinRange, yMaxRange } =
         this.#canvasDimensionInfo;
       this.#ctx.clearRect(xMinRange, yMinRange, xMaxRange, yMaxRange);
@@ -159,6 +165,11 @@ class Constellation {
 
     animation.call(this);
   }
+
+  toggleAnimation(value) {
+    this.#stopAnimation = value ?? !this.#stopAnimation;
+    this.animate();
+  }
 }
 
 /************************ Driver code ***********************************/
@@ -168,8 +179,9 @@ function mainFn() {
   const canvas = document.getElementById(canvasId);
 
   const setCanvasSize = function () {
-    this.width = window.innerWidth;
-    this.height = window.innerHeight;
+    const { width, height } = window.getComputedStyle(this);
+    this.width = width.split('px')[0];
+    this.height = height.split('px')[0];
   }.bind(canvas);
 
   setCanvasSize();
@@ -181,6 +193,17 @@ function mainFn() {
     setCanvasSize();
     ConstellationEffect.updateOnResize();
   });
+
+  const constellationObserver = new IntersectionObserver(entries => {
+    ConstellationEffect.toggleAnimation(!entries[0].isIntersecting);
+  });
+
+  constellationObserver.observe(canvas);
 }
 
 mainFn();
+
+const body = document.body;
+window.addEventListener('scroll', () => {
+  console.log('oh biy');
+});
