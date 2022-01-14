@@ -12,11 +12,13 @@ body {
   overflow: hidden;
 }
 
+.menu-header {
+  display: flex;
+  align-items: center;
+}
+
 /* Logo section with optional ham-burger-menu */
 .first-container {
-  position: absolute;
-  inset: 0 0 auto 0;
-  z-index: 10;
   display: flex;
   align-items: center;
 }
@@ -37,31 +39,51 @@ body {
   margin-left: auto;
 
   height: 3px;
-  width: 21px;
+  width: 30px;
   background-color: white;
 
-  border-radius: 2px;
+  border-radius: 10px;
+  transition: all 0.2s ease-out;
 
   &::before,
   &::after {
     content: '';
+    display: inherit;
     position: absolute;
-    background-color: inherit;
+    background-color: white;
     height: inherit;
     width: inherit;
     border-radius: inherit;
-  }
 
-  &::before {
-    top: -200%;
+    top: 7px;
+    transition: all 0.2s ease-out;
   }
 
   &::after {
-    bottom: -200%;
+    top: -7px;
+  }
+
+  &.active {
+    background-color: transparent;
+
+    &::before {
+      top: 0;
+      transform: rotate(-45deg);
+    }
+
+    &::after {
+      top: 0;
+      transform: rotate(45deg);
+    }
   }
 }
 
 @media screen and (max-width: 600px) {
+  .first-container {
+    position: absolute;
+    inset: 0 0 auto 0;
+    z-index: 10;
+  }
   .ham-burger-button {
     display: inline-block;
   }
@@ -70,12 +92,8 @@ body {
 /* Nav bar links */
 .second-container {
   position: relative;
-
-  display: inline-block;
-  background-color: aquamarine;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
+  display: flex;
+  margin-left: auto;
 }
 
 .nav-items-holder {
@@ -83,27 +101,43 @@ body {
   justify-content: center;
   align-items: center;
 
-  position: absolute;
-  inset: 0 0 0 30%;
   background-color: black;
   color: white;
 
-  transform: translateX(100%);
-  transition: all 500ms ease-in-out;
-
-  &.active {
-    transform: translateX(0%);
-  }
-
-  ul {
+  .nav-item-list {
     display: flex;
     height: min-content;
-    flex-direction: column;
     gap: 10px;
 
-    li {
+    &-item {
       list-style: none;
       text-decoration: none;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .second-container {
+    display: inline-block;
+    background-color: aquamarine;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+  }
+
+  .nav-items-holder {
+    position: absolute;
+    inset: 0 0 0 30%;
+
+    transform: translateX(100%);
+    transition: transform 500ms ease-in-out;
+
+    &.active {
+      transform: translateX(0%);
+    }
+
+    .nav-item-list {
+      flex-direction: column;
     }
   }
 }
