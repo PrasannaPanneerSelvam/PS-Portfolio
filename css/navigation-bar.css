@@ -1,0 +1,182 @@
+.resize-animation-stopper * {
+  -webkit-animation: none !important;
+          animation: none !important;
+  -webkit-transition: none !important;
+  transition: none !important;
+}
+
+.navigation-bar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+
+.menu-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+/* Logo section with optional ham-burger-menu */
+.first-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.logo-container {
+  background-color: aqua;
+  height: 50px;
+  width: 50px;
+}
+
+.brand-logo-container {
+  padding: 0.5rem;
+}
+
+.brand-logo-container .brand-logo {
+  height: 40px;
+  display: inline-block;
+  position: relative;
+}
+
+.brand-logo-container .brand-logo img {
+  height: 100%;
+  position: absolute;
+  aspect-ratio: 1 / 1;
+}
+
+.ham-burger-button {
+  display: inline-block;
+  display: none;
+  position: relative;
+  margin-right: 7px;
+  margin-left: auto;
+  height: 3px;
+  width: 30px;
+  background-color: white;
+  border-radius: 10px;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+.ham-burger-button::before, .ham-burger-button::after {
+  content: '';
+  display: inherit;
+  position: absolute;
+  background-color: white;
+  height: inherit;
+  width: inherit;
+  border-radius: inherit;
+  top: 7px;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+.ham-burger-button::after {
+  top: -7px;
+}
+
+.ham-burger-button.active {
+  background-color: transparent;
+}
+
+.ham-burger-button.active::before {
+  top: 0;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+.ham-burger-button.active::after {
+  top: 0;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+@media screen and (max-width: 600px) {
+  .first-container {
+    position: absolute;
+    inset: 0 0 auto 0;
+    z-index: 10;
+  }
+  .ham-burger-button {
+    display: inline-block;
+  }
+}
+
+/* Nav bar links */
+.second-container {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: auto;
+}
+
+.nav-items-holder {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: black;
+  color: white;
+}
+
+.nav-items-holder .nav-item-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+  gap: 10px;
+}
+
+.nav-items-holder .nav-item-list-item {
+  list-style: none;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 600px) {
+  .second-container {
+    display: inline-block;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+  }
+  .nav-items-holder {
+    position: absolute;
+    inset: 0 0 0 30%;
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+    -webkit-transition: -webkit-transform 500ms ease-in-out;
+    transition: -webkit-transform 500ms ease-in-out;
+    transition: transform 500ms ease-in-out;
+    transition: transform 500ms ease-in-out, -webkit-transform 500ms ease-in-out;
+  }
+  .nav-items-holder.active {
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+  }
+  .nav-items-holder .nav-item-list {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+/*# sourceMappingURL=navigation-bar.css.map */

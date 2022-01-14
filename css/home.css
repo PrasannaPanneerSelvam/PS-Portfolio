@@ -1,0 +1,67 @@
+.home {
+  color: white;
+  background-color: black;
+  position: relative;
+}
+
+.constellation-canvas {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+}
+
+.short-intro {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.contact-button {
+  position: absolute;
+  bottom: calc(0% - 200px);
+}
+
+.typewrite-text {
+  display: inline-block;
+  position: relative;
+}
+
+.typewrite-text::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 150%;
+  top: 50%;
+  right: -5px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  border-right: 2px solid white;
+  -webkit-animation: blink 300ms infinite linear alternate;
+          animation: blink 300ms infinite linear alternate;
+}
+
+@-webkit-keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/*# sourceMappingURL=home.css.map */

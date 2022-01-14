@@ -1,0 +1,316 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
+.resize-animation-stopper * {
+  -webkit-animation: none !important;
+          animation: none !important;
+  -webkit-transition: none !important;
+  transition: none !important;
+}
+
+.navigation-bar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+
+.menu-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+/* Logo section with optional ham-burger-menu */
+.first-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.logo-container {
+  background-color: aqua;
+  height: 50px;
+  width: 50px;
+}
+
+.brand-logo-container {
+  padding: 0.5rem;
+}
+
+.brand-logo-container .brand-logo {
+  height: 40px;
+  display: inline-block;
+  position: relative;
+}
+
+.brand-logo-container .brand-logo img {
+  height: 100%;
+  position: absolute;
+  aspect-ratio: 1 / 1;
+}
+
+.ham-burger-button {
+  display: inline-block;
+  display: none;
+  position: relative;
+  margin-right: 7px;
+  margin-left: auto;
+  height: 3px;
+  width: 30px;
+  background-color: white;
+  border-radius: 10px;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+.ham-burger-button::before, .ham-burger-button::after {
+  content: '';
+  display: inherit;
+  position: absolute;
+  background-color: white;
+  height: inherit;
+  width: inherit;
+  border-radius: inherit;
+  top: 7px;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+.ham-burger-button::after {
+  top: -7px;
+}
+
+.ham-burger-button.active {
+  background-color: transparent;
+}
+
+.ham-burger-button.active::before {
+  top: 0;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+.ham-burger-button.active::after {
+  top: 0;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+@media screen and (max-width: 600px) {
+  .first-container {
+    position: absolute;
+    inset: 0 0 auto 0;
+    z-index: 10;
+  }
+  .ham-burger-button {
+    display: inline-block;
+  }
+}
+
+/* Nav bar links */
+.second-container {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: auto;
+}
+
+.nav-items-holder {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: black;
+  color: white;
+}
+
+.nav-items-holder .nav-item-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+  gap: 10px;
+}
+
+.nav-items-holder .nav-item-list-item {
+  list-style: none;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 600px) {
+  .second-container {
+    display: inline-block;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+  }
+  .nav-items-holder {
+    position: absolute;
+    inset: 0 0 0 30%;
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+    -webkit-transition: -webkit-transform 500ms ease-in-out;
+    transition: -webkit-transform 500ms ease-in-out;
+    transition: transform 500ms ease-in-out;
+    transition: transform 500ms ease-in-out, -webkit-transform 500ms ease-in-out;
+  }
+  .nav-items-holder.active {
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+  }
+  .nav-items-holder .nav-item-list {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+.home {
+  color: white;
+  background-color: black;
+  position: relative;
+}
+
+.constellation-canvas {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+}
+
+.short-intro {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.contact-button {
+  position: absolute;
+  bottom: calc(0% - 200px);
+}
+
+.typewrite-text {
+  display: inline-block;
+  position: relative;
+}
+
+.typewrite-text::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 150%;
+  top: 50%;
+  right: -5px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  border-right: 2px solid white;
+  -webkit-animation: blink 300ms infinite linear alternate;
+          animation: blink 300ms infinite linear alternate;
+}
+
+@-webkit-keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.outlined-btn {
+  padding: 1.25rem 1.75rem;
+  color: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+  border-radius: var(--border-radius);
+  background: transparent;
+  cursor: pointer;
+}
+
+.outlined-btn.blur {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+:root {
+  --primary-color: #000;
+  --secondary-color: #fff;
+  --tertiary-color: rgba(0, 181, 255);
+  --border-radius: 4px;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Monserrat', sans-serif;
+}
+
+body {
+  background-color: black;
+  width: 100vw;
+}
+
+.body-container {
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.full-page-section {
+  height: 100vh;
+}
+
+.about-me {
+  color: white;
+  background-color: black;
+  position: relative;
+}
+
+.skills-showcase-canvas {
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  top: 20%;
+  right: 0;
+}
+
+.contact {
+  color: white;
+  background-color: black;
+}
+/*# sourceMappingURL=portfolio-styling.css.map */

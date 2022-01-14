@@ -17,6 +17,7 @@ const NavigationBar = (function () {
   function toggleSideBar() {
     slider.classList.toggle('active');
     hamburgerButton.classList.toggle('active');
+    secondContainer.classList.toggle('active');
   }
 
   slider.addEventListener('click', e => {

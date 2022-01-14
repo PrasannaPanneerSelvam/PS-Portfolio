@@ -203,7 +203,7 @@ function mainFn() {
 
 mainFn();
 
-const body = document.body;
-window.addEventListener('scroll', () => {
-  console.log('oh biy');
-});
+// const body = document.body;
+// window.addEventListener('scroll', () => {
+//   console.log('oh biy');
+// });

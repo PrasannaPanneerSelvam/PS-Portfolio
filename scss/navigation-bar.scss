@@ -1,20 +1,15 @@
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .resize-animation-stopper * {
   animation: none !important;
   transition: none !important;
 }
 
-body {
-  background-color: black;
-  width: 100vw;
-  overflow: hidden;
+.navigation-bar {
+  // position: sticky;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  transition: all 300ms ease-in-out;
 }
 
 .menu-header {
@@ -32,6 +27,22 @@ body {
   background-color: aqua;
   height: 50px;
   width: 50px;
+}
+
+.brand-logo-container {
+  padding: 0.5rem;
+
+  .brand-logo {
+    height: 40px;
+    display: inline-block;
+    position: relative;
+
+    img {
+      height: 100%;
+      position: absolute;
+      aspect-ratio: 1 / 1;
+    }
+  }
 }
 
 .ham-burger-button {
@@ -124,7 +135,6 @@ body {
 @media screen and (max-width: 600px) {
   .second-container {
     display: inline-block;
-    background-color: aquamarine;
     height: 100vh;
     width: 100vw;
     overflow: hidden;

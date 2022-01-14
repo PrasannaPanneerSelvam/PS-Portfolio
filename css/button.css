@@ -5,8 +5,9 @@
   border-radius: var(--border-radius);
   background: transparent;
   cursor: pointer;
-
-  &.blur {
-    background-color: rgba(0, 0, 0, 0.75);
-  }
 }
+
+.outlined-btn.blur {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+/*# sourceMappingURL=button.css.map */
