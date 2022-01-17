@@ -14,10 +14,13 @@ const NavigationBar = (function () {
     hamburgerButton = document.getElementById('ham-burger-button'),
     secondContainer = document.getElementById('second-container');
 
+  let isOpened = false;
+
   function toggleSideBar() {
     slider.classList.toggle('active');
     hamburgerButton.classList.toggle('active');
     secondContainer.classList.toggle('active');
+    isOpened = !isOpened;
   }
 
   slider.addEventListener('click', e => {
@@ -25,7 +28,9 @@ const NavigationBar = (function () {
   });
 
   hamburgerButton.addEventListener('click', toggleSideBar);
-  secondContainer.addEventListener('click', toggleSideBar);
+  secondContainer.addEventListener('click', () => {
+    if(isOpened) toggleSideBar();
+  });
 
   return { toggleSideBar };
 })();
@@ -37,9 +42,11 @@ const body = document.body,
 
 let lastScrollPosition = window.pageYOffset,
   active = true;
+
 window.addEventListener('scroll', () => {
   const currentScroll = window.pageYOffset,
     scrollingUpwards = lastScrollPosition > currentScroll;
+  
   lastScrollPosition = currentScroll;
 
   if (!active && scrollingUpwards) {

@@ -274,6 +274,90 @@
   background-color: rgba(0, 0, 0, 0.75);
 }
 
+.projects {
+  color: white;
+  background-color: black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 30px;
+}
+
+.outlined-btn {
+  padding: 1.25rem 1.75rem;
+  color: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+  border-radius: var(--border-radius);
+  background: transparent;
+  cursor: pointer;
+}
+
+.outlined-btn.blur {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+:root {
+  --neon-green: #00e9bf;
+  --secondary-color: #fff;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  background-color: black;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 40px;
+}
+
+.tilt-card {
+  display: inline-block;
+  height: 300px;
+  width: 225px;
+  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: var(--neon-green);
+}
+
+.card-btn {
+  margin-top: 20px;
+}
+
 :root {
   --primary-color: #000;
   --secondary-color: #fff;
@@ -291,9 +375,21 @@
   font-family: 'Monserrat', sans-serif;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   background-color: black;
   width: 100vw;
+  overflow: hidden;
+}
+
+.smooth-scroll-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
 }
 
 .body-container {
@@ -325,5 +421,13 @@ body {
 .contact {
   color: white;
   background-color: black;
+}
+
+.mail {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 5px;
+  border: 1px solid white;
+  cursor: pointer;
 }
 /*# sourceMappingURL=portfolio-styling.css.map */

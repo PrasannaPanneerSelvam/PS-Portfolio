@@ -172,33 +172,4 @@ class Constellation {
   }
 }
 
-/************************ Driver code ***********************************/
-function mainFn() {
-  const canvasId = 'constellation-canvas';
-
-  const canvas = document.getElementById(canvasId);
-
-  const setCanvasSize = function () {
-    const { width, height } = window.getComputedStyle(this);
-    this.width = width.split('px')[0];
-    this.height = height.split('px')[0];
-  }.bind(canvas);
-
-  setCanvasSize();
-
-  const ConstellationEffect = new Constellation(canvas);
-  ConstellationEffect.animate();
-
-  window.addEventListener('resize', () => {
-    setCanvasSize();
-    ConstellationEffect.updateOnResize();
-  });
-
-  const constellationObserver = new IntersectionObserver(entries => {
-    ConstellationEffect.toggleAnimation(!entries[0].isIntersecting);
-  });
-
-  constellationObserver.observe(canvas);
-}
-
-mainFn();
+export default Constellation;

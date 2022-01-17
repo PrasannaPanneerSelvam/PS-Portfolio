@@ -3,6 +3,8 @@
 @import 'navigation-bar';
 @import 'home';
 @import 'button';
+@import '_projects';
+@import '_cardAnim';
 
 :root {
   --primary-color: #000;
@@ -22,9 +24,21 @@
   font-family: 'Monserrat', sans-serif;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   background-color: black;
   width: 100vw;
+  overflow: hidden;
+}
+
+.smooth-scroll-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
 }
 
 .body-container {
@@ -56,4 +70,14 @@ body {
 .contact {
   color: white;
   background-color: black;
+}
+
+
+.mail {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 5px;
+  border: 1px solid white;
+
+  cursor: pointer;
 }
