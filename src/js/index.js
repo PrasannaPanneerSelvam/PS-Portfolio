@@ -20,7 +20,7 @@ const { resizeEventCallback, scrollEventCallback } = ProgressScrollBar({
   scrollThumb,
 });
 
-window.addEventListener('scroll', NavbarScrollCallback);
+window.addEventListener('scroll', NavbarScrollCallback());
 
 // Constellation effect addition
 function IncludeConstellationEffect() {
