@@ -134,6 +134,7 @@
   display: -ms-flexbox;
   display: flex;
   margin-left: auto;
+  margin-right: 2%;
 }
 
 .nav-items-holder {
@@ -389,6 +390,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
+  right: 1%;
   overflow: hidden;
 }
 
@@ -429,5 +431,25 @@ body {
   padding: 5px;
   border: 1px solid white;
   cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-bar {
+  position: fixed;
+  inset: 0 0 0 99%;
+  overflow: hidden;
+}
+
+.progress-bar {
+  display: inline-block;
+  width: 100%;
+  height: var(--progress-height, 1%);
+  background: -webkit-gradient(linear, left top, left bottom, from(#ff0), to(#fff));
+  background: linear-gradient(#ff0, #fff);
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
 }
 /*# sourceMappingURL=portfolio-styling.css.map */

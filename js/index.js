@@ -1,81 +1,77 @@
 import applySmoothScrollEffectToContent from './smoothScroll.js';
 import addSkewEffect from './skewCard.js';
-import ParallaxTilt from './ParallaxTilt.js'
-import Constellation from './constellation.js'
-
+import ParallaxTilt from './ParallaxTilt.js';
+import Constellation from './constellation.js';
+import CopyTextToClipBoard from './CopyText.js';
+import ProgressScrollBar from './ProgressScrollbar.js';
 
 // Smoothening the scroll
-applySmoothScrollEffectToContent(
+const SmoothScrollResize = applySmoothScrollEffectToContent(
   document.getElementsByClassName('smooth-scroll-container')[0]
 );
 
+const scrollBar = document.getElementsByClassName('scroll-bar')[0],
+  scrollThumb = document.getElementsByClassName('progress-bar')[0];
+
+const { resizeEventCallback, scrollEventCallback } = ProgressScrollBar({
+  scrollBar,
+  scrollThumb,
+});
 
 // Constellation effect addition
 function IncludeConstellationEffect() {
-    const canvasId = 'constellation-canvas';
-  
-    const canvas = document.getElementById(canvasId);
-  
-    const setCanvasSize = function () {
-      const { width, height } = window.getComputedStyle(this);
-      this.width = width.split('px')[0];
-      this.height = height.split('px')[0];
-    }.bind(canvas);
-  
+  const canvasId = 'constellation-canvas';
+
+  const canvas = document.getElementById(canvasId);
+
+  const setCanvasSize = function () {
+    const { width, height } = window.getComputedStyle(this);
+    this.width = width.split('px')[0];
+    this.height = height.split('px')[0];
+  }.bind(canvas);
+
+  setCanvasSize();
+
+  const ConstellationEffect = new Constellation(canvas);
+  ConstellationEffect.animate();
+
+  const constellationObserver = new IntersectionObserver(entries => {
+    ConstellationEffect.toggleAnimation(!entries[0].isIntersecting);
+  });
+
+  constellationObserver.observe(canvas);
+
+  return () => {
     setCanvasSize();
-  
-    const ConstellationEffect = new Constellation(canvas);
-    ConstellationEffect.animate();
-  
-    window.addEventListener('resize', () => {
-      setCanvasSize();
-      ConstellationEffect.updateOnResize();
-    });
-  
-    const constellationObserver = new IntersectionObserver(entries => {
-      ConstellationEffect.toggleAnimation(!entries[0].isIntersecting);
-    });
-  
-    constellationObserver.observe(canvas);
+    ConstellationEffect.updateOnResize();
+  };
 }
-  
-IncludeConstellationEffect();
-  
+
+const ConstellationResize = IncludeConstellationEffect();
 
 // Applying Parallax tilt effect
-const tiltCards = [...document.getElementsByClassName('tilt-card')]
+const tiltCards = [...document.getElementsByClassName('tilt-card')];
 
 tiltCards.forEach(element => {
-    new ParallaxTilt(element, {maxDeflection:10});
+  new ParallaxTilt(element, { maxDeflection: 10 });
 });
-
 
 // Adding skew effect on scroll
 addSkewEffect(document.getElementsByClassName('skew-container'));
 
+// Adding up window resize callbacks
+const resizeFunctions = [
+  SmoothScrollResize,
+  ConstellationResize,
+  resizeEventCallback,
+];
 
-
-// Copy to Clipboard - Sources : https://alligator.io/js/copying-to-clipboard/
-
-const mailIdElement = document.getElementById('copy-mail-id');
-
-mailIdElement.addEventListener('click', () => {
-  const selection = window.getSelection();
-  const range = document.createRange();
-  range.selectNodeContents(mailIdElement);
-  selection.removeAllRanges();
-  selection.addRange(range);
-
-  try {
-    document.execCommand('copy');
-    selection.removeAllRanges();
-
-    mailIdElement.getElementsByClassName('mail')[0].dataset.status = 'Copied!';
-    mailIdElement.classList.add('success');
-
-    setTimeout(() => {
-      mailIdElement.classList.remove('success');
-      mailIdElement.getElementsByClassName('mail')[0].dataset.status = 'Click to Copy';
-    }, 1200);
-  } catch (e) {}
+window.addEventListener('resize', () => {
+  for (let idx = 0; idx < resizeFunctions.length; idx++) {
+    resizeFunctions[idx]();
+  }
 });
+
+CopyTextToClipBoard();
+
+window.addEventListener('scroll', scrollEventCallback);

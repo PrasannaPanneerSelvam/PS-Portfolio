@@ -38,6 +38,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
+  right: 1%;
   overflow: hidden;
 }
 
@@ -72,7 +73,6 @@ body {
   background-color: black;
 }
 
-
 .mail {
   display: inline-block;
   margin-top: 30px;
@@ -80,4 +80,22 @@ body {
   border: 1px solid white;
 
   cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-bar {
+  position: fixed;
+  inset: 0 0 0 99%;
+  overflow: hidden;
+}
+
+.progress-bar {
+  display: inline-block;
+  width: 100%;
+  height: var(--progress-height, 1%);
+  background: linear-gradient(#ff0, #fff);
+  transition: all 0.2s linear;
 }
