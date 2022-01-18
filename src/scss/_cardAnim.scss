@@ -1,42 +1,34 @@
-@import 'button';
+@import '_button';
 
 :root {
-    --neon-green: #00e9bf;
-    --secondary-color: #fff;
-}
-
-*,
-*::before,
-*::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  --neon-green: #00e9bf;
+  --secondary-color: #fff;
 }
 
 body {
-    background-color: black;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background-color: black;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    gap: 40px;
+  gap: 40px;
 }
 
 .tilt-card {
-    display: inline-block;
-    height: 300px;
-    width: 225px;
-    padding: 20px;
+  display: inline-block;
+  height: 300px;
+  width: 225px;
+  padding: 20px;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    
-    background-color: var(--neon-green);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--neon-green);
 }
 
 .card-btn {
-    margin-top: 20px;
+  margin-top: 20px;
 }

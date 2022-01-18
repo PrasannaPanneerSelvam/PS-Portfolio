@@ -173,6 +173,25 @@
     width: 100vw;
     overflow: hidden;
   }
+  .second-container.active.v2 {
+    background: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(1rem);
+            backdrop-filter: blur(1rem);
+  }
+  .second-container.active.v3 {
+    background: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(1rem);
+            backdrop-filter: blur(1rem);
+  }
+  .second-container.v1 .nav-items-holder {
+    background: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(1rem);
+            backdrop-filter: blur(1rem);
+  }
+  .second-container.v3 .nav-items-holder {
+    background: transparent;
+    inset: 0;
+  }
   .nav-items-holder {
     position: absolute;
     inset: 0 0 0 30%;
@@ -197,19 +216,16 @@
 
 .home {
   color: white;
-  background-color: black;
   position: relative;
 }
 
 .constellation-canvas {
-  position: absolute;
   width: 100vw;
   height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
   opacity: 0.5;
-  z-index: 2;
 }
 
 .short-intro {
@@ -279,7 +295,6 @@
 
 .projects {
   color: white;
-  background-color: black;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -310,15 +325,6 @@
 :root {
   --neon-green: #00e9bf;
   --secondary-color: #fff;
-}
-
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 body {
@@ -380,6 +386,12 @@ body {
 
 html {
   overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
 
 body {
@@ -410,7 +422,6 @@ body {
 
 .about-me {
   color: white;
-  background-color: black;
   position: relative;
 }
 
@@ -424,7 +435,6 @@ body {
 
 .contact {
   color: white;
-  background-color: black;
 }
 
 .mail {
@@ -433,10 +443,6 @@ body {
   padding: 5px;
   border: 1px solid white;
   cursor: pointer;
-}
-
-::-webkit-scrollbar {
-  display: none;
 }
 
 .scroll-bar {
