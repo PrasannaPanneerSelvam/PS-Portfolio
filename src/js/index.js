@@ -55,7 +55,8 @@ const ConstellationResize = IncludeConstellationEffect();
 
 // Adding Typewriter effect
 const words = ['cleaner', 'cool', 'faster'];
-new TypeWriter('typewrite-text', words).update();
+const typeWriter = new TypeWriter('typewrite-text', words);
+typeWriter.update();
 
 // Applying Parallax tilt effect
 const tiltCards = [...document.getElementsByClassName('tilt-card')];
@@ -72,6 +73,7 @@ const resizeFunctions = [
   SmoothScrollResize,
   ConstellationResize,
   resizeEventCallback,
+  typeWriter.setTypeWriterDimensionsAndUpdateParent.bind(typeWriter),
 ];
 
 window.addEventListener('resize', () => {
