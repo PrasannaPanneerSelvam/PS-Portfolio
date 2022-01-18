@@ -152,6 +152,32 @@
     height: 100vh;
     width: 100vw;
     overflow: hidden;
+
+    &.active {
+      &.v2 {
+        background: hsla(0, 0%, 100%, 0.1);
+        backdrop-filter: blur(1rem);
+      }
+
+      &.v3 {
+        background: hsla(0, 0%, 100%, 0.1);
+        backdrop-filter: blur(1rem);
+      }
+    }
+
+    &.v1 {
+      .nav-items-holder {
+        background: hsla(0, 0%, 100%, 0.1);
+        backdrop-filter: blur(1rem);
+      }
+    }
+
+    &.v3 {
+      .nav-items-holder {
+        background: transparent;
+        inset: 0;
+      }
+    }
   }
 
   .nav-items-holder {
@@ -170,3 +196,10 @@
     }
   }
 }
+
+// @supports (backdrop-filter: blur(1rem)) {
+//   .primary-navigation {
+//     background: hsla(0, 0%, 100%, 0.1);
+//     backdrop-filter: blur(1rem);
+//   }
+// }

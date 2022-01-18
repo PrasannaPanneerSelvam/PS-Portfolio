@@ -26,6 +26,12 @@
 
 html {
   overflow-x: hidden;
+  -ms-overflow-style: none; // Internet Explorer 10+
+  scrollbar-width: none; // Firefox
+
+  &::-webkit-scrollbar {
+    display: none; // Chrome, Safari & Brave
+  }
 }
 
 body {
@@ -80,10 +86,6 @@ body {
   border: 1px solid white;
 
   cursor: pointer;
-}
-
-::-webkit-scrollbar {
-  display: none;
 }
 
 .scroll-bar {
