@@ -11,6 +11,9 @@ function fixResizeAnimations() {
 
 const NavigationBar = (function () {
   const slider = document.getElementById('nav-items-holder'),
+    hamburgerButtonContainer = document.getElementById(
+      'ham-burger-button-container'
+    ),
     hamburgerButton = document.getElementById('ham-burger-button'),
     secondContainer = document.getElementById('second-container');
 
@@ -27,7 +30,7 @@ const NavigationBar = (function () {
     e.stopPropagation();
   });
 
-  hamburgerButton.addEventListener('click', toggleSideBar);
+  hamburgerButtonContainer.addEventListener('click', toggleSideBar);
   secondContainer.addEventListener('click', () => {
     if (isOpened) toggleSideBar();
   });

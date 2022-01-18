@@ -69,14 +69,30 @@
   aspect-ratio: 1 / 1;
 }
 
-.ham-burger-button {
-  display: inline-block;
+.ham-burger-button-container {
+  --hamburger-line-height: 3px;
+  --hamburger-line-width: 30px;
   display: none;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  height: calc(8 * var(--hamburger-line-height));
+  padding: 3px;
   position: relative;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   margin-right: 7px;
   margin-left: auto;
-  height: 3px;
-  width: 30px;
+}
+
+.ham-burger-button {
+  display: inline-block;
+  position: relative;
+  height: var(--hamburger-line-height);
+  width: var(--hamburger-line-width);
   background-color: white;
   border-radius: 10px;
   -webkit-transition: all 0.2s ease-out;
@@ -122,8 +138,10 @@
     inset: 0 0 auto 0;
     z-index: 10;
   }
-  .ham-burger-button {
-    display: inline-block;
+  .ham-burger-button-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
   }
 }
 
@@ -171,6 +189,7 @@
     display: inline-block;
     height: 100vh;
     width: 100vw;
+    margin-right: 0;
     overflow: hidden;
   }
   .second-container.active.v2 {
