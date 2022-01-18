@@ -4,8 +4,11 @@ function alterSkew(speed) {
   let xSkewAngle = speed,
     ySkewAngle = 0;
 
-  styles.setProperty('--skew-x-angle', `${xSkewAngle}deg`);
-  styles.setProperty('--skew-y-angle', `${ySkewAngle}deg`);
+  // styles.setProperty('--skew-x-angle', `${xSkewAngle}deg`);
+  // styles.setProperty('--skew-y-angle', `${ySkewAngle}deg`);
+
+  // styles.setProperty('--horizontal-angle', `${xSkewAngle * 10}deg`);
+  styles.setProperty('--vertical-angle', `${-xSkewAngle * 10}deg`);
 }
 
 function addSkewEffect(elementsToBeSkewed) {
