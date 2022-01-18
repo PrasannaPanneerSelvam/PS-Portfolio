@@ -183,6 +183,7 @@
 .nav-items-holder .nav-item-list-item {
   list-style: none;
   text-decoration: none;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 600px) {
@@ -232,6 +233,33 @@
         -ms-flex-direction: column;
             flex-direction: column;
   }
+}
+
+html {
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-bar {
+  position: fixed;
+  inset: 0 0 0 99%;
+  overflow: hidden;
+}
+
+.progress-bar {
+  display: inline-block;
+  width: 100%;
+  height: var(--progress-height, 1%);
+  background: -webkit-gradient(linear, left top, left bottom, from(#ff0), to(#fff));
+  background: linear-gradient(#ff0, #fff);
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  border-radius: calc(1vw / 2);
 }
 
 .home {
@@ -300,17 +328,21 @@
   }
 }
 
-.outlined-btn {
-  padding: 1.25rem 1.75rem;
-  color: var(--secondary-color);
-  border: 1px solid var(--secondary-color);
-  border-radius: var(--border-radius);
-  background: transparent;
-  cursor: pointer;
+.about-me {
+  color: white;
+  position: relative;
 }
 
-.outlined-btn.blur {
-  background-color: rgba(0, 0, 0, 0.75);
+.skills-showcase-canvas {
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  top: 20%;
+  right: 0;
+}
+
+:root {
+  --neon-green: #00e9bf;
 }
 
 .projects {
@@ -327,39 +359,6 @@
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   gap: 30px;
-}
-
-.outlined-btn {
-  padding: 1.25rem 1.75rem;
-  color: var(--secondary-color);
-  border: 1px solid var(--secondary-color);
-  border-radius: var(--border-radius);
-  background: transparent;
-  cursor: pointer;
-}
-
-.outlined-btn.blur {
-  background-color: rgba(0, 0, 0, 0.75);
-}
-
-:root {
-  --neon-green: #00e9bf;
-  --secondary-color: #fff;
-}
-
-body {
-  background-color: black;
-  height: 100vh;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  gap: 40px;
 }
 
 .tilt-card {
@@ -379,11 +378,46 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background-color: var(--neon-green);
+  border-radius: 5px;
+  border: 1px solid white;
+  background-color: transparent;
 }
 
 .card-btn {
   margin-top: 20px;
+}
+
+.contact {
+  color: white;
+}
+
+.mail {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 5px;
+  border: 1px solid white;
+  cursor: pointer;
+}
+
+.content {
+  max-width: 60ch;
+}
+
+.full-page-section {
+  height: 100vh;
+}
+
+.outlined-btn {
+  padding: 1.25rem 1.75rem;
+  color: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+  border-radius: var(--border-radius);
+  background: transparent;
+  cursor: pointer;
+}
+
+.outlined-btn.blur {
+  background-color: rgba(0, 0, 0, 0.75);
 }
 
 :root {
@@ -391,6 +425,7 @@ body {
   --secondary-color: #fff;
   --tertiary-color: rgba(0, 181, 255);
   --border-radius: 4px;
+  --is-mobile-view: 'false';
 }
 
 *,
@@ -401,16 +436,6 @@ body {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   font-family: 'Poppins', 'Monserrat', sans-serif;
-}
-
-html {
-  overflow-x: hidden;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-html::-webkit-scrollbar {
-  display: none;
 }
 
 body {
@@ -435,49 +460,9 @@ body {
   left: 0;
 }
 
-.full-page-section {
-  height: 100vh;
-}
-
-.about-me {
-  color: white;
-  position: relative;
-}
-
-.skills-showcase-canvas {
-  width: 50%;
-  height: 50%;
-  position: absolute;
-  top: 20%;
-  right: 0;
-}
-
-.contact {
-  color: white;
-}
-
-.mail {
-  display: inline-block;
-  margin-top: 30px;
-  padding: 5px;
-  border: 1px solid white;
-  cursor: pointer;
-}
-
-.scroll-bar {
-  position: fixed;
-  inset: 0 0 0 99%;
-  overflow: hidden;
-}
-
-.progress-bar {
-  display: inline-block;
-  width: 100%;
-  height: var(--progress-height, 1%);
-  background: -webkit-gradient(linear, left top, left bottom, from(#ff0), to(#fff));
-  background: linear-gradient(#ff0, #fff);
-  -webkit-transition: all 0.2s linear;
-  transition: all 0.2s linear;
-  border-radius: calc(1vw / 2);
+@media screen and (max-width: 600px) {
+  body {
+    --is-mobile-view: 'true';
+  }
 }
 /*# sourceMappingURL=portfolio-styling.css.map */

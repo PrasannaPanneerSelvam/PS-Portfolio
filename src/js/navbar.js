@@ -75,6 +75,9 @@ fixResizeAnimations();
 
 // TODO :: Fetch from data atrribute
 const classNames = ['home', 'about-me', 'projects', 'contact'],
+  targetElements = classNames.map(
+    cls => document.getElementsByClassName(cls)[0]
+  ),
   navBarListItems = document.getElementsByClassName('nav-item-list-item');
 
 const navbarComputedStyleObject = getComputedStyle(
@@ -82,7 +85,7 @@ const navbarComputedStyleObject = getComputedStyle(
 );
 
 for (let idx = 0; idx < navBarListItems.length; idx++) {
-  const targetElement = document.getElementsByClassName(classNames[idx])[0];
+  const targetElement = targetElements[idx];
   navBarListItems[idx].addEventListener('click', () => {
     NavigationBar.toggleSideBar();
 
@@ -97,5 +100,18 @@ for (let idx = 0; idx < navBarListItems.length; idx++) {
     });
   });
 }
+
+const quickContactBtn = document.getElementById('quick-contact-btn');
+quickContactBtn.addEventListener('click', () => {
+  // TODO :: Cache the offset value if needed
+  const navbarHeight =
+      parseInt(navbarComputedStyleObject.height.split('px')[0]) + 10,
+    targetOffset = targetElements[3].offsetTop;
+
+  doNothingOnScrollBar = true;
+  window.scrollTo({
+    top: targetOffset - (targetOffset === 0 ? 0 : navbarHeight),
+  });
+});
 
 export default scrollNavbarCallback;

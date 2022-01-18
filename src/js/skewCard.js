@@ -8,7 +8,13 @@ function alterSkew(speed) {
   // styles.setProperty('--skew-y-angle', `${ySkewAngle}deg`);
 
   // styles.setProperty('--horizontal-angle', `${xSkewAngle * 10}deg`);
-  styles.setProperty('--vertical-angle', `${-xSkewAngle * 10}deg`);
+
+  const isMobileView = getComputedStyle(document.body)
+    .getPropertyValue('--is-mobile-view')
+    .trim();
+
+  if (isMobileView === '"true"')
+    styles.setProperty('--vertical-angle', `${-xSkewAngle * 10}deg`);
 }
 
 function addSkewEffect(elementsToBeSkewed) {

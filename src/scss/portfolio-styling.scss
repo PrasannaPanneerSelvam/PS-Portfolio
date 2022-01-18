@@ -2,10 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
 @import '_navigation-bar';
+@import '_scrollbar';
+
 @import '_home';
-@import '_button';
+@import '_about';
 @import '_projects';
-@import '_cardAnim';
+@import 'contact';
+
+@import '_utilities';
+@import '_button';
 
 :root {
   --primary-color: #000;
@@ -13,6 +18,8 @@
   --tertiary-color: rgba(0, 181, 255);
 
   --border-radius: 4px;
+
+  --is-mobile-view: 'false';
 }
 
 *,
@@ -23,16 +30,6 @@
   box-sizing: border-box;
 
   font-family: 'Poppins', 'Monserrat', sans-serif;
-}
-
-html {
-  overflow-x: hidden;
-  -ms-overflow-style: none; // Internet Explorer 10+
-  scrollbar-width: none; // Firefox
-
-  &::-webkit-scrollbar {
-    display: none; // Chrome, Safari & Brave
-  }
 }
 
 body {
@@ -57,47 +54,8 @@ body {
   left: 0;
 }
 
-.full-page-section {
-  height: 100vh;
-}
-
-.about-me {
-  color: white;
-  position: relative;
-}
-
-.skills-showcase-canvas {
-  width: 50%;
-  height: 50%;
-  position: absolute;
-  top: 20%;
-  right: 0;
-}
-
-.contact {
-  color: white;
-}
-
-.mail {
-  display: inline-block;
-  margin-top: 30px;
-  padding: 5px;
-  border: 1px solid white;
-
-  cursor: pointer;
-}
-
-.scroll-bar {
-  position: fixed;
-  inset: 0 0 0 99%;
-  overflow: hidden;
-}
-
-.progress-bar {
-  display: inline-block;
-  width: 100%;
-  height: var(--progress-height, 1%);
-  background: linear-gradient(#ff0, #fff);
-  transition: all 0.2s linear;
-  border-radius: calc(1vw / 2);
+@media screen and (max-width: 600px) {
+  body {
+    --is-mobile-view: 'true';
+  }
 }

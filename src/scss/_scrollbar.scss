@@ -1,0 +1,24 @@
+html {
+  overflow-x: hidden;
+  -ms-overflow-style: none; // Internet Explorer 10+
+  scrollbar-width: none; // Firefox
+
+  &::-webkit-scrollbar {
+    display: none; // Chrome, Safari & Brave
+  }
+}
+
+.scroll-bar {
+  position: fixed;
+  inset: 0 0 0 99%;
+  overflow: hidden;
+}
+
+.progress-bar {
+  display: inline-block;
+  width: 100%;
+  height: var(--progress-height, 1%);
+  background: linear-gradient(#ff0, #fff);
+  transition: all 0.2s linear;
+  border-radius: calc(1vw / 2);
+}
