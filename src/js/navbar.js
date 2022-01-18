@@ -38,6 +38,8 @@ const NavigationBar = (function () {
   return { toggleSideBar };
 })();
 
+let doNothingOnScrollBar = false;
+
 function scrollNavbarCallback() {
   const navbar = document.getElementById('navigation-bar');
 
@@ -49,6 +51,11 @@ function scrollNavbarCallback() {
       scrollingUpwards = lastScrollPosition > currentScroll;
 
     lastScrollPosition = currentScroll;
+
+    if (doNothingOnScrollBar) {
+      doNothingOnScrollBar = false;
+      return;
+    }
 
     if (!active && scrollingUpwards) {
       active = true;
@@ -63,5 +70,32 @@ function scrollNavbarCallback() {
 }
 
 fixResizeAnimations();
+
+// Setting navigation tour for nav list items
+
+// TODO :: Fetch from data atrribute
+const classNames = ['home', 'about-me', 'projects', 'contact'],
+  navBarListItems = document.getElementsByClassName('nav-item-list-item');
+
+const navbarComputedStyleObject = getComputedStyle(
+  document.getElementsByClassName('first-container')[0]
+);
+
+for (let idx = 0; idx < navBarListItems.length; idx++) {
+  const targetElement = document.getElementsByClassName(classNames[idx])[0];
+  navBarListItems[idx].addEventListener('click', () => {
+    NavigationBar.toggleSideBar();
+
+    // TODO :: Cache the offset value if needed
+    const navbarHeight =
+        parseInt(navbarComputedStyleObject.height.split('px')[0]) + 10,
+      targetOffset = targetElement.offsetTop;
+
+    doNothingOnScrollBar = true;
+    window.scrollTo({
+      top: targetOffset - (targetOffset === 0 ? 0 : navbarHeight),
+    });
+  });
+}
 
 export default scrollNavbarCallback;
