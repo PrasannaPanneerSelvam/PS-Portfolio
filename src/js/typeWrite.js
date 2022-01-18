@@ -44,5 +44,4 @@ class TypeWriter {
   }
 }
 
-const words = ['cleaner', 'cool', 'faster'];
-new TypeWriter('typewrite-text', words).update();
+export default TypeWriter;

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio</title>
 
-    <link rel="stylesheet" href="./css/portfolio-styling.css" />
+    <link rel="stylesheet" href="./src/css/portfolio-styling.css" />
   </head>
   <body>
     <section class="navigation-bar" id="navigation-bar">
@@ -36,10 +36,11 @@
     </section>
 
     <div class="scroll-bar">
-      <div class="progress-bar"></div>  
+      <div class="progress-bar"></div>
     </div>
 
-    <div class="smooth-scroll-container"> <!-- body-container -->
+    <div class="smooth-scroll-container">
+      <!-- body-container -->
       <section class="home full-page-section">
         <canvas class="constellation-canvas" id="constellation-canvas"></canvas>
         <div class="short-intro">
@@ -93,15 +94,28 @@
       </section>
 
       <section class="projects full-page-section">
+        <div class="tilt-card skew-container">
+          <div class="text-content">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor,
+            tenetur consequatur. Quos quidem cum tempora expedita velit dicta
+            debitis ut nostrum ea, ex eveniet at inventore esse. Commodi,
+            inventore ea?
+          </div>
+          <button class="outlined-btn card-btn" id="inside-btn">
+            Click me
+          </button>
+        </div>
 
         <div class="tilt-card skew-container">
-          <div class="text-content">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor, tenetur consequatur. Quos quidem cum tempora expedita velit dicta debitis ut nostrum ea, ex eveniet at inventore esse. Commodi, inventore ea?</div>
-          <button class="outlined-btn card-btn" id="inside-btn">Click me</button>
-        </div>
-    
-        <div class="tilt-card skew-container">
-            <div class="text-content">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor, tenetur consequatur. Quos quidem cum tempora expedita velit dicta debitis ut nostrum ea, ex eveniet at inventore esse. Commodi, inventore ea?</div>
-            <button class="outlined-btn card-btn" id="inside-btn">Click me</button>
+          <div class="text-content">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor,
+            tenetur consequatur. Quos quidem cum tempora expedita velit dicta
+            debitis ut nostrum ea, ex eveniet at inventore esse. Commodi,
+            inventore ea?
+          </div>
+          <button class="outlined-btn card-btn" id="inside-btn">
+            Click me
+          </button>
         </div>
       </section>
 
@@ -125,12 +139,9 @@
       </section>
     </div>
 
-    <script src="./js/index.js" type="module"></script>
+    <script src="./dist/index-bundle.js"></script>
 
-    <script src="./js/typeWrite.js" type="text/javascript"></script>
-    <script src="./js/navbar.js" type="text/javascript"></script>
-
-    <script src="./js/test.js" type="text/javascript"></script>
-    <script src="./js/initTagCloud.js" type="text/javascript"></script>
+    <!-- <script src="./js/test.js" type="text/javascript"></script>
+    <script src="./js/initTagCloud.js" type="text/javascript"></script> -->
   </body>
 </html>

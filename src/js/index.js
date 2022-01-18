@@ -4,6 +4,8 @@ import ParallaxTilt from './ParallaxTilt.js';
 import Constellation from './constellation.js';
 import CopyTextToClipBoard from './CopyText.js';
 import ProgressScrollBar from './ProgressScrollbar.js';
+import TypeWriter from './typeWrite.js';
+import NavbarScrollCallback from './navbar.js';
 
 // Smoothening the scroll
 const SmoothScrollResize = applySmoothScrollEffectToContent(
@@ -17,6 +19,8 @@ const { resizeEventCallback, scrollEventCallback } = ProgressScrollBar({
   scrollBar,
   scrollThumb,
 });
+
+window.addEventListener('scroll', NavbarScrollCallback);
 
 // Constellation effect addition
 function IncludeConstellationEffect() {
@@ -48,6 +52,10 @@ function IncludeConstellationEffect() {
 }
 
 const ConstellationResize = IncludeConstellationEffect();
+
+// Adding Typewriter effect
+const words = ['cleaner', 'cool', 'faster'];
+new TypeWriter('typewrite-text', words).update();
 
 // Applying Parallax tilt effect
 const tiltCards = [...document.getElementsByClassName('tilt-card')];

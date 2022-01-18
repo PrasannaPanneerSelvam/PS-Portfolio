@@ -29,33 +29,36 @@ const NavigationBar = (function () {
 
   hamburgerButton.addEventListener('click', toggleSideBar);
   secondContainer.addEventListener('click', () => {
-    if(isOpened) toggleSideBar();
+    if (isOpened) toggleSideBar();
   });
 
   return { toggleSideBar };
 })();
 
+function scrollNavbarCallback() {
+  const navbar = document.getElementById('navigation-bar');
+
+  let lastScrollPosition = window.pageYOffset,
+    active = true;
+
+  return () => {
+    const currentScroll = window.pageYOffset,
+      scrollingUpwards = lastScrollPosition > currentScroll;
+
+    lastScrollPosition = currentScroll;
+
+    if (!active && scrollingUpwards) {
+      active = true;
+      navbar.classList.remove('hide-nav');
+      navbar.classList.add('show-nav');
+    } else if (active && !scrollingUpwards) {
+      active = false;
+      navbar.classList.remove('show-nav');
+      navbar.classList.add('hide-nav');
+    }
+  };
+}
+
 fixResizeAnimations();
 
-const body = document.body,
-  navbar = document.getElementById('navigation-bar');
-
-let lastScrollPosition = window.pageYOffset,
-  active = true;
-
-window.addEventListener('scroll', () => {
-  const currentScroll = window.pageYOffset,
-    scrollingUpwards = lastScrollPosition > currentScroll;
-  
-  lastScrollPosition = currentScroll;
-
-  if (!active && scrollingUpwards) {
-    active = true;
-    navbar.classList.remove('hide-nav');
-    navbar.classList.add('show-nav');
-  } else if (active && !scrollingUpwards) {
-    active = false;
-    navbar.classList.remove('show-nav');
-    navbar.classList.add('hide-nav');
-  }
-});
+export default scrollNavbarCallback;

@@ -7,7 +7,7 @@ function ProgressScrollBar({ scrollBar, scrollThumb }) {
 
   function resetScrollBarDetails() {
     scrollBarHeight = window.getComputedStyle(scrollBar).height.split('px')[0];
-    entireContentHeight = body.style.height.split('px')[0];
+    entireContentHeight = document.body.style.height.split('px')[0];
     maxYScrollPoint = entireContentHeight - scrollBarHeight;
     initValue = (scrollBarHeight * 100) / entireContentHeight;
     percentagePerStep = (100 - initValue) / maxYScrollPoint;

@@ -4,10 +4,25 @@ module.exports = {
   mode: 'development',
   // mode: 'production',
   entry: {
-    main: path.resolve(__dirname, 'src/js/index.js'),
+    index: path.resolve(__dirname, 'src/js/index.js'),
   },
   output: {
-    main: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist'),
     filename: '[name]-bundle.js',
+    clean: true,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
+      },
+    ],
   },
 };
