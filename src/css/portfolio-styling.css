@@ -407,6 +407,15 @@ html::-webkit-scrollbar {
   height: 100vh;
 }
 
+@media screen and (max-width: 600px) {
+  .full-page-section {
+    min-height: 100vh;
+    height: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
 .outlined-btn {
   padding: 1.25rem 1.75rem;
   color: var(--secondary-color);

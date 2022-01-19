@@ -9,3 +9,12 @@
   // align-items: center;
   // justify-content: center;
 }
+
+@media screen and (max-width: 600px) {
+  .full-page-section {
+    min-height: 100vh;
+    height: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
