@@ -72,20 +72,15 @@ function scrollNavbarCallback() {
 fixResizeAnimations();
 
 // Setting navigation tour for nav list items
-
-// TODO :: Fetch from data atrribute
-const classNames = ['home', 'about-me', 'projects', 'contact'],
-  targetElements = classNames.map(
-    cls => document.getElementsByClassName(cls)[0]
-  ),
-  navBarListItems = document.getElementsByClassName('nav-item-list-item');
-
-const navbarComputedStyleObject = getComputedStyle(
-  document.getElementsByClassName('first-container')[0]
-);
+const navBarListItems = document.getElementsByClassName('nav-item-list-item'),
+  navbarComputedStyleObject = getComputedStyle(
+    document.getElementsByClassName('first-container')[0]
+  );
 
 for (let idx = 0; idx < navBarListItems.length; idx++) {
-  const targetElement = targetElements[idx];
+  const targetClassName = navBarListItems[idx].dataset.targetSection,
+    targetElement = document.getElementsByClassName(targetClassName)[0];
+
   navBarListItems[idx].addEventListener('click', () => {
     NavigationBar.toggleSideBar();
 

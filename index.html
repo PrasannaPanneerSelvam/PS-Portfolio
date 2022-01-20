@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#000" />
     <title>Portfolio</title>
 
     <link rel="stylesheet" href="./src/css/portfolio-styling.css" />
@@ -30,10 +31,18 @@
         <div class="second-container" id="second-container">
           <div class="nav-items-holder" id="nav-items-holder">
             <ul class="nav-item-list">
-              <li class="nav-item-list-item">Home</li>
-              <li class="nav-item-list-item">About</li>
-              <li class="nav-item-list-item">Projects</li>
-              <li class="nav-item-list-item">Contact</li>
+              <li class="nav-item-list-item" data-target-section="home">
+                Home
+              </li>
+              <li class="nav-item-list-item" data-target-section="about-me">
+                About
+              </li>
+              <li class="nav-item-list-item" data-target-section="projects">
+                Projects
+              </li>
+              <li class="nav-item-list-item" data-target-section="contact">
+                Contact
+              </li>
             </ul>
           </div>
         </div>
@@ -89,7 +98,7 @@
           compromising the performance and appearance of the product.
         </div>
 
-        <div class="skills-showcase">
+        <div class="skills-showcase" id="skills-showcase">
           <ul>
             <li>Javascript</li>
             <li>Typescript</li>
@@ -151,8 +160,8 @@
       </section>
     </div>
 
-    <!-- <script src="./src/js/index.js" type="module"></script> -->
-    <script src="./dist/index-bundle.js"></script>
+    <script src="./src/js/index.js" type="module"></script>
+    <!-- <script src="./dist/index-bundle.js"></script> -->
 
     <!-- <script src="./js/test.js" type="text/javascript"></script>
     <script src="./js/initTagCloud.js" type="text/javascript"></script> -->
