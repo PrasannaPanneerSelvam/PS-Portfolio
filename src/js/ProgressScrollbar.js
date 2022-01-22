@@ -5,6 +5,16 @@ function ProgressScrollBar({ scrollBar, scrollThumb }) {
     initValue,
     percentagePerStep;
 
+  // For touch tab & laptop screens
+  scrollBar.addEventListener('click', ({ y }) => {
+    const percent = y / scrollBarHeight,
+      initPercent = initValue / 100;
+
+    window.scrollTo({
+      top: Math.max(0, percent - initPercent) * entireContentHeight,
+    });
+  });
+
   function resetScrollBarDetails() {
     scrollBarHeight = window.getComputedStyle(scrollBar).height.split('px')[0];
     entireContentHeight = document.body.style.height.split('px')[0];
