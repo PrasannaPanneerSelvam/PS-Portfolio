@@ -6,6 +6,7 @@ import CopyTextToClipBoard from './CopyText.js';
 import ProgressScrollBar from './ProgressScrollbar.js';
 import TypeWriter from './typeWrite.js';
 import NavbarScrollCallback from './navbar.js';
+import activateSkillShowCaseAnimation from './SkillsShowCase.js'
 
 // Smoothening the scroll
 const SmoothScrollResize = applySmoothScrollEffectToContent(
@@ -21,6 +22,8 @@ const { resizeEventCallback, scrollEventCallback } = ProgressScrollBar({
 });
 
 window.addEventListener('scroll', NavbarScrollCallback());
+
+activateSkillShowCaseAnimation();
 
 // Constellation effect addition
 function IncludeConstellationEffect() {

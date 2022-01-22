@@ -85,8 +85,9 @@ for (let idx = 0; idx < navBarListItems.length; idx++) {
     NavigationBar.toggleSideBar();
 
     // TODO :: Cache the offset value if needed
-    const navbarHeight =
-        parseInt(navbarComputedStyleObject.height.split('px')[0]) + 10,
+    const navbarHeight = parseInt(
+        navbarComputedStyleObject.height.split('px')[0]
+      ), //+ 10, // No need for offset in case of centered content
       targetOffset = targetElement.offsetTop;
 
     doNothingOnScrollBar = true;
@@ -96,12 +97,15 @@ for (let idx = 0; idx < navBarListItems.length; idx++) {
   });
 }
 
-const quickContactBtn = document.getElementById('quick-contact-btn');
+const quickContactBtn = document.getElementById('quick-contact-btn'),
+  targetClassName = quickContactBtn.dataset.targetSection,
+  targetElement = document.getElementsByClassName(targetClassName)[0];
+
 quickContactBtn.addEventListener('click', () => {
   // TODO :: Cache the offset value if needed
   const navbarHeight =
       parseInt(navbarComputedStyleObject.height.split('px')[0]) + 10,
-    targetOffset = targetElements[3].offsetTop;
+    targetOffset = targetElement.offsetTop;
 
   doNothingOnScrollBar = true;
   window.scrollTo({

@@ -1,15 +1,39 @@
 .about-me {
   color: white;
   position: relative;
+
+  padding: 10rem;
 }
 
-.skills-showcase-canvas {
-  width: 50%;
-  height: 50%;
-  position: absolute;
-  top: 20%;
-  right: 0;
+.about-me-content-container {
+  display: flex;
+  gap: 70px;
 }
+
+.skills-showcase {
+  display: flex;
+  gap: 70px;
+
+  ul {
+    list-style: none;
+  }
+}
+
+.list-item-text {
+  width: max-content;
+}
+
+@media screen and (max-width: 600px) {
+  .about-me {
+    padding: 1rem;
+  }
+
+  .about-me-content-container {
+    flex-direction: column;
+  }
+}
+
+/* Animations */
 
 .bounceInRight {
   animation-duration: var(--animate-duration, 1s);
