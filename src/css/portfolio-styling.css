@@ -183,6 +183,7 @@
 .nav-items-holder .nav-item-list-item {
   list-style: none;
   text-decoration: none;
+  text-align: center;
   cursor: pointer;
 }
 
@@ -233,6 +234,11 @@
         -ms-flex-direction: column;
             flex-direction: column;
   }
+}
+
+.resume-btn {
+  height: 100%;
+  padding: 0.25rem 0.7rem !important;
 }
 
 html {
@@ -331,7 +337,26 @@ html::-webkit-scrollbar {
 .about-me {
   color: white;
   position: relative;
-  padding: 10rem;
+  padding: 1.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.center-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .about-me-content-container {
@@ -339,6 +364,11 @@ html::-webkit-scrollbar {
   display: -ms-flexbox;
   display: flex;
   gap: 70px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .skills-showcase {
@@ -367,6 +397,9 @@ html::-webkit-scrollbar {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
   }
 }
 
@@ -541,16 +574,16 @@ html::-webkit-scrollbar {
 
 .content {
   max-width: 60ch;
+  cursor: default;
 }
 
 .full-page-section {
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
 }
 
 @media screen and (max-width: 600px) {
   .full-page-section {
-    min-height: 100vh;
-    height: auto;
     padding-top: 10px;
     padding-bottom: 10px;
   }

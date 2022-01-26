@@ -43,6 +43,7 @@
               <li class="nav-item-list-item" data-target-section="contact">
                 Contact
               </li>
+              <button class="outlined-btn resume-btn">Resume</button>
             </ul>
           </div>
         </div>
@@ -52,6 +53,30 @@
     <canvas class="constellation-canvas" id="constellation-canvas"></canvas>
     <div class="scroll-bar">
       <div class="progress-bar"></div>
+    </div>
+
+    <div class="contact-stick">
+      <ul class="contact-list">
+        <li>
+          <a href="https://github.com/PrasannaPanneerSelvam" target="blank">
+            <!-- <svg> -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="white"
+              stroke-width="2"
+            >
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+              ></path>
+            </svg>
+          </a>
+        </li>
+        <li><div></div></li>
+        <li><div></div></li>
+      </ul>
     </div>
 
     <div class="smooth-scroll-container">
@@ -78,55 +103,64 @@
       </section>
 
       <section class="about-me full-page-section">
-        <h1 class="about-me-header">About me</h1>
+        <div class="center-wrapper" id="center-wrapper">
+          <h1 class="about-me-header">About me</h1>
+          <div class="about-me-content-container">
+            <div class="about-me-content content" id="about-me-content">
+              &nbsp&nbsp&nbsp&nbsp Hi, I am Prasanna. I've stepped into
+              programming world from coding small bots for fun and started
+              enjoying making things that dwell on virtual world of computers
+              while having their impact on our world. Learnt data structures to
+              make the process smoother and faster.
+              <br /><br />
+              &nbsp&nbsp&nbsp&nbsp Fast-forward to today, I am working as a
+              software engineer, building highly scalable cross platform
+              front-end products at a Fintech startup. Currently i am focusing
+              on building easily understandable code bases with good coding
+              practices without compromising the performance and appearance of
+              the product.
+            </div>
 
-        <div class="about-me-content-container">
-          <div class="about-me-content content">
-            &nbsp&nbsp&nbsp&nbsp Hi, I am Prasanna. I've stepped into
-            programming world from coding small bots for fun and started
-            enjoying making things that dwell on virtual world of computers
-            while having their impact on our world. Learnt data structures to
-            make the process smoother and faster.
-            <br /><br />
-            &nbsp&nbsp&nbsp&nbsp Fast-forward to today, I am working as software
-            engineer, building highly scalable cross platform front-end products
-            at a Fintech startup. Currently i am focusing on building easily
-            understandable code bases with good coding practices without
-            compromising the performance and appearance of the product.
-          </div>
+            <div class="skills-showcase" id="skills-showcase">
+              <ul>
+                <li><div class="list-item-text">Javascript</div></li>
+                <li><div class="list-item-text">React Js</div></li>
+                <li><div class="list-item-text">HTML</div></li>
+                <li><div class="list-item-text">CSS / SCSS</div></li>
+              </ul>
 
-          <div class="skills-showcase" id="skills-showcase">
-            <ul>
-              <li><div class="list-item-text">Javascript</div></li>
-              <li><div class="list-item-text">React Js</div></li>
-              <li><div class="list-item-text">HTML</div></li>
-              <li><div class="list-item-text">CSS / SCSS</div></li>
-            </ul>
+              <ul>
+                <li><div class="list-item-text">Typescript</div></li>
+                <li><div class="list-item-text">Express Js</div></li>
+                <li><div class="list-item-text">Node Js</div></li>
+                <li><div class="list-item-text">Mongo DB</div></li>
+              </ul>
 
-            <ul>
-              <li><div class="list-item-text">Typescript</div></li>
-              <li><div class="list-item-text">Express Js</div></li>
-              <li><div class="list-item-text">Node Js</div></li>
-              <li><div class="list-item-text">Mongo DB</div></li>
-            </ul>
-
-            <ul>
-              <li><div class="list-item-text">Python</div></li>
-              <li><div class="list-item-text">Flask</div></li>
-              <li><div class="list-item-text">Gulp</div></li>
-              <li><div class="list-item-text">Git</div></li>
-            </ul>
+              <ul>
+                <li><div class="list-item-text">Python</div></li>
+                <li><div class="list-item-text">Flask</div></li>
+                <li><div class="list-item-text">Gulp</div></li>
+                <li><div class="list-item-text">Git</div></li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
       <section class="projects full-page-section">
         <div class="tilt-card skew-container">
+          <h2>Online Image Editor</h2>
           <div class="text-content">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor,
-            tenetur consequatur. Quos quidem cum tempora expedita velit dicta
-            debitis ut nostrum ea, ex eveniet at inventore esse. Commodi,
-            inventore ea?
+            A fully client side image editor with painting tools. Features
+            added:
+            <ul>
+              <li>Draw custom shapes</li>
+              <li>Draw free-style art with brush</li>
+              <li>Image flipping & rotations</li>
+              <li>Image filters</li>
+              <li>Image resizing</li>
+              <li>Edge detection & blurs</li>
+            </ul>
           </div>
           <button class="outlined-btn card-btn" id="inside-btn">
             Click me
@@ -134,15 +168,39 @@
         </div>
 
         <div class="tilt-card skew-container">
+          <h2>Json to Excel converter</h2>
           <div class="text-content">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor,
-            tenetur consequatur. Quos quidem cum tempora expedita velit dicta
-            debitis ut nostrum ea, ex eveniet at inventore esse. Commodi,
-            inventore ea?
+            A public api for converting simple and deeply nested Json objects
+            into user-friendly Excel files, with multi-level headers. Client end
+            site is available with preview and output color configuring options.
           </div>
           <button class="outlined-btn card-btn" id="inside-btn">
             Click me
           </button>
+        </div>
+
+        <div class="tilt-card skew-container">
+          <h2>Sorting visualizer</h2>
+          <div class="text-content">
+            A landing page showcasing different types of sorting algorithms
+            visually for the user. Speed and type of sorting algorithm can be
+            selected at the runtime of the program.
+          </div>
+
+          <a
+            href="https://github.com/PrasannaPanneerSelvam/SortingVisualizer"
+            target="blank"
+            ><button class="outlined-btn card-btn" id="inside-btn">
+              View Code
+            </button></a
+          >
+          <a
+            href="https://prasannapanneerselvam.github.io/SortingVisualizer/"
+            target="blank"
+            ><button class="outlined-btn card-btn" id="inside-btn">
+              View Project
+            </button></a
+          >
         </div>
       </section>
 

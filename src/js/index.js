@@ -6,7 +6,10 @@ import CopyTextToClipBoard from './CopyText.js';
 import ProgressScrollBar from './ProgressScrollbar.js';
 import TypeWriter from './typeWrite.js';
 import NavbarScrollCallback from './navbar.js';
-import activateSkillShowCaseAnimation from './SkillsShowCase.js'
+import {
+  activateSkillShowCaseAnimation,
+  setContainerSize,
+} from './SkillsShowCase.js';
 
 // Smoothening the scroll
 const SmoothScrollResize = applySmoothScrollEffectToContent(
@@ -75,6 +78,7 @@ addSkewEffect(document.getElementsByClassName('skew-container'));
 const resizeFunctions = [
   SmoothScrollResize,
   ConstellationResize,
+  setContainerSize,
   resizeEventCallback,
   typeWriter.setTypeWriterDimensionsAndUpdateParent.bind(typeWriter),
 ];

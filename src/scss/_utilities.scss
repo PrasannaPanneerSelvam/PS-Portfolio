@@ -1,9 +1,11 @@
 .content {
   max-width: 60ch;
+  cursor: default;
 }
 
 .full-page-section {
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
 
   // display: flex;
   // align-items: center;
@@ -12,8 +14,6 @@
 
 @media screen and (max-width: 600px) {
   .full-page-section {
-    min-height: 100vh;
-    height: auto;
     padding-top: 10px;
     padding-bottom: 10px;
   }

@@ -154,6 +154,7 @@
     &-item {
       list-style: none;
       text-decoration: none;
+      text-align: center;
       cursor: pointer;
     }
   }
@@ -217,3 +218,8 @@
 //     backdrop-filter: blur(1rem);
 //   }
 // }
+
+.resume-btn {
+  height: 100%;
+  padding: 0.25rem 0.7rem !important;
+}
