@@ -42,6 +42,13 @@
   .about-me-content-container {
     flex-direction: column;
     align-items: center;
+    gap: 2rem;
+  }
+
+  .skills-showcase {
+    width: 100%;
+    gap: 0px;
+    justify-content: space-between;
   }
 }
 

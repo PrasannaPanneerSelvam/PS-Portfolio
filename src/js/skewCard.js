@@ -13,6 +13,9 @@ function alterSkew(speed) {
     .getPropertyValue('--is-mobile-view')
     .trim();
 
+  const sign = xSkewAngle < 0 ? -1 : 1;
+  xSkewAngle = Math.min(Math.abs(xSkewAngle), 3);
+  xSkewAngle *= sign;
   if (isMobileView === '"true"')
     styles.setProperty('--vertical-angle', `${-xSkewAngle * 10}deg`);
 }

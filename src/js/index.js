@@ -5,16 +5,20 @@ import Constellation from './constellation.js';
 import CopyTextToClipBoard from './CopyText.js';
 import ProgressScrollBar from './ProgressScrollbar.js';
 import TypeWriter from './typeWrite.js';
-import NavbarScrollCallback from './navbar.js';
+import { scrollNavbarCallback, setNavigationClicks } from './navbar.js';
 import {
   activateSkillShowCaseAnimation,
   setContainerSize,
 } from './SkillsShowCase.js';
+import ResizeAnimationsHandler from './ResizeHandler.js';
 
 // Smoothening the scroll
-const SmoothScrollResize = applySmoothScrollEffectToContent(
-  document.getElementsByClassName('smooth-scroll-container')[0]
-);
+const { setBodyHeightOnResize, navScrollEffect } =
+  applySmoothScrollEffectToContent(
+    document.getElementsByClassName('smooth-scroll-container')[0]
+  );
+
+setNavigationClicks(navScrollEffect);
 
 const scrollBar = document.getElementsByClassName('scroll-bar')[0],
   scrollThumb = document.getElementsByClassName('progress-bar')[0];
@@ -24,7 +28,7 @@ const { resizeEventCallback, scrollEventCallback } = ProgressScrollBar({
   scrollThumb,
 });
 
-window.addEventListener('scroll', NavbarScrollCallback());
+window.addEventListener('scroll', scrollNavbarCallback());
 
 activateSkillShowCaseAnimation();
 
@@ -76,18 +80,14 @@ addSkewEffect(document.getElementsByClassName('skew-container'));
 
 // Adding up window resize callbacks
 const resizeFunctions = [
-  SmoothScrollResize,
+  setBodyHeightOnResize,
   ConstellationResize,
   setContainerSize,
   resizeEventCallback,
   typeWriter.setTypeWriterDimensionsAndUpdateParent.bind(typeWriter),
 ];
 
-window.addEventListener('resize', () => {
-  for (let idx = 0; idx < resizeFunctions.length; idx++) {
-    resizeFunctions[idx]();
-  }
-});
+ResizeAnimationsHandler(resizeFunctions);
 
 CopyTextToClipBoard();
 

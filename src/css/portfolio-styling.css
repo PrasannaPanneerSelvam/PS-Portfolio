@@ -400,6 +400,14 @@ html::-webkit-scrollbar {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
+    gap: 2rem;
+  }
+  .skills-showcase {
+    width: 100%;
+    gap: 0px;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
   }
 }
 
@@ -618,6 +626,7 @@ html::-webkit-scrollbar {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   font-family: 'Poppins', 'Monserrat', sans-serif;
+  font-size: 16px;
 }
 
 body {

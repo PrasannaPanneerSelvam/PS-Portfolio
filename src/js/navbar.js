@@ -1,14 +1,3 @@
-function fixResizeAnimations() {
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    document.body.classList.add('resize-animation-stopper');
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      document.body.classList.remove('resize-animation-stopper');
-    }, 400);
-  });
-}
-
 const NavigationBar = (function () {
   const slider = document.getElementById('nav-items-holder'),
     hamburgerButtonContainer = document.getElementById(
@@ -69,48 +58,51 @@ function scrollNavbarCallback() {
   };
 }
 
-fixResizeAnimations();
+function setNavigationClicks(smoothScrollCb) {
+  // Setting navigation tour for nav list items
+  const navBarListItems = document.getElementsByClassName('nav-item-list-item'),
+    navbarComputedStyleObject = getComputedStyle(
+      document.getElementsByClassName('first-container')[0]
+    );
 
-// Setting navigation tour for nav list items
-const navBarListItems = document.getElementsByClassName('nav-item-list-item'),
-  navbarComputedStyleObject = getComputedStyle(
-    document.getElementsByClassName('first-container')[0]
-  );
+  for (let idx = 0; idx < navBarListItems.length; idx++) {
+    const targetClassName = navBarListItems[idx].dataset.targetSection,
+      targetElement = document.getElementsByClassName(targetClassName)[0];
 
-for (let idx = 0; idx < navBarListItems.length; idx++) {
-  const targetClassName = navBarListItems[idx].dataset.targetSection,
+    navBarListItems[idx].addEventListener('click', () => {
+      NavigationBar.toggleSideBar();
+
+      // TODO :: Cache the offset value if needed
+      const navbarHeight = parseInt(
+          navbarComputedStyleObject.height.split('px')[0]
+        ), //+ 10, // No need for offset in case of centered content
+        targetOffset = targetElement.offsetTop;
+
+      doNothingOnScrollBar = true;
+
+      smoothScrollCb(targetOffset);
+      window.scrollTo({
+        top: targetOffset,
+      });
+    });
+  }
+
+  const quickContactBtn = document.getElementById('quick-contact-btn'),
+    targetClassName = quickContactBtn.dataset.targetSection,
     targetElement = document.getElementsByClassName(targetClassName)[0];
 
-  navBarListItems[idx].addEventListener('click', () => {
-    NavigationBar.toggleSideBar();
-
+  quickContactBtn.addEventListener('click', () => {
     // TODO :: Cache the offset value if needed
-    const navbarHeight = parseInt(
-        navbarComputedStyleObject.height.split('px')[0]
-      ), //+ 10, // No need for offset in case of centered content
+    const navbarHeight =
+        parseInt(navbarComputedStyleObject.height.split('px')[0]) + 10,
       targetOffset = targetElement.offsetTop;
 
     doNothingOnScrollBar = true;
+    smoothScrollCb(targetOffset);
     window.scrollTo({
-      top: targetOffset - (targetOffset === 0 ? 0 : navbarHeight),
+      top: targetOffset,
     });
   });
 }
 
-const quickContactBtn = document.getElementById('quick-contact-btn'),
-  targetClassName = quickContactBtn.dataset.targetSection,
-  targetElement = document.getElementsByClassName(targetClassName)[0];
-
-quickContactBtn.addEventListener('click', () => {
-  // TODO :: Cache the offset value if needed
-  const navbarHeight =
-      parseInt(navbarComputedStyleObject.height.split('px')[0]) + 10,
-    targetOffset = targetElement.offsetTop;
-
-  doNothingOnScrollBar = true;
-  window.scrollTo({
-    top: targetOffset - (targetOffset === 0 ? 0 : navbarHeight),
-  });
-});
-
-export default scrollNavbarCallback;
+export { scrollNavbarCallback, setNavigationClicks };
