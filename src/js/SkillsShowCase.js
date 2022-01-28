@@ -48,4 +48,6 @@ const setContainerSize = (function () {
   };
 })();
 
+setContainerSize();
+
 export { activateSkillShowCaseAnimation, setContainerSize };

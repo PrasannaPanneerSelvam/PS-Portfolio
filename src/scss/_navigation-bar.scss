@@ -143,18 +143,19 @@
   justify-content: center;
   align-items: center;
 
-  background-color: black;
   color: white;
 
   .nav-item-list {
     display: flex;
+    align-items: center;
     height: min-content;
     gap: 10px;
 
     &-item {
+      display: inline-block;
+      height: fit-content;
       list-style: none;
       text-decoration: none;
-      text-align: center;
       cursor: pointer;
     }
   }
@@ -196,6 +197,7 @@
   }
 
   .nav-items-holder {
+    background-color: black;
     position: absolute;
     inset: 0 0 0 30%;
 

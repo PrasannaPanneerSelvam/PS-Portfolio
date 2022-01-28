@@ -9,15 +9,17 @@ function applySmoothScrollEffectToContent(scrollWrap) {
       getComputedStyle(document.body)
         .getPropertyValue('--is-mobile-view')
         .trim() === '"true"';
-  let offset = 0;
+  let offset = window.pageYOffset;
 
   const cssStyleObj = scrollWrap.style;
+  cssStyleObj.transition = 'transform 1s ease-out';
   cssStyleObj.transform = 'translateY(var(--scroll-offset, 0))';
 
   function smoothScroll() {
-    offset += (window.pageYOffset - offset) * reducedScrollSpeed;
-    cssStyleObj.setProperty('--scroll-offset', `${-offset}px`);
-
+    if (offset !== window.pageYOffset) {
+      offset += (window.pageYOffset - offset) * reducedScrollSpeed;
+      cssStyleObj.setProperty('--scroll-offset', `-${window.pageYOffset}px`);
+    }
     requestAnimationFrame(smoothScroll);
   }
 
@@ -40,7 +42,7 @@ function applySmoothScrollEffectToContent(scrollWrap) {
 
   setBodyHeightOnResize();
 
-  if (isMobileView) {
+  if (true || isMobileView) {
     window.addEventListener('scroll', () => {
       cssStyleObj.setProperty('--scroll-offset', `${-window.pageYOffset}px`);
     });

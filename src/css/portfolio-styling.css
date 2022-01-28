@@ -166,7 +166,6 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: black;
   color: white;
 }
 
@@ -174,6 +173,9 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   height: -webkit-min-content;
   height: -moz-min-content;
   height: min-content;
@@ -181,9 +183,12 @@
 }
 
 .nav-items-holder .nav-item-list-item {
+  display: inline-block;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   list-style: none;
   text-decoration: none;
-  text-align: center;
   cursor: pointer;
 }
 
@@ -215,6 +220,7 @@
     inset: 0;
   }
   .nav-items-holder {
+    background-color: black;
     position: absolute;
     inset: 0 0 0 30%;
     -webkit-transform: translateX(100%);
@@ -266,6 +272,23 @@ html::-webkit-scrollbar {
   -webkit-transition: all 0.2s linear;
   transition: all 0.2s linear;
   border-radius: calc(1vw / 2);
+}
+
+.content {
+  max-width: 60ch;
+  cursor: default;
+}
+
+.full-page-section {
+  min-height: 100vh;
+  height: auto;
+}
+
+@media screen and (max-width: 600px) {
+  .full-page-section {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
 }
 
 .home {
@@ -570,6 +593,48 @@ html::-webkit-scrollbar {
 
 .contact {
   color: white;
+  position: relative;
+}
+
+.contact-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.contact-container h1 {
+  font-size: 2.5rem;
+}
+
+.contact-content {
+  max-width: 45ch;
+  text-align: center;
+}
+
+.contact-links-container {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 2rem;
 }
 
 .mail {
@@ -577,23 +642,139 @@ html::-webkit-scrollbar {
   margin-top: 30px;
   padding: 5px;
   border: 1px solid white;
+  border-radius: 10px;
+  padding-left: 40px;
   cursor: pointer;
 }
 
-.content {
-  max-width: 60ch;
-  cursor: default;
+.social-media-list {
+  --socialMediatItem: 40px;
+  --socialMediaMargin: calc(var(--socialMediatItem) * 0.65);
+  display: inline-block;
+  list-style: none;
+  position: relative;
+  height: var(--socialMediatItem);
+  width: calc(var(--socialMediatItem) * 4 + var(--socialMediaMargin) * 3);
 }
 
-.full-page-section {
-  min-height: 100vh;
-  height: auto;
+.social-media-list-item {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+  display: inline-block;
+  height: var(--socialMediatItem);
+  width: var(--socialMediatItem);
+  border-radius: 50%;
+  background: -webkit-gradient(linear, left top, left bottom, from(red), to(white));
+  background: linear-gradient(red, white);
 }
 
-@media screen and (max-width: 600px) {
-  .full-page-section {
-    padding-top: 10px;
-    padding-bottom: 10px;
+.social-media-list-item:nth-child(1) {
+  --final-position: calc(var(--socialMediatItem) * 0.5);
+  --expand-time: 1s;
+  --shrink-time: 1s;
+}
+
+.social-media-list-item:nth-child(2) {
+  --final-position: calc(
+        var(--socialMediatItem) * 1.5 + var(--socialMediaMargin)
+      );
+  --expand-time: 1s;
+  --shrink-time: 1s;
+}
+
+.social-media-list-item:nth-child(3) {
+  --final-position: calc(
+        100% - var(--socialMediatItem) * 1.5 - var(--socialMediaMargin)
+      );
+  --expand-time: 1s;
+  --shrink-time: 1s;
+}
+
+.social-media-list-item:nth-child(4) {
+  --final-position: calc(100% - var(--socialMediatItem) * 0.5);
+  --expand-time: 1s;
+  --shrink-time: 1s;
+}
+
+.social-media-list-item:hover {
+  background: -webkit-gradient(linear, left top, left bottom, from(green), to(white));
+  background: linear-gradient(green, white);
+}
+
+.showUp {
+  -webkit-animation: scrollExpand var(--expand-time) forwards;
+          animation: scrollExpand var(--expand-time) forwards;
+}
+
+.wrapUp {
+  -webkit-animation: scrollShrink var(--shrink-time) forwards;
+          animation: scrollShrink var(--shrink-time) forwards;
+}
+
+.footer {
+  position: absolute;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  left: 0;
+  right: 0;
+  bottom: 20px;
+  margin: 0 auto;
+}
+
+@-webkit-keyframes scrollExpand {
+  0% {
+    -webkit-transform: translate(-50%) rotate(0turn);
+            transform: translate(-50%) rotate(0turn);
+  }
+  100% {
+    -webkit-transform: translate(-50%) rotate(1turn);
+            transform: translate(-50%) rotate(1turn);
+    left: var(--final-position);
+  }
+}
+
+@keyframes scrollExpand {
+  0% {
+    -webkit-transform: translate(-50%) rotate(0turn);
+            transform: translate(-50%) rotate(0turn);
+  }
+  100% {
+    -webkit-transform: translate(-50%) rotate(1turn);
+            transform: translate(-50%) rotate(1turn);
+    left: var(--final-position);
+  }
+}
+
+@-webkit-keyframes scrollShrink {
+  0% {
+    -webkit-transform: translate(-50%) rotate(0turn);
+            transform: translate(-50%) rotate(0turn);
+    left: var(--final-position);
+  }
+  100% {
+    -webkit-transform: translate(-50%) rotate(-1turn);
+            transform: translate(-50%) rotate(-1turn);
+    left: 50%;
+  }
+}
+
+@keyframes scrollShrink {
+  0% {
+    -webkit-transform: translate(-50%) rotate(0turn);
+            transform: translate(-50%) rotate(0turn);
+    left: var(--final-position);
+  }
+  100% {
+    -webkit-transform: translate(-50%) rotate(-1turn);
+            transform: translate(-50%) rotate(-1turn);
+    left: 50%;
   }
 }
 

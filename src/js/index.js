@@ -1,15 +1,16 @@
-import applySmoothScrollEffectToContent from './smoothScroll.js';
-import addSkewEffect from './skewCard.js';
-import ParallaxTilt from './ParallaxTilt.js';
-import Constellation from './constellation.js';
-import CopyTextToClipBoard from './CopyText.js';
-import ProgressScrollBar from './ProgressScrollbar.js';
-import TypeWriter from './typeWrite.js';
 import { scrollNavbarCallback, setNavigationClicks } from './navbar.js';
+import applySmoothScrollEffectToContent from './smoothScroll.js';
+import ProgressScrollBar from './ProgressScrollbar.js';
+import Constellation from './constellation.js';
+import TypeWriter from './typeWrite.js';
+import ParallaxTilt from './ParallaxTilt.js';
+import addSkewEffect from './skewCard.js';
 import {
   activateSkillShowCaseAnimation,
   setContainerSize,
 } from './SkillsShowCase.js';
+import ActivateSocialMediaAnimation from './Contact.js';
+import CopyTextToClipBoard from './CopyText.js';
 import ResizeAnimationsHandler from './ResizeHandler.js';
 
 // Smoothening the scroll
@@ -90,5 +91,6 @@ const resizeFunctions = [
 ResizeAnimationsHandler(resizeFunctions);
 
 CopyTextToClipBoard();
+ActivateSocialMediaAnimation();
 
 window.addEventListener('scroll', scrollEventCallback);
