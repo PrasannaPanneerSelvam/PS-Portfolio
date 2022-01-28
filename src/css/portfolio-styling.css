@@ -669,34 +669,30 @@ html::-webkit-scrollbar {
   border-radius: 50%;
   background: -webkit-gradient(linear, left top, left bottom, from(red), to(white));
   background: linear-gradient(red, white);
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
 }
 
 .social-media-list-item:nth-child(1) {
   --final-position: calc(var(--socialMediatItem) * 0.5);
-  --expand-time: 1s;
-  --shrink-time: 1s;
 }
 
 .social-media-list-item:nth-child(2) {
   --final-position: calc(
         var(--socialMediatItem) * 1.5 + var(--socialMediaMargin)
       );
-  --expand-time: 1s;
-  --shrink-time: 1s;
 }
 
 .social-media-list-item:nth-child(3) {
   --final-position: calc(
         100% - var(--socialMediatItem) * 1.5 - var(--socialMediaMargin)
       );
-  --expand-time: 1s;
-  --shrink-time: 1s;
 }
 
 .social-media-list-item:nth-child(4) {
   --final-position: calc(100% - var(--socialMediatItem) * 0.5);
-  --expand-time: 1s;
-  --shrink-time: 1s;
 }
 
 .social-media-list-item:hover {
@@ -705,13 +701,13 @@ html::-webkit-scrollbar {
 }
 
 .showUp {
-  -webkit-animation: scrollExpand var(--expand-time) forwards;
-          animation: scrollExpand var(--expand-time) forwards;
+  -webkit-animation-name: scrollExpand;
+          animation-name: scrollExpand;
 }
 
 .wrapUp {
-  -webkit-animation: scrollShrink var(--shrink-time) forwards;
-          animation: scrollShrink var(--shrink-time) forwards;
+  -webkit-animation-name: scrollShrink;
+          animation-name: scrollShrink;
 }
 
 .footer {
@@ -732,6 +728,7 @@ html::-webkit-scrollbar {
   0% {
     -webkit-transform: translate(-50%) rotate(0turn);
             transform: translate(-50%) rotate(0turn);
+    left: 50%;
   }
   100% {
     -webkit-transform: translate(-50%) rotate(1turn);
@@ -744,6 +741,7 @@ html::-webkit-scrollbar {
   0% {
     -webkit-transform: translate(-50%) rotate(0turn);
             transform: translate(-50%) rotate(0turn);
+    left: 50%;
   }
   100% {
     -webkit-transform: translate(-50%) rotate(1turn);

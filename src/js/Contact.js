@@ -20,6 +20,13 @@ function activateSocialMediaAnimation() {
   const socialMediaContainer = document.getElementById('social-media-list'),
     socialMediaElems = [...socialMediaContainer.getElementsByTagName('li')];
 
+  socialMediaElems[0].onanimationstart = () => {
+    SocialMediaIconsObserver.unobserve(socialMediaContainer);
+  };
+  socialMediaElems[0].onanimationend = () => {
+    SocialMediaIconsObserver.observe(socialMediaContainer);
+  };
+
   SocialMediaIconsObserver.observe(socialMediaContainer);
 
   return SocialMediaIconsObserver;

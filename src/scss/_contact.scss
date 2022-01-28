@@ -65,32 +65,27 @@
 
     background: linear-gradient(red, white);
 
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+
     &:nth-child(1) {
       --final-position: calc(var(--socialMediatItem) * 0.5);
-      --expand-time: 1s;
-      --shrink-time: 1s;
     }
 
     &:nth-child(2) {
       --final-position: calc(
         var(--socialMediatItem) * 1.5 + var(--socialMediaMargin)
       );
-      --expand-time: 1s;
-      --shrink-time: 1s;
     }
 
     &:nth-child(3) {
       --final-position: calc(
         100% - var(--socialMediatItem) * 1.5 - var(--socialMediaMargin)
       );
-      --expand-time: 1s;
-      --shrink-time: 1s;
     }
 
     &:nth-child(4) {
       --final-position: calc(100% - var(--socialMediatItem) * 0.5);
-      --expand-time: 1s;
-      --shrink-time: 1s;
     }
 
     &:hover {
@@ -100,11 +95,11 @@
 }
 
 .showUp {
-  animation: scrollExpand var(--expand-time) forwards;
+  animation-name: scrollExpand;
 }
 
 .wrapUp {
-  animation: scrollShrink var(--shrink-time) forwards;
+  animation-name: scrollShrink;
 }
 
 .footer {
@@ -120,6 +115,7 @@
 @keyframes scrollExpand {
   0% {
     transform: translate(-50%) rotate(0turn);
+    left: 50%;
   }
 
   100% {
