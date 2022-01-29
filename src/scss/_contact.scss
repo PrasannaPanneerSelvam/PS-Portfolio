@@ -104,28 +104,40 @@
       &.hide {
         transform: translate(-50%, 0);
       }
+
+      &.show {
+        transition-delay: calc(var(--animation-timing) / 2);
+      }
     }
 
     &:nth-child(1) {
       --final-left-position: calc(
         -1 * (var(--socialMediatItem) * 2 + var(--socialMediaMargin) * 1.5)
       );
+
+      --final-turn: -1turn;
     }
 
     &:nth-child(2) {
       --final-left-position: calc(
         -1 * (var(--socialMediatItem) * 1 + var(--socialMediaMargin) * 0.5)
       );
+
+      --final-turn: -1turn;
     }
 
     &:nth-child(3) {
       --final-left-position: calc(var(--socialMediaMargin) * 0.5);
+
+      --final-turn: 1turn;
     }
 
     &:nth-child(4) {
       --final-left-position: calc(
         var(--socialMediatItem) + var(--socialMediaMargin) * 1.5
       );
+
+      --final-turn: 1turn;
     }
 
     &:hover {
@@ -158,17 +170,18 @@
   }
 
   100% {
-    transform: translate(var(--final-left-position)) rotate(1turn);
+    transform: translate(var(--final-left-position)) rotate(var(--final-turn));
   }
 }
 
 @keyframes scrollShrink {
   0% {
-    transform: translate(var(--final-left-position)) rotate(0turn);
+    transform: translate(var(--final-left-position))
+      rotate(calc(var(--final-turn)));
   }
 
   100% {
-    transform: translate(-50%) rotate(-1turn);
+    transform: translate(-50%) rotate(0turn);
   }
 }
 
@@ -202,9 +215,9 @@
   z-index: 10;
 
   transition: transform calc(var(--animation-timing) / 2);
-  transition-delay: calc(var(--animation-timing) / 2);
 
   &.hide {
+    transition-delay: calc(var(--animation-timing) / 2);
     transform: translateY(100%);
   }
 

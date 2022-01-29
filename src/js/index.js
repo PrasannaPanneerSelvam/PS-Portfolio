@@ -1,3 +1,4 @@
+import CopyContactIcons from './CopyContactIcons.js';
 import { scrollNavbarCallback, setNavigationClicks } from './navbar.js';
 import applySmoothScrollEffectToContent from './smoothScroll.js';
 import ProgressScrollBar from './ProgressScrollbar.js';
@@ -12,6 +13,8 @@ import {
 import ActivateSocialMediaAnimation from './Contact.js';
 import CopyTextToClipBoard from './CopyText.js';
 import ResizeAnimationsHandler from './ResizeHandler.js';
+
+CopyContactIcons();
 
 // Smoothening the scroll
 const { setBodyHeightOnResize, navScrollEffect } =

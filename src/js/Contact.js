@@ -1,12 +1,19 @@
-const toggleSideBarIcons = function () {
+const toggleSideBarIcons = (function () {
   const stick = document.getElementById('social-media-vertical-stick'),
-    stickElemsClassList = [...stick.getElementsByTagName('li')].map(i => i.classList);
+    stickElemsClassList = [...stick.getElementsByTagName('li')].map(
+      i => i.classList
+    );
 
-  return function (bool) {
-    stick.parentElement.classList.toggle('hide', bool);
-    stickElemsClassList.forEach(item => item.toggle('hide', bool));
-  }
-}();
+  return function (doHide) {
+    stick.parentElement.classList.toggle('hide', doHide);
+    stick.parentElement.classList.toggle('show', !doHide);
+
+    stickElemsClassList.forEach(item => {
+      item.toggle('hide', doHide);
+      item.toggle('show', !doHide);
+    });
+  };
+})();
 
 function activateSocialMediaAnimation() {
   const options = {

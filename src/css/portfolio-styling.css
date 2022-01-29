@@ -740,26 +740,35 @@ html::-webkit-scrollbar {
           transform: translate(-50%, 0);
 }
 
+.social-media-list-item.vertical.show {
+  -webkit-transition-delay: calc(var(--animation-timing) / 2);
+          transition-delay: calc(var(--animation-timing) / 2);
+}
+
 .social-media-list-item:nth-child(1) {
   --final-left-position: calc(
         -1 * (var(--socialMediatItem) * 2 + var(--socialMediaMargin) * 1.5)
       );
+  --final-turn: -1turn;
 }
 
 .social-media-list-item:nth-child(2) {
   --final-left-position: calc(
         -1 * (var(--socialMediatItem) * 1 + var(--socialMediaMargin) * 0.5)
       );
+  --final-turn: -1turn;
 }
 
 .social-media-list-item:nth-child(3) {
   --final-left-position: calc(var(--socialMediaMargin) * 0.5);
+  --final-turn: 1turn;
 }
 
 .social-media-list-item:nth-child(4) {
   --final-left-position: calc(
         var(--socialMediatItem) + var(--socialMediaMargin) * 1.5
       );
+  --final-turn: 1turn;
 }
 
 .social-media-list-item:hover {
@@ -797,8 +806,8 @@ html::-webkit-scrollbar {
             transform: translate(-50%) rotate(0turn);
   }
   100% {
-    -webkit-transform: translate(var(--final-left-position)) rotate(1turn);
-            transform: translate(var(--final-left-position)) rotate(1turn);
+    -webkit-transform: translate(var(--final-left-position)) rotate(var(--final-turn));
+            transform: translate(var(--final-left-position)) rotate(var(--final-turn));
   }
 }
 
@@ -808,30 +817,30 @@ html::-webkit-scrollbar {
             transform: translate(-50%) rotate(0turn);
   }
   100% {
-    -webkit-transform: translate(var(--final-left-position)) rotate(1turn);
-            transform: translate(var(--final-left-position)) rotate(1turn);
+    -webkit-transform: translate(var(--final-left-position)) rotate(var(--final-turn));
+            transform: translate(var(--final-left-position)) rotate(var(--final-turn));
   }
 }
 
 @-webkit-keyframes scrollShrink {
   0% {
-    -webkit-transform: translate(var(--final-left-position)) rotate(0turn);
-            transform: translate(var(--final-left-position)) rotate(0turn);
+    -webkit-transform: translate(var(--final-left-position)) rotate(calc(var(--final-turn)));
+            transform: translate(var(--final-left-position)) rotate(calc(var(--final-turn)));
   }
   100% {
-    -webkit-transform: translate(-50%) rotate(-1turn);
-            transform: translate(-50%) rotate(-1turn);
+    -webkit-transform: translate(-50%) rotate(0turn);
+            transform: translate(-50%) rotate(0turn);
   }
 }
 
 @keyframes scrollShrink {
   0% {
-    -webkit-transform: translate(var(--final-left-position)) rotate(0turn);
-            transform: translate(var(--final-left-position)) rotate(0turn);
+    -webkit-transform: translate(var(--final-left-position)) rotate(calc(var(--final-turn)));
+            transform: translate(var(--final-left-position)) rotate(calc(var(--final-turn)));
   }
   100% {
-    -webkit-transform: translate(-50%) rotate(-1turn);
-            transform: translate(-50%) rotate(-1turn);
+    -webkit-transform: translate(-50%) rotate(0turn);
+            transform: translate(-50%) rotate(0turn);
   }
 }
 
@@ -867,11 +876,11 @@ html::-webkit-scrollbar {
   transition: -webkit-transform calc(var(--animation-timing) / 2);
   transition: transform calc(var(--animation-timing) / 2);
   transition: transform calc(var(--animation-timing) / 2), -webkit-transform calc(var(--animation-timing) / 2);
-  -webkit-transition-delay: calc(var(--animation-timing) / 2);
-          transition-delay: calc(var(--animation-timing) / 2);
 }
 
 .contact-stick.hide {
+  -webkit-transition-delay: calc(var(--animation-timing) / 2);
+          transition-delay: calc(var(--animation-timing) / 2);
   -webkit-transform: translateY(100%);
           transform: translateY(100%);
 }
