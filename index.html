@@ -5,7 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#000" />
-    <title>Portfolio</title>
+    <meta
+      name="description"
+      content="Prasanna - Software development engineer who builds responsive sites with digital experiences."
+    />
+    <title>Prasanna Ps</title>
 
     <link rel="stylesheet" href="./src/css/portfolio-styling.css" />
   </head>
@@ -43,7 +47,9 @@
               <li class="nav-item-list-item" data-target-section="contact">
                 Contact
               </li>
-              <button class="outlined-btn resume-btn">Resume</button>
+              <li>
+                <button class="outlined-btn resume-btn">Resume</button>
+              </li>
             </ul>
           </div>
         </div>
@@ -53,14 +59,13 @@
     <canvas class="constellation-canvas" id="constellation-canvas"></canvas>
 
     <div class="contact-stick">
-      <ul
-        class="social-media-list vertical contact-list"
-        id="social-media-vertical-stick"
-      >
+      <ul class="social-media-list vertical" id="social-media-vertical-stick">
         <li class="social-media-list-item vertical">
           <a
             href="https://www.linkedin.com/in/prasanna-p-61956a163/"
             target="blank"
+            aria-label="LinkedIn"
+            rel="noreferrer"
           >
             <svg
               class="socialMediaIcons"
@@ -76,6 +81,8 @@
           <a
             href="https://github.com/PrasannaPanneerSelvam"
             target="blank"
+            aria-label="GitHub"
+            rel="noreferrer"
             class="ss-atag"
           >
             <svg
@@ -92,6 +99,8 @@
           <a
             href="https://www.instagram.com/prithiv_krish/"
             target="blank"
+            aria-label="Instagram"
+            rel="noreferrer"
             class="ss-atag"
             style="margin-top: 2px; margin-left: 2px"
           >
@@ -104,6 +113,8 @@
           <a
             href="https://www.instagram.com/prithiv_krish/"
             target="blank"
+            aria-label="Slack"
+            rel="noreferrer"
             class="ss-atag"
           >
             <svg
@@ -134,7 +145,7 @@
 
           <div class="my-work">
             I build things to make web
-            <div class="typewrite-text" id="typewrite-text"></div>
+            <div class="typewrite-text" id="typewrite-text">cleaner</div>
           </div>
 
           <button
@@ -207,9 +218,7 @@
               <li>Edge detection & blurs</li>
             </ul>
           </div>
-          <button class="outlined-btn card-btn" id="inside-btn">
-            Click me
-          </button>
+          <button class="outlined-btn card-btn">Click me</button>
         </div>
 
         <div class="tilt-card skew-container">
@@ -219,9 +228,7 @@
             into user-friendly Excel files, with multi-level headers. Client end
             site is available with preview and output color configuring options.
           </div>
-          <button class="outlined-btn card-btn" id="inside-btn">
-            Click me
-          </button>
+          <button class="outlined-btn card-btn">Click me</button>
         </div>
 
         <div class="tilt-card skew-container">
@@ -235,16 +242,12 @@
           <a
             href="https://github.com/PrasannaPanneerSelvam/SortingVisualizer"
             target="blank"
-            ><button class="outlined-btn card-btn" id="inside-btn">
-              View Code
-            </button></a
+            ><button class="outlined-btn card-btn">View Code</button></a
           >
           <a
             href="https://prasannapanneerselvam.github.io/SortingVisualizer/"
             target="blank"
-            ><button class="outlined-btn card-btn" id="inside-btn">
-              View Project
-            </button></a
+            ><button class="outlined-btn card-btn">View Project</button></a
           >
         </div>
       </section>
@@ -265,6 +268,8 @@
                 <a
                   href="https://www.linkedin.com/in/prasanna-p-61956a163/"
                   target="blank"
+                  aria-label="LinkedIn"
+                  rel="noreferrer"
                 >
                   <svg
                     class="socialMediaIcons"
@@ -280,6 +285,8 @@
                 <a
                   href="https://github.com/PrasannaPanneerSelvam"
                   target="blank"
+                  aria-label="GitHub"
+                  rel="noreferrer"
                   class="ss-atag"
                 >
                   <svg
@@ -296,6 +303,8 @@
                 <a
                   href="https://www.instagram.com/prithiv_krish/"
                   target="blank"
+                  aria-label="Instagram"
+                  rel="noreferrer"
                   class="ss-atag"
                   style="margin-top: 2px; margin-left: 2px"
                 >
@@ -308,6 +317,8 @@
                 <a
                   href="https://www.instagram.com/prithiv_krish/"
                   target="blank"
+                  aria-label="Slack"
+                  rel="noreferrer"
                   class="ss-atag"
                 >
                   <svg
@@ -388,8 +399,8 @@
       </symbol>
     </svg>
 
-    <script src="./src/js/index.js" type="module"></script>
-    <!-- <script src="./dist/index-bundle.js"></script> -->
+    <!-- <script src="./src/js/index.js" type="module"></script> -->
+    <script src="./dist/index-bundle.js"></script>
 
     <!-- <script src="./js/test.js" type="text/javascript"></script>
     <script src="./js/initTagCloud.js" type="text/javascript"></script> -->

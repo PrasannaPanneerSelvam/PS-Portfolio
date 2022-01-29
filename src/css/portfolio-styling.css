@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
 .resize-animation-stopper * {
   -webkit-animation: none !important;
@@ -662,16 +661,21 @@ html::-webkit-scrollbar {
 .social-media-list {
   --socialMediatItem: 40px;
   --socialMediaMargin: calc(var(--socialMediatItem) * 0.65);
+  --container-max-size: calc(
+    var(--socialMediatItem) * 4 + var(--socialMediaMargin) * 3
+  );
   display: inline-block;
   list-style: none;
   position: relative;
   height: var(--socialMediatItem);
-  width: calc(var(--socialMediatItem) * 4 + var(--socialMediaMargin) * 3);
+  width: var(--container-max-size);
 }
 
 .social-media-list.vertical {
+  position: relative;
   height: calc(var(--socialMediatItem) * 4);
   width: var(--socialMediatItem);
+  margin-bottom: 20px;
 }
 
 .social-media-list-item {
@@ -702,10 +706,16 @@ html::-webkit-scrollbar {
 
 .social-media-list-item.vertical {
   top: auto;
-  bottom: var(--final-bottom-position);
+  bottom: 0;
+  -webkit-transform: translate(-50%, var(--final-bottom-position));
+          transform: translate(-50%, var(--final-bottom-position));
+  -webkit-transition: -webkit-transform calc(var(--animation-timing) / 2);
+  transition: -webkit-transform calc(var(--animation-timing) / 2);
+  transition: transform calc(var(--animation-timing) / 2);
+  transition: transform calc(var(--animation-timing) / 2), -webkit-transform calc(var(--animation-timing) / 2);
   border: none;
   --final-bottom-position: calc(
-        var(--child-reverse-num) * (var(--socialMediatItem))
+        -1 * var(--child-reverse-num) * (var(--socialMediatItem))
       );
 }
 
@@ -725,24 +735,31 @@ html::-webkit-scrollbar {
   --child-reverse-num: 0;
 }
 
+.social-media-list-item.vertical.hide {
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+}
+
 .social-media-list-item:nth-child(1) {
-  --final-left-position: calc(var(--socialMediatItem) * 0.5);
+  --final-left-position: calc(
+        -1 * (var(--socialMediatItem) * 2 + var(--socialMediaMargin) * 1.5)
+      );
 }
 
 .social-media-list-item:nth-child(2) {
   --final-left-position: calc(
-        var(--socialMediatItem) * 1.5 + var(--socialMediaMargin)
+        -1 * (var(--socialMediatItem) * 1 + var(--socialMediaMargin) * 0.5)
       );
 }
 
 .social-media-list-item:nth-child(3) {
-  --final-left-position: calc(
-        100% - var(--socialMediatItem) * 1.5 - var(--socialMediaMargin)
-      );
+  --final-left-position: calc(var(--socialMediaMargin) * 0.5);
 }
 
 .social-media-list-item:nth-child(4) {
-  --final-left-position: calc(100% - var(--socialMediatItem) * 0.5);
+  --final-left-position: calc(
+        var(--socialMediatItem) + var(--socialMediaMargin) * 1.5
+      );
 }
 
 .social-media-list-item:hover {
@@ -778,12 +795,10 @@ html::-webkit-scrollbar {
   0% {
     -webkit-transform: translate(-50%) rotate(0turn);
             transform: translate(-50%) rotate(0turn);
-    left: 50%;
   }
   100% {
-    -webkit-transform: translate(-50%) rotate(1turn);
-            transform: translate(-50%) rotate(1turn);
-    left: var(--final-left-position);
+    -webkit-transform: translate(var(--final-left-position)) rotate(1turn);
+            transform: translate(var(--final-left-position)) rotate(1turn);
   }
 }
 
@@ -791,38 +806,32 @@ html::-webkit-scrollbar {
   0% {
     -webkit-transform: translate(-50%) rotate(0turn);
             transform: translate(-50%) rotate(0turn);
-    left: 50%;
   }
   100% {
-    -webkit-transform: translate(-50%) rotate(1turn);
-            transform: translate(-50%) rotate(1turn);
-    left: var(--final-left-position);
+    -webkit-transform: translate(var(--final-left-position)) rotate(1turn);
+            transform: translate(var(--final-left-position)) rotate(1turn);
   }
 }
 
 @-webkit-keyframes scrollShrink {
   0% {
-    -webkit-transform: translate(-50%) rotate(0turn);
-            transform: translate(-50%) rotate(0turn);
-    left: var(--final-left-position);
+    -webkit-transform: translate(var(--final-left-position)) rotate(0turn);
+            transform: translate(var(--final-left-position)) rotate(0turn);
   }
   100% {
     -webkit-transform: translate(-50%) rotate(-1turn);
             transform: translate(-50%) rotate(-1turn);
-    left: 50%;
   }
 }
 
 @keyframes scrollShrink {
   0% {
-    -webkit-transform: translate(-50%) rotate(0turn);
-            transform: translate(-50%) rotate(0turn);
-    left: var(--final-left-position);
+    -webkit-transform: translate(var(--final-left-position)) rotate(0turn);
+            transform: translate(var(--final-left-position)) rotate(0turn);
   }
   100% {
     -webkit-transform: translate(-50%) rotate(-1turn);
             transform: translate(-50%) rotate(-1turn);
-    left: 50%;
   }
 }
 
@@ -854,14 +863,17 @@ html::-webkit-scrollbar {
   left: 40px;
   bottom: 0;
   z-index: 10;
-  -webkit-transition: bottom calc(var(--animation-timing) / 2);
-  transition: bottom calc(var(--animation-timing) / 2);
+  -webkit-transition: -webkit-transform calc(var(--animation-timing) / 2);
+  transition: -webkit-transform calc(var(--animation-timing) / 2);
+  transition: transform calc(var(--animation-timing) / 2);
+  transition: transform calc(var(--animation-timing) / 2), -webkit-transform calc(var(--animation-timing) / 2);
   -webkit-transition-delay: calc(var(--animation-timing) / 2);
           transition-delay: calc(var(--animation-timing) / 2);
 }
 
 .contact-stick.hide {
-  bottom: -100%;
+  -webkit-transform: translateY(100%);
+          transform: translateY(100%);
 }
 
 .contact-stick::after {
@@ -871,20 +883,6 @@ html::-webkit-scrollbar {
   width: 1px;
   margin: 0 auto;
   background-color: white;
-}
-
-.contact-list {
-  position: relative;
-  margin-bottom: 20px;
-}
-
-.contact-list .vertical {
-  -webkit-transition: bottom calc(var(--animation-timing) / 2);
-  transition: bottom calc(var(--animation-timing) / 2);
-}
-
-.contact-list .vertical.hide {
-  bottom: 0;
 }
 
 @media screen and (max-width: 600px) {
