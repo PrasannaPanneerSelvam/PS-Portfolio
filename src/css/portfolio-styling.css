@@ -378,6 +378,12 @@ html::-webkit-scrollbar {
           justify-content: center;
 }
 
+@media screen and (min-width: 600px) {
+  .about-me {
+    padding: 1.5rem 2rem;
+  }
+}
+
 .center-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -663,7 +669,13 @@ html::-webkit-scrollbar {
   width: calc(var(--socialMediatItem) * 4 + var(--socialMediaMargin) * 3);
 }
 
+.social-media-list.vertical {
+  height: calc(var(--socialMediatItem) * 4);
+  width: var(--socialMediatItem);
+}
+
 .social-media-list-item {
+  --final-left-position: 0;
   position: absolute;
   top: 0;
   left: 50%;
@@ -688,28 +700,49 @@ html::-webkit-scrollbar {
           animation-fill-mode: forwards;
 }
 
+.social-media-list-item.vertical {
+  top: auto;
+  bottom: var(--final-bottom-position);
+  border: none;
+  --final-bottom-position: calc(
+        var(--child-reverse-num) * (var(--socialMediatItem))
+      );
+}
+
+.social-media-list-item.vertical:nth-child(1) {
+  --child-reverse-num: 3;
+}
+
+.social-media-list-item.vertical:nth-child(2) {
+  --child-reverse-num: 2;
+}
+
+.social-media-list-item.vertical:nth-child(3) {
+  --child-reverse-num: 1;
+}
+
+.social-media-list-item.vertical:nth-child(4) {
+  --child-reverse-num: 0;
+}
+
 .social-media-list-item:nth-child(1) {
-  background: -webkit-gradient(linear, left top, left bottom, from(red), to(white));
-  background: linear-gradient(red, white);
-  --final-position: calc(var(--socialMediatItem) * 0.5);
+  --final-left-position: calc(var(--socialMediatItem) * 0.5);
 }
 
 .social-media-list-item:nth-child(2) {
-  --final-position: calc(
+  --final-left-position: calc(
         var(--socialMediatItem) * 1.5 + var(--socialMediaMargin)
       );
 }
 
 .social-media-list-item:nth-child(3) {
-  --final-position: calc(
+  --final-left-position: calc(
         100% - var(--socialMediatItem) * 1.5 - var(--socialMediaMargin)
       );
 }
 
 .social-media-list-item:nth-child(4) {
-  background: -webkit-gradient(linear, left top, left bottom, from(red), to(white));
-  background: linear-gradient(red, white);
-  --final-position: calc(100% - var(--socialMediatItem) * 0.5);
+  --final-left-position: calc(100% - var(--socialMediatItem) * 0.5);
 }
 
 .social-media-list-item:hover {
@@ -750,7 +783,7 @@ html::-webkit-scrollbar {
   100% {
     -webkit-transform: translate(-50%) rotate(1turn);
             transform: translate(-50%) rotate(1turn);
-    left: var(--final-position);
+    left: var(--final-left-position);
   }
 }
 
@@ -763,7 +796,7 @@ html::-webkit-scrollbar {
   100% {
     -webkit-transform: translate(-50%) rotate(1turn);
             transform: translate(-50%) rotate(1turn);
-    left: var(--final-position);
+    left: var(--final-left-position);
   }
 }
 
@@ -771,7 +804,7 @@ html::-webkit-scrollbar {
   0% {
     -webkit-transform: translate(-50%) rotate(0turn);
             transform: translate(-50%) rotate(0turn);
-    left: var(--final-position);
+    left: var(--final-left-position);
   }
   100% {
     -webkit-transform: translate(-50%) rotate(-1turn);
@@ -784,7 +817,7 @@ html::-webkit-scrollbar {
   0% {
     -webkit-transform: translate(-50%) rotate(0turn);
             transform: translate(-50%) rotate(0turn);
-    left: var(--final-position);
+    left: var(--final-left-position);
   }
   100% {
     -webkit-transform: translate(-50%) rotate(-1turn);
@@ -810,6 +843,54 @@ html::-webkit-scrollbar {
 
 .fillColor {
   fill: white;
+}
+
+.contact-stick {
+  --animation-timing: 1s;
+  position: fixed;
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+  left: 40px;
+  bottom: 0;
+  z-index: 10;
+  -webkit-transition: bottom calc(var(--animation-timing) / 2);
+  transition: bottom calc(var(--animation-timing) / 2);
+  -webkit-transition-delay: calc(var(--animation-timing) / 2);
+          transition-delay: calc(var(--animation-timing) / 2);
+}
+
+.contact-stick.hide {
+  bottom: -100%;
+}
+
+.contact-stick::after {
+  content: '';
+  display: block;
+  height: 90px;
+  width: 1px;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.contact-list {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.contact-list .vertical {
+  -webkit-transition: bottom calc(var(--animation-timing) / 2);
+  transition: bottom calc(var(--animation-timing) / 2);
+}
+
+.contact-list .vertical.hide {
+  bottom: 0;
+}
+
+@media screen and (max-width: 600px) {
+  .contact-stick {
+    display: none;
+  }
 }
 
 .outlined-btn {

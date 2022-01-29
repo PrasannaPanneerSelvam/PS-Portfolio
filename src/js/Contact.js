@@ -1,3 +1,13 @@
+const toggleSideBarIcons = function () {
+  const stick = document.getElementById('social-media-vertical-stick'),
+    stickElemsClassList = [...stick.getElementsByTagName('li')].map(i => i.classList);
+
+  return function (bool) {
+    stick.parentElement.classList.toggle('hide', bool);
+    stickElemsClassList.forEach(item => item.toggle('hide', bool));
+  }
+}();
+
 function activateSocialMediaAnimation() {
   const options = {
     threshold: 1,
@@ -10,9 +20,11 @@ function activateSocialMediaAnimation() {
       if (entries[0].isIntersecting) {
         targetChildClassList.add('showUp');
         targetChildClassList.remove('wrapUp');
+        toggleSideBarIcons(true);
       } else {
         targetChildClassList.add('wrapUp');
         targetChildClassList.remove('showUp');
+        toggleSideBarIcons(false);
       }
     });
   }, options);

@@ -52,7 +52,14 @@
   height: var(--socialMediatItem);
   width: calc(var(--socialMediatItem) * 4 + var(--socialMediaMargin) * 3);
 
+  &.vertical {
+    height: calc(var(--socialMediatItem) * 4);
+    width: var(--socialMediatItem);
+  }
+
   &-item {
+    --final-left-position: 0;
+
     position: absolute;
     top: 0;
     left: 50%;
@@ -70,26 +77,40 @@
     animation-duration: 1s;
     animation-fill-mode: forwards;
 
+    &.vertical {
+      top: auto;
+      bottom: var(--final-bottom-position);
+      border: none;
+
+      --final-bottom-position: calc(
+        var(--child-reverse-num) * (var(--socialMediatItem))
+      );
+
+      @for $i from 1 through 4 {
+        &:nth-child(#{$i}) {
+          --child-reverse-num: #{4 - $i};
+        }
+      }
+    }
+
     &:nth-child(1) {
-      background: linear-gradient(red, white);
-      --final-position: calc(var(--socialMediatItem) * 0.5);
+      --final-left-position: calc(var(--socialMediatItem) * 0.5);
     }
 
     &:nth-child(2) {
-      --final-position: calc(
+      --final-left-position: calc(
         var(--socialMediatItem) * 1.5 + var(--socialMediaMargin)
       );
     }
 
     &:nth-child(3) {
-      --final-position: calc(
+      --final-left-position: calc(
         100% - var(--socialMediatItem) * 1.5 - var(--socialMediaMargin)
       );
     }
 
     &:nth-child(4) {
-      background: linear-gradient(red, white);
-      --final-position: calc(100% - var(--socialMediatItem) * 0.5);
+      --final-left-position: calc(100% - var(--socialMediatItem) * 0.5);
     }
 
     &:hover {
@@ -124,14 +145,14 @@
 
   100% {
     transform: translate(-50%) rotate(1turn);
-    left: var(--final-position);
+    left: var(--final-left-position);
   }
 }
 
 @keyframes scrollShrink {
   0% {
     transform: translate(-50%) rotate(0turn);
-    left: var(--final-position);
+    left: var(--final-left-position);
   }
 
   100% {
@@ -159,45 +180,48 @@
   fill: white;
 }
 
-// .contact-stick {
-//   width: min-content;
-//   // background-color: blue;
+.contact-stick {
+  --animation-timing: 1s;
+  position: fixed;
 
-//   position: fixed;
+  width: min-content;
 
-//   left: 40px;
-//   bottom: 0;
-// }
+  left: 40px;
+  bottom: 0;
+  z-index: 10;
 
-// .contact-list {
-//   position: relative;
-//   list-style: none;
+  transition: bottom calc(var(--animation-timing) / 2);
+  transition-delay: calc(var(--animation-timing) / 2);
 
-//   div {
-//     display: inline-block;
-//     height: 40px;
-//     width: 40px;
-//     border-radius: 50%;
-//     background-color: green;
-//   }
+  &.hide {
+    bottom: -100%;
+  }
 
-//   a {
-//     svg {
-//       width: 20px;
-//       height: 20px;
+  &::after {
+    content: '';
+    display: block;
+    height: 90px;
+    width: 1px;
+    margin: 0 auto;
+    background-color: white;
+  }
+}
 
-//       margin: 0 auto;
-//     }
-//     width: 20px;
-//     height: 20px;
-//   }
+.contact-list {
+  position: relative;
+  margin-bottom: 20px;
 
-//   &::after {
-//     content: '';
-//     display: block;
-//     height: 90px;
-//     width: 1px;
-//     margin: 0 auto;
-//     background-color: white;
-//   }
-// }
+  .vertical {
+    transition: bottom calc(var(--animation-timing) / 2);
+
+    &.hide {
+      bottom: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .contact-stick {
+    display: none;
+  }
+}
