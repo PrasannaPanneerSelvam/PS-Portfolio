@@ -58,17 +58,20 @@
     left: 50%;
     transform: translate(-50%);
 
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: var(--socialMediatItem);
     width: var(--socialMediatItem);
     border-radius: 50%;
 
-    background: linear-gradient(red, white);
+    border: 1px solid white;
 
     animation-duration: 1s;
     animation-fill-mode: forwards;
 
     &:nth-child(1) {
+      background: linear-gradient(red, white);
       --final-position: calc(var(--socialMediatItem) * 0.5);
     }
 
@@ -85,6 +88,7 @@
     }
 
     &:nth-child(4) {
+      background: linear-gradient(red, white);
       --final-position: calc(100% - var(--socialMediatItem) * 0.5);
     }
 
@@ -134,6 +138,25 @@
     transform: translate(-50%) rotate(-1turn);
     left: 50%;
   }
+}
+
+.ss-atag {
+  height: 30px;
+  width: 30px;
+}
+
+.socialMediaIcons {
+  height: 100%;
+  width: 100%;
+}
+
+.justStroke {
+  fill: transparent;
+  stroke: white;
+}
+
+.fillColor {
+  fill: white;
 }
 
 // .contact-stick {

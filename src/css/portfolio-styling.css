@@ -669,12 +669,19 @@ html::-webkit-scrollbar {
   left: 50%;
   -webkit-transform: translate(-50%);
           transform: translate(-50%);
-  display: inline-block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   height: var(--socialMediatItem);
   width: var(--socialMediatItem);
   border-radius: 50%;
-  background: -webkit-gradient(linear, left top, left bottom, from(red), to(white));
-  background: linear-gradient(red, white);
+  border: 1px solid white;
   -webkit-animation-duration: 1s;
           animation-duration: 1s;
   -webkit-animation-fill-mode: forwards;
@@ -682,6 +689,8 @@ html::-webkit-scrollbar {
 }
 
 .social-media-list-item:nth-child(1) {
+  background: -webkit-gradient(linear, left top, left bottom, from(red), to(white));
+  background: linear-gradient(red, white);
   --final-position: calc(var(--socialMediatItem) * 0.5);
 }
 
@@ -698,6 +707,8 @@ html::-webkit-scrollbar {
 }
 
 .social-media-list-item:nth-child(4) {
+  background: -webkit-gradient(linear, left top, left bottom, from(red), to(white));
+  background: linear-gradient(red, white);
   --final-position: calc(100% - var(--socialMediatItem) * 0.5);
 }
 
@@ -780,6 +791,25 @@ html::-webkit-scrollbar {
             transform: translate(-50%) rotate(-1turn);
     left: 50%;
   }
+}
+
+.ss-atag {
+  height: 30px;
+  width: 30px;
+}
+
+.socialMediaIcons {
+  height: 100%;
+  width: 100%;
+}
+
+.justStroke {
+  fill: transparent;
+  stroke: white;
+}
+
+.fillColor {
+  fill: white;
 }
 
 .outlined-btn {
