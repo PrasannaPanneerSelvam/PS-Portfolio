@@ -14,9 +14,29 @@
 @import '_button';
 
 :root {
+  // Color palette
   --primary-color: #000;
   --secondary-color: #fff;
-  --tertiary-color: rgba(0, 181, 255);
+  --tertiary-color: transparent;
+
+  --primary-bg-color: var(--primary-color);
+  --secondary-bg-color: var(--tertiary-color);
+
+  --primary-text-color: var(--secondary-color);
+
+  --button-outline-color: var(--secondary-color);
+
+  --nav-text-color: var(--secondary-color);
+
+  --icon-stroke-color: var(--secondary-color);
+
+  --icon-primary-fill-color: var(--tertiary-color);
+  --icon-secondary-fill-color: var(--secondary-color);
+
+  --card-stroke-color: var(--secondary-color);
+
+  --constellation-particle-color: var(--secondary-color);
+  --constellation-link-color: rgba(0, 181, 255);
 
   --border-radius: 4px;
 
@@ -35,7 +55,7 @@
 }
 
 body {
-  background-color: black;
+  background-color: var(--primary-bg-color);
   width: 100vw;
   overflow: hidden;
 }

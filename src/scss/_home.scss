@@ -1,5 +1,5 @@
 .home {
-  color: white;
+  color: var(--primary-text-color);
   position: relative;
 }
 
@@ -44,7 +44,7 @@
     top: 50%;
     right: -5px;
     transform: translateY(-50%);
-    border-right: 2px solid white;
+    border-right: 2px solid var(--primary-text-color);
     animation: blink 300ms infinite linear alternate;
   }
 

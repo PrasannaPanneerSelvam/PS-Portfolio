@@ -50,7 +50,16 @@ function IncludeConstellationEffect() {
 
   setCanvasSize();
 
-  const ConstellationEffect = new Constellation(canvas);
+  const rootStyles = getComputedStyle(document.body);
+
+  const options = {
+    particleColor: rootStyles.getPropertyValue(
+      '--constellation-particle-color'
+    ),
+    linkColor: rootStyles.getPropertyValue('--constellation-link-color'),
+  };
+
+  const ConstellationEffect = new Constellation(canvas, options);
   ConstellationEffect.animate();
 
   const constellationObserver = new IntersectionObserver(entries => {

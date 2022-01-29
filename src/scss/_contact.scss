@@ -1,5 +1,5 @@
 .contact {
-  color: white;
+  color: var(--primary-text-color);
   position: relative;
 }
 
@@ -34,7 +34,7 @@
   display: inline-block;
   margin-top: 30px;
   padding: 5px;
-  border: 1px solid white;
+  border: 1px solid var(--button-outline-color);
   border-radius: 10px;
   padding-left: 40px;
 
@@ -78,7 +78,7 @@
     width: var(--socialMediatItem);
     border-radius: 50%;
 
-    border: 1px solid white;
+    border: 1px solid var(--button-outline-color);
 
     animation-duration: 1s;
     animation-fill-mode: forwards;
@@ -196,12 +196,12 @@
 }
 
 .justStroke {
-  fill: transparent;
-  stroke: white;
+  fill: var(--icon-primary-fill-color);
+  stroke: var(--icon-stroke-color);
 }
 
 .fillColor {
-  fill: white;
+  fill: var(--icon-secondary-fill-color);
 }
 
 .contact-stick {
@@ -227,7 +227,7 @@
     height: 90px;
     width: 1px;
     margin: 0 auto;
-    background-color: white;
+    background-color: var(--icon-stroke-color);
   }
 }
 
@@ -235,4 +235,8 @@
   .contact-stick {
     display: none;
   }
+}
+
+.hideSvg {
+  display: none;
 }

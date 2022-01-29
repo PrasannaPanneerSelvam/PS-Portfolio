@@ -93,7 +93,7 @@
   position: relative;
   height: var(--hamburger-line-height);
   width: var(--hamburger-line-width);
-  background-color: white;
+  background-color: var(--icon-stroke-color);
   border-radius: 10px;
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
@@ -103,7 +103,7 @@
   content: '';
   display: inherit;
   position: absolute;
-  background-color: white;
+  background-color: var(--icon-stroke-color);
   height: inherit;
   width: inherit;
   border-radius: inherit;
@@ -165,7 +165,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  color: white;
+  color: var(--nav-text-color);
 }
 
 .nav-items-holder .nav-item-list {
@@ -181,7 +181,8 @@
   gap: 10px;
 }
 
-.nav-items-holder .nav-item-list-item {
+.nav-items-holder .nav-item-list-item,
+.nav-items-holder .nav-item-list .resume-button-item {
   display: inline-block;
   height: -webkit-fit-content;
   height: -moz-fit-content;
@@ -225,7 +226,7 @@
     inset: 0;
   }
   .nav-items-holder {
-    background-color: black;
+    background-color: var(--primary-bg-color);
     position: absolute;
     inset: 0 0 0 30%;
     -webkit-transform: translateX(100%);
@@ -297,7 +298,7 @@ html::-webkit-scrollbar {
 }
 
 .home {
-  color: white;
+  color: var(--primary-text-color);
   position: relative;
 }
 
@@ -339,7 +340,7 @@ html::-webkit-scrollbar {
   right: -5px;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
-  border-right: 2px solid white;
+  border-right: 2px solid var(--primary-text-color);
   -webkit-animation: blink 300ms infinite linear alternate;
           animation: blink 300ms infinite linear alternate;
 }
@@ -363,7 +364,7 @@ html::-webkit-scrollbar {
 }
 
 .about-me {
-  color: white;
+  color: var(--primary-text-color);
   position: relative;
   padding: 1.5rem;
   display: -webkit-box;
@@ -561,7 +562,7 @@ html::-webkit-scrollbar {
 }
 
 .projects {
-  color: white;
+  color: var(--primary-text-color);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -594,8 +595,8 @@ html::-webkit-scrollbar {
       -ms-flex-pack: center;
           justify-content: center;
   border-radius: 5px;
-  border: 1px solid white;
-  background-color: transparent;
+  border: 1px solid var(--card-stroke-color);
+  background-color: var(--secondary-bg-color);
 }
 
 .card-btn {
@@ -603,7 +604,7 @@ html::-webkit-scrollbar {
 }
 
 .contact {
-  color: white;
+  color: var(--primary-text-color);
   position: relative;
 }
 
@@ -652,7 +653,7 @@ html::-webkit-scrollbar {
   display: inline-block;
   margin-top: 30px;
   padding: 5px;
-  border: 1px solid white;
+  border: 1px solid var(--button-outline-color);
   border-radius: 10px;
   padding-left: 40px;
   cursor: pointer;
@@ -697,7 +698,7 @@ html::-webkit-scrollbar {
   height: var(--socialMediatItem);
   width: var(--socialMediatItem);
   border-radius: 50%;
-  border: 1px solid white;
+  border: 1px solid var(--button-outline-color);
   -webkit-animation-duration: 1s;
           animation-duration: 1s;
   -webkit-animation-fill-mode: forwards;
@@ -855,12 +856,12 @@ html::-webkit-scrollbar {
 }
 
 .justStroke {
-  fill: transparent;
-  stroke: white;
+  fill: var(--icon-primary-fill-color);
+  stroke: var(--icon-stroke-color);
 }
 
 .fillColor {
-  fill: white;
+  fill: var(--icon-secondary-fill-color);
 }
 
 .contact-stick {
@@ -891,7 +892,7 @@ html::-webkit-scrollbar {
   height: 90px;
   width: 1px;
   margin: 0 auto;
-  background-color: white;
+  background-color: var(--icon-stroke-color);
 }
 
 @media screen and (max-width: 600px) {
@@ -900,10 +901,14 @@ html::-webkit-scrollbar {
   }
 }
 
+.hideSvg {
+  display: none;
+}
+
 .outlined-btn {
   padding: 1.25rem 1.75rem;
-  color: var(--secondary-color);
-  border: 1px solid var(--secondary-color);
+  color: var(--primary-text-color);
+  border: 1px solid var(--button-outline-color);
   border-radius: var(--border-radius);
   background: transparent;
   cursor: pointer;
@@ -916,7 +921,18 @@ html::-webkit-scrollbar {
 :root {
   --primary-color: #000;
   --secondary-color: #fff;
-  --tertiary-color: rgba(0, 181, 255);
+  --tertiary-color: transparent;
+  --primary-bg-color: var(--primary-color);
+  --secondary-bg-color: var(--tertiary-color);
+  --primary-text-color: var(--secondary-color);
+  --button-outline-color: var(--secondary-color);
+  --nav-text-color: var(--secondary-color);
+  --icon-stroke-color: var(--secondary-color);
+  --icon-primary-fill-color: var(--tertiary-color);
+  --icon-secondary-fill-color: var(--secondary-color);
+  --card-stroke-color: var(--secondary-color);
+  --constellation-particle-color: var(--secondary-color);
+  --constellation-link-color: rgba(0, 181, 255);
   --border-radius: 4px;
   --is-mobile-view: 'false';
 }
@@ -933,7 +949,7 @@ html::-webkit-scrollbar {
 }
 
 body {
-  background-color: black;
+  background-color: var(--primary-bg-color);
   width: 100vw;
   overflow: hidden;
 }

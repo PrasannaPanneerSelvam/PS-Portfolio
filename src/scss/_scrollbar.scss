@@ -21,4 +21,9 @@ html {
   background: linear-gradient(#ff0, #fff);
   transition: all 0.2s linear;
   border-radius: calc(1vw / 2);
+
+  // TODO :: Fix this - Border radius is not proper in this case
+  // height: 100%;
+  // transform-origin: top;
+  // transform: scaleY(var(--progress-height, 1%));
 }

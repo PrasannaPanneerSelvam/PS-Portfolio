@@ -81,7 +81,7 @@
 
   height: var(--hamburger-line-height);
   width: var(--hamburger-line-width);
-  background-color: white;
+  background-color: var(--icon-stroke-color);
 
   border-radius: 10px;
   transition: all 0.2s ease-out;
@@ -91,7 +91,7 @@
     content: '';
     display: inherit;
     position: absolute;
-    background-color: white;
+    background-color: var(--icon-stroke-color);
     height: inherit;
     width: inherit;
     border-radius: inherit;
@@ -143,7 +143,7 @@
   justify-content: center;
   align-items: center;
 
-  color: white;
+  color: var(--nav-text-color);
 
   .nav-item-list {
     display: flex;
@@ -151,7 +151,8 @@
     height: min-content;
     gap: 10px;
 
-    &-item {
+    &-item,
+    .resume-button-item {
       display: inline-block;
       height: fit-content;
       list-style: none;
@@ -202,7 +203,7 @@
   }
 
   .nav-items-holder {
-    background-color: black;
+    background-color: var(--primary-bg-color);
     position: absolute;
     inset: 0 0 0 30%;
 
