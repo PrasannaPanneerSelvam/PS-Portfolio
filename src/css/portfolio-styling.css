@@ -715,6 +715,8 @@ html::-webkit-scrollbar {
   transition: transform calc(var(--animation-timing) / 2);
   transition: transform calc(var(--animation-timing) / 2), -webkit-transform calc(var(--animation-timing) / 2);
   border: none;
+  -webkit-transition-delay: calc(var(--animation-timing) / 2);
+          transition-delay: calc(var(--animation-timing) / 2);
   --final-bottom-position: calc(
         -1 * var(--child-reverse-num) * (var(--socialMediatItem))
       );
@@ -737,13 +739,10 @@ html::-webkit-scrollbar {
 }
 
 .social-media-list-item.vertical.hide {
+  -webkit-transition-delay: 0s;
+          transition-delay: 0s;
   -webkit-transform: translate(-50%, 0);
           transform: translate(-50%, 0);
-}
-
-.social-media-list-item.vertical.show {
-  -webkit-transition-delay: calc(var(--animation-timing) / 2);
-          transition-delay: calc(var(--animation-timing) / 2);
 }
 
 .social-media-list-item:nth-child(1) {
@@ -862,6 +861,11 @@ html::-webkit-scrollbar {
 
 .fillColor {
   fill: var(--icon-secondary-fill-color);
+}
+
+.fillWithPrimaryColor {
+  fill: #fff;
+  stroke: #fff;
 }
 
 .contact-stick {

@@ -90,6 +90,7 @@
       transition: transform calc(var(--animation-timing) / 2);
 
       border: none;
+      transition-delay: calc(var(--animation-timing) / 2);
 
       --final-bottom-position: calc(
         -1 * var(--child-reverse-num) * (var(--socialMediatItem))
@@ -102,11 +103,8 @@
       }
 
       &.hide {
+        transition-delay: 0s;
         transform: translate(-50%, 0);
-      }
-
-      &.show {
-        transition-delay: calc(var(--animation-timing) / 2);
       }
     }
 
@@ -202,6 +200,11 @@
 
 .fillColor {
   fill: var(--icon-secondary-fill-color);
+}
+
+.fillWithPrimaryColor {
+  fill: #fff;
+  stroke: #fff;
 }
 
 .contact-stick {
