@@ -1,28 +1,41 @@
 const path = require('path');
 
-module.exports = {
-  mode: 'development',
-  // mode: 'production',
-  entry: {
-    index: path.resolve(__dirname, 'src/js/index.js'),
-  },
+const isProduction = process.env.NODE_ENV == 'production';
+
+const config = {
+  entry: './src/ts/index.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name]-bundle.js',
-    clean: true,
+    filename: 'index-bundle.js',
+    publicPath: path.resolve(__dirname, 'dist'),
   },
+  devServer: {
+    port: 8080,
+    static: [path.join(__dirname, "dist"), path.join(__dirname, "static")],
+    compress: true,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization",
+      "X-Content-Type-Options": "Disabled"
+    }
+  },
+  plugins: [],
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-          },
-        },
-      },
+        test: /\.(ts|tsx)$/i,
+        loader: 'ts-loader',
+        exclude: ['/node_modules/'],
+      }
     ],
   },
+  resolve: {
+    extensions: ['.ts', '.js', '...'],
+  },
+};
+
+module.exports = () => {
+  config.mode = isProduction ? 'production' : 'development';
+  return config;
 };

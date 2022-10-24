@@ -19,7 +19,7 @@ function activateSkillShowCaseAnimation() {
   }, options);
 
   const skillContainer = document.getElementById('skills-showcase'),
-    skillElems = [...skillContainer.getElementsByTagName('li')];
+    skillElems = Array.from(skillContainer.getElementsByTagName('li'));
 
   skillElems.forEach(skill => SkillObserver.observe(skill));
 

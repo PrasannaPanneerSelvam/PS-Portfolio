@@ -1,4 +1,4 @@
-function alterSkew(speed) {
+function alterSkew(speed: number) {
   const styles = this.style;
 
   let xSkewAngle = speed,
@@ -20,7 +20,7 @@ function alterSkew(speed) {
     styles.setProperty('--vertical-angle', `${-xSkewAngle * 10}deg`);
 }
 
-function addSkewEffect(elementsToBeSkewed) {
+function addSkewEffect(elementsToBeSkewed: HTMLCollection) {
   let lastValue = window.scrollY,
     scrollDiff,
     currentScroll,

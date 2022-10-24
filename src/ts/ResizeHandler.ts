@@ -1,5 +1,7 @@
-function ResizeAnimationsHandler(resizeFunctions) {
-  let resizeTimer;
+type VoidCallback = () => void;
+
+function ResizeAnimationsHandler(resizeFunctions: VoidCallback[]) {
+  let resizeTimer: NodeJS.Timeout;
   window.addEventListener('resize', () => {
     document.body.classList.add('resize-animation-stopper');
 

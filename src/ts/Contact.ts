@@ -1,10 +1,10 @@
 const toggleSideBarIcons = (function () {
   const stick = document.getElementById('social-media-vertical-stick'),
-    stickElemsClassList = [...stick.getElementsByTagName('li')].map(
+    stickElemsClassList = Array.from(stick.getElementsByTagName('li')).map(
       i => i.classList
     );
 
-  return function (doHide) {
+  return function (doHide: boolean) {
     stick.parentElement.classList.toggle('hide', doHide);
     stick.parentElement.classList.toggle('show', !doHide);
 
@@ -37,7 +37,7 @@ function activateSocialMediaAnimation() {
   }, options);
 
   const socialMediaContainer = document.getElementById('social-media-list'),
-    socialMediaElems = [...socialMediaContainer.getElementsByTagName('li')];
+    socialMediaElems = Array.from(socialMediaContainer.getElementsByTagName('li'));
 
   socialMediaElems[0].onanimationstart = () => {
     SocialMediaIconsObserver.unobserve(socialMediaContainer);

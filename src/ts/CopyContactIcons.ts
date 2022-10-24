@@ -4,7 +4,7 @@ function CopyContactIcons() {
     listIcons = listContainer.children;
 
   for (let idx = 0; idx < listIcons.length; idx++) {
-    let listItem = listIcons[idx].cloneNode(true);
+    let listItem = listIcons[idx].cloneNode(true) as HTMLElement;
     listItem.classList.remove('vertical');
     targetContainer.appendChild(listItem);
   }

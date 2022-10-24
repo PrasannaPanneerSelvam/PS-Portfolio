@@ -1,31 +1,33 @@
-import CopyContactIcons from './CopyContactIcons.js';
-import { scrollNavbarCallback, setNavigationClicks } from './navbar.js';
-import applySmoothScrollEffectToContent from './smoothScroll.js';
-import ProgressScrollBar from './ProgressScrollbar.js';
-import Constellation from './constellation.js';
-import TypeWriter from './typeWrite.js';
-import ParallaxTilt from './ParallaxTilt.js';
-import addSkewEffect from './skewCard.js';
+import { Maybe } from './CommonTypes'
+
+import CopyContactIcons from './CopyContactIcons';
+import { scrollNavbarCallback, setNavigationClicks } from './navbar';
+import applySmoothScrollEffectToContent from './smoothScroll';
+import ProgressScrollBar from './ProgressScrollbar';
+import Constellation from './constellation';
+import TypeWriter from './typeWrite';
+import ParallaxTilt from './ParallaxTilt';
+import addSkewEffect from './skewCard';
 import {
   activateSkillShowCaseAnimation,
   setContainerSize,
-} from './SkillsShowCase.js';
-import ActivateSocialMediaAnimation from './Contact.js';
-import CopyTextToClipBoard from './CopyText.js';
-import ResizeAnimationsHandler from './ResizeHandler.js';
+} from './SkillsShowCase';
+import ActivateSocialMediaAnimation from './Contact';
+import CopyTextToClipBoard from './CopyText';
+import ResizeAnimationsHandler from './ResizeHandler';
 
 CopyContactIcons();
 
 // Smoothening the scroll
 const { setBodyHeightOnResize, navScrollEffect } =
   applySmoothScrollEffectToContent(
-    document.getElementsByClassName('smooth-scroll-container')[0]
+    document.getElementsByClassName('smooth-scroll-container')[0] as HTMLElement
   );
 
 setNavigationClicks(navScrollEffect);
 
-const scrollBar = document.getElementsByClassName('scroll-bar')[0],
-  scrollThumb = document.getElementsByClassName('progress-bar')[0];
+const scrollBar = document.getElementsByClassName('scroll-bar')[0] as HTMLElement,
+  scrollThumb = document.getElementsByClassName('progress-bar')[0] as HTMLElement;
 
 const { resizeEventCallback, scrollEventCallback } = ProgressScrollBar({
   scrollBar,
@@ -40,7 +42,7 @@ activateSkillShowCaseAnimation();
 function IncludeConstellationEffect() {
   const canvasId = 'constellation-canvas';
 
-  const canvas = document.getElementById(canvasId);
+  const canvas = document.getElementById(canvasId) as Maybe<HTMLCanvasElement>;
 
   const setCanvasSize = function () {
     const { width, height } = window.getComputedStyle(this);
@@ -82,10 +84,10 @@ const typeWriter = new TypeWriter('typewrite-text', words);
 typeWriter.update();
 
 // Applying Parallax tilt effect
-const tiltCards = [...document.getElementsByClassName('tilt-card')];
+const tiltCards = Array.from(document.getElementsByClassName('tilt-card'));
 
 tiltCards.forEach(element => {
-  new ParallaxTilt(element, { maxDeflection: 10 });
+  new ParallaxTilt(element as HTMLElement, { maxDeflection: 10, childrenProjectionDistance: undefined, scaleOnHover: undefined });
 });
 
 // Adding skew effect on scroll

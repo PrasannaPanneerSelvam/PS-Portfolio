@@ -1,4 +1,4 @@
-function applySmoothScrollEffectToContent(scrollWrap) {
+function applySmoothScrollEffectToContent(scrollWrap: HTMLElement) {
   function setBodyHeightOnResize() {
     const height = scrollWrap.getBoundingClientRect().height - 1;
     document.body.style.height = `${Math.floor(height)}px`;

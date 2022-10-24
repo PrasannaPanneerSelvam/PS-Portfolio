@@ -108,7 +108,7 @@
 // export { scrollNavbarCallback, setNavigationClicks };
 
 function fixResizeAnimations() {
-  let resizeTimer;
+  let resizeTimer: NodeJS.Timeout;
   window.addEventListener('resize', () => {
     document.body.classList.add('resize-animation-stopper');
     clearTimeout(resizeTimer);
@@ -187,16 +187,17 @@ const navBarListItems = document.getElementsByClassName('nav-item-list-item'),
   );
 
 for (let idx = 0; idx < navBarListItems.length; idx++) {
-  const targetClassName = navBarListItems[idx].dataset.targetSection,
-    targetElement = document.getElementsByClassName(targetClassName)[0];
+  const liElem = navBarListItems[idx] as HTMLUListElement,
+    targetClassName = liElem.dataset.targetSection,
+    targetElement = document.getElementsByClassName(targetClassName)[0] as HTMLElement;
 
-  navBarListItems[idx].addEventListener('click', () => {
+    liElem.addEventListener('click', () => {
     NavigationBar.toggleSideBar();
 
     // TODO :: Cache the offset value if needed
     const navbarHeight =
         parseInt(navbarComputedStyleObject.height.split('px')[0]) + 10,
-      targetOffset = targetElement.offsetTop;
+      targetOffset = targetElement?.offsetTop;
 
     doNothingOnScrollBar = true;
     window.scrollTo({
@@ -207,13 +208,13 @@ for (let idx = 0; idx < navBarListItems.length; idx++) {
 
 const quickContactBtn = document.getElementById('quick-contact-btn'),
   targetClassName = quickContactBtn.dataset.targetSection,
-  targetElement = document.getElementsByClassName(targetClassName)[0];
+  targetElement = document.getElementsByClassName(targetClassName)[0] as HTMLElement;
 
 quickContactBtn.addEventListener('click', () => {
   // TODO :: Cache the offset value if needed
   const navbarHeight =
       parseInt(navbarComputedStyleObject.height.split('px')[0]) + 10,
-    targetOffset = targetElement.offsetTop;
+    targetOffset = targetElement?.offsetTop;
 
   doNothingOnScrollBar = true;
   window.scrollTo({
@@ -221,6 +222,6 @@ quickContactBtn.addEventListener('click', () => {
   });
 });
 
-const setNavigationClicks = () => {};
+const setNavigationClicks = (_: any) => {};
 
 export { scrollNavbarCallback, setNavigationClicks };
