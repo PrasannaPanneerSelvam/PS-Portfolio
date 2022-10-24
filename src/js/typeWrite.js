@@ -18,6 +18,7 @@ class TypeWriter {
     this.#lastTimeOutId = -1;
 
     this.#setDimensions();
+    document.fonts.onloadingdone = () => this.#setDimensions();
   }
 
   #setDimensions() {
