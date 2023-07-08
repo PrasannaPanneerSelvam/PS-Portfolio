@@ -1,0 +1,55 @@
+.hamburgerButtonHolder {
+  --hamburger-line-height: 3px;
+  --hamburger-line-width: 30px;
+
+  display: flex;
+  /* display: none; */
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: content-box;
+  height: calc(8 * var(--hamburger-line-height));
+  padding: 1vh;
+
+  position: absolute;
+  top: 1vh;
+  right: 1vh;
+
+  z-index: var(--hamburger-level);
+}
+
+.hamburgerButton {
+  display: inline-block;
+  position: relative;
+  height: var(--hamburger-line-height);
+  width: var(--hamburger-line-width);
+  background-color: var(--icon-stroke-color);
+  border-radius: 10px;
+  transition: all 0.2s ease-out;
+}
+.hamburgerButton::before,
+.hamburgerButton::after {
+  content: '';
+  display: inherit;
+  position: absolute;
+  background-color: var(--icon-stroke-color);
+  height: inherit;
+  width: inherit;
+  border-radius: inherit;
+  top: 7px;
+  transition: all 0.2s ease-out;
+}
+.hamburgerButton::after {
+  top: -7px;
+}
+.hamburgerButton.active {
+  background-color: transparent;
+}
+.hamburgerButton.active::before {
+  top: 0;
+  transform: rotate(-45deg);
+}
+.hamburgerButton.active::after {
+  top: 0;
+  transform: rotate(45deg);
+}

@@ -1,6 +1,56 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', 'Monserrat', sans-serif;
+}
+
+:root {
+  font-size: 16px;
+  line-height: 1.5rem;
+  font-weight: 400;
+
+  color-scheme: light dark;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  --primary-color: #000;
+  --secondary-color: #fff;
+  --tertiary-color: transparent;
+  --primary-bg-color: var(--primary-color);
+  --secondary-bg-color: var(--tertiary-color);
+  --primary-text-color: var(--secondary-color);
+  --button-outline-color: var(--secondary-color);
+  --nav-text-color: var(--secondary-color);
+  --icon-stroke-color: var(--secondary-color);
+  --icon-primary-fill-color: var(--tertiary-color);
+  --icon-secondary-fill-color: var(--secondary-color);
+  --card-stroke-color: var(--secondary-color);
+  --constellation-particle-color: var(--secondary-color);
+  --constellation-link-color: rgba(0, 181, 255);
+  --border-radius: 4px;
+  --is-mobile-view: 'false';
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  position: relative;
+  background-color: var(--primary-bg-color);
+
+  height: 100vh;
+  width: 100%;
+  /* overflow: hidden; */
+  background-color: #000;
+  color: #fff;
 }
