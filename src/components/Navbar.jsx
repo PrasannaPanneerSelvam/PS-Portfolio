@@ -42,23 +42,28 @@ function Navbar({ currentPageIndex, sections }) {
           >
             <a href={`#${section.toLowerCase()}`}>{section}</a>
 
-            {/* <div
-              className={styles.growingBar}
-              style={{
-                scale: currentPageIndex === idx ? '1 1' : '0 1',
-                transformOrigin:
-                  currentPageIndex === idx ? 'center left' : 'center right',
-              }}
-            ></div> */}
+            {isMobileView && (
+              <div
+                className={styles.growingBar}
+                style={{
+                  display: currentPageIndex === idx ? 'inline-block' : 'none',
+                  //   scale: currentPageIndex === idx ? '1 1' : '0 1',
+                  //   transformOrigin:
+                  //     currentPageIndex === idx ? 'center left' : 'center right',
+                }}
+              ></div>
+            )}
           </li>
         ))}
 
-        <div
-          className={styles.slider}
-          style={{
-            translate: `${currentPageIndex * 100}%`,
-          }}
-        ></div>
+        {isMobileView || (
+          <div
+            className={styles.slider}
+            style={{
+              translate: `${currentPageIndex * 100}%`,
+            }}
+          ></div>
+        )}
 
         <li
           className={styles.navItem}
