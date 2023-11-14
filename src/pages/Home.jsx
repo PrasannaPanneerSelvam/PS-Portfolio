@@ -19,9 +19,7 @@ function Home({ reference }) {
 
   const textToBeChanged = (isMobileView ? '' : introPrefix) + 'Prasanna';
 
-  const text = useRandomText(textToBeChanged, options);
-
-  const isDone = text === textToBeChanged;
+  const [text, isDone] = useRandomText(textToBeChanged, options);
 
   const introDescriptionClassList = [styles.slider, styles.introText];
 
