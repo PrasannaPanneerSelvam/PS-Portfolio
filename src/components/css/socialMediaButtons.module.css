@@ -1,0 +1,57 @@
+.listHolder {
+  --iconSize: 50px;
+  --final-turn: 0turn;
+  --final-left-position: 0;
+  --final-top-position: 0;
+  position: relative;
+  display: flex;
+  list-style: none;
+  /* background-color: rgba(255, 255, 0, 0.4); */
+}
+
+.listItem {
+  position: absolute;
+  display: inline-block;
+
+  text-align: center;
+  height: var(--iconSize);
+  width: var(--iconSize);
+  border-radius: 50%;
+  border: 1px solid #fff;
+
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+
+  display: grid;
+  place-content: center;
+}
+
+.showUp {
+  animation-name: scrollExpand;
+}
+
+.wrapUp {
+  animation-name: scrollShrink;
+}
+
+@keyframes scrollExpand {
+  0% {
+    transform: translate(0%) rotate(0turn);
+  }
+
+  100% {
+    transform: translate(var(--final-left-position), var(--final-top-position))
+      rotate(var(--final-turn));
+  }
+}
+
+@keyframes scrollShrink {
+  0% {
+    transform: translate(var(--final-left-position), var(--final-top-position))
+      rotate(var(--final-turn));
+  }
+
+  100% {
+    transform: translate(0%) rotate(0turn);
+  }
+}

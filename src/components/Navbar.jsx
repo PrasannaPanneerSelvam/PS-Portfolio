@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from './navbar.module.css';
+import styles from './css/navbar.module.css';
 
 import Hamburger from './Hamburger';
 import { getAppStateContext } from '../context/AppContext';
@@ -64,6 +64,18 @@ function Navbar({ currentPageIndex, sections }) {
             }}
           ></div>
         )}
+
+        {/* <div
+          className={styles.slider2}
+          style={{
+            translate: `${currentPageIndex * 100}%`,
+          }}
+        >
+          <div className={styles.quater}></div>
+          <div className={styles.quater}></div>
+          <div className={styles.quater}></div>
+          <div className={styles.quater}></div>
+        </div> */}
 
         <li
           className={styles.navItem}

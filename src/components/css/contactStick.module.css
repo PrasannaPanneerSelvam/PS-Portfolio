@@ -1,0 +1,22 @@
+.contactStickWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  position: fixed;
+
+  left: 50px;
+  bottom: 50px;
+
+  --icon-stroke-color: #fff;
+  --hamburger-level: 11;
+
+  overflow: hidden;
+}
+
+.stick {
+  margin-top: 10px;
+  height: 100px;
+  width: 2px;
+  background-color: #fff;
+}

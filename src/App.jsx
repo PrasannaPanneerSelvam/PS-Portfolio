@@ -3,63 +3,13 @@ import './App.css';
 
 import Navbar from './components/Navbar';
 import { getAppStateContext } from './context/AppContext';
-
-function navBarHandler(sections, pageIndexSetter, rootFontSize) {
-  function throttle(cb, delay = 300) {
-    let shouldWait = false,
-      isSomeCallOnQueue = false;
-
-    const timeOutFunc = () => {
-      if (isSomeCallOnQueue) {
-        cb();
-        isSomeCallOnQueue = false;
-        setTimeout(timeOutFunc, delay);
-      } else {
-        shouldWait = false;
-      }
-    };
-
-    return () => {
-      if (shouldWait) {
-        isSomeCallOnQueue = true;
-        return;
-      }
-
-      cb();
-      shouldWait = true;
-      setTimeout(timeOutFunc, delay);
-    };
-  }
-
-  const onScrollFn = () => {
-    let currentIndex = -1;
-
-    const pageYOffSetWithTopPadding = window.pageYOffset + rootFontSize;
-
-    for (let idx = 0; idx < sections.length; idx++) {
-      const section = sections[idx];
-
-      if (
-        section.offsetTop + section.clientHeight <=
-        pageYOffSetWithTopPadding
-      ) {
-        // console.log('Crossed ' + idx);
-      } else if (section.offsetTop <= pageYOffSetWithTopPadding) {
-        // console.log('On cover ' + idx);
-        currentIndex = idx;
-        break;
-      }
-    }
-
-    pageIndexSetter(currentIndex);
-  };
-
-  // TODO :: Fix this
-  return throttle(onScrollFn);
-}
+import Contact from './pages/Contact';
+import Home from './pages/Home';
+import navBarHandler from './components/navBarHandler';
+import ContactStick from './components/ContactStick';
 
 function App() {
-  const { currentPageIndex, isMobileView, rootFontSize, setCurrentPageIndex } =
+  const { currentPageIndex, rootFontSize, setCurrentPageIndex } =
     getAppStateContext();
 
   const pagesRef = useRef([]);
@@ -88,16 +38,22 @@ function App() {
   };
 
   const colors = ['teal', 'indigo', 'darkgreen', 'darkslateblue'];
+  const sectionsForMap = ['About', 'Projects'];
+
   const sections = ['Home', 'About', 'Projects', 'Contact'];
 
   return (
     <div>
-      <Navbar sections={sections} currentPageIndex={currentPageIndex}></Navbar>
+      {/* <Navbar sections={sections} currentPageIndex={currentPageIndex}></Navbar> */}
+      <ContactStick></ContactStick>
 
-      {sections.map((sectionName, idx) => (
+      <Home reference={(el) => (pagesRef.current[0] = el)}></Home>
+      <Contact reference={(el) => (pagesRef.current[1] = el)}></Contact>
+
+      {sectionsForMap.map((sectionName, idx) => (
         <section
           key={`section-page-${idx}`}
-          ref={(el) => (pagesRef.current[idx] = el)}
+          ref={(el) => (pagesRef.current[idx + 2] = el)}
           id={`${sectionName.toLowerCase()}`}
           style={{
             ...dummyPageStyles,

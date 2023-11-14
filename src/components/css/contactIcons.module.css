@@ -1,0 +1,17 @@
+.hideSvg {
+  display: none;
+}
+
+.justStroke {
+  fill: var(--icon-primary-fill-color);
+  stroke: var(--icon-stroke-color);
+}
+
+.fillColor {
+  fill: var(--icon-secondary-fill-color);
+}
+
+.fillWithPrimaryColor {
+  fill: #fff;
+  stroke: #fff;
+}

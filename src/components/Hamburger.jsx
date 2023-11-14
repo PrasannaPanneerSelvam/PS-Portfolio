@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from './hamburger.module.css';
+import styles from './css/hamburger.module.css';
 
 function Hamburger({ isTurnedOn, onClickCallback }) {
   const hamburgerButtonClasses = [styles.hamburgerButton];
