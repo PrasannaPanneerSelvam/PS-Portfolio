@@ -18,6 +18,7 @@ const AppStateContextComponent = ({ children }) => {
     }));
 
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
+  const [isHeroAnimPending, setHeroAnimPending] = useState(true);
 
   useEffect(() => {
     const alterStateBasedOnDeviceDimensions = () => {
@@ -46,6 +47,9 @@ const AppStateContextComponent = ({ children }) => {
 
         currentPageIndex,
         setCurrentPageIndex,
+
+        isHeroAnimPending,
+        setHeroAnimPending,
       }}
     >
       {children}

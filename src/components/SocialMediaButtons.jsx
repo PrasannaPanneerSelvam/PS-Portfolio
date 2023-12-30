@@ -1,25 +1,43 @@
 import { useEffect, useMemo, useRef } from 'react';
 import styles from './css/socialMediaButtons.module.css';
+import { socialMediaSvgs } from './ContactIcons';
+
+const socialMediaItems = ['linkedin', 'github', 'instagram', 'mail'];
 
 function SocialMediaButtons({ expand, showAsHorizontal = true }) {
   const buttonRefs = useRef([]);
+  const showOrHideRef = useRef(null);
 
   useEffect(() => {
+    const classToBeAdded = expand ? styles.showUp : styles.wrapUp;
+
+    if (showOrHideRef.current === null && expand === false) {
+      showOrHideRef.current = classToBeAdded;
+      return;
+    }
+
+    if (showOrHideRef.current === classToBeAdded) return;
+
+    showOrHideRef.current = classToBeAdded;
+
+    const classToBeRemoved = !expand ? styles.showUp : styles.wrapUp;
+
     buttonRefs.current.forEach((node) => {
-      const animClass = expand ? styles.showUp : styles.wrapUp;
-      node.classList.remove(styles.wrapUp, styles.showUp);
-      node.classList.add(animClass);
+      node.classList.add(classToBeAdded);
+      node.classList.remove(classToBeRemoved);
     });
   }, [expand]);
 
   return useMemo(() => {
-    const socialMediaItems = ['linkedin', 'mail', 'instagram', 'github'];
-
-    const gap = 50,
-      iconSize = 50,
+    const gap = 20, // 50
+      iconSize = 40, // 50
       halfIconSize = iconSize / 2;
 
-    const itemsCount = socialMediaItems.length,
+    const processedSocialMediaItems = showAsHorizontal
+      ? socialMediaItems
+      : socialMediaItems.map((_, idx, arr) => arr[arr.length - idx - 1]);
+
+    const itemsCount = processedSocialMediaItems.length,
       halfLength = Math.floor(itemsCount / 2),
       isEvenSize = itemsCount % 2 === 0,
       maxLength = (iconSize + gap) * itemsCount - gap,
@@ -40,7 +58,7 @@ function SocialMediaButtons({ expand, showAsHorizontal = true }) {
           width: `${containerWidth}px`,
         }}
       >
-        {socialMediaItems.map((mediaItem, idx) => {
+        {processedSocialMediaItems.map((mediaItem, idx) => {
           const elementStyles = { left: startingLeftPosition };
 
           if (!showAsHorizontal) {
@@ -78,14 +96,14 @@ function SocialMediaButtons({ expand, showAsHorizontal = true }) {
 
           return (
             <li
-              key={`${idx}-${mediaItem[0]}`}
+              key={mediaItem}
               className={styles.listItem}
               style={elementStyles}
               ref={(refVal) => {
                 buttonRefs.current[idx] = refVal;
               }}
             >
-              {mediaItem[0]}
+              {socialMediaSvgs[mediaItem]}
             </li>
           );
         })}

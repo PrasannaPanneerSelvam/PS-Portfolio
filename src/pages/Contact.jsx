@@ -6,13 +6,13 @@ import styles from './css/contact.module.css';
 function Contact({ reference }) {
   const [expand, setExpand] = useState(true);
 
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setExpand((i) => !i);
-    }, 2000);
+  // useEffect(() => {
+  //   const timeoutId = setTimeout(() => {
+  //     setExpand((i) => !i);
+  //   }, 2000);
 
-    return () => clearTimeout(timeoutId);
-  }, [expand]);
+  //   return () => clearTimeout(timeoutId);
+  // }, [expand]);
 
   return useMemo(
     () => (

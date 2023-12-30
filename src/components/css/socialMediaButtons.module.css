@@ -1,5 +1,5 @@
 .listHolder {
-  --iconSize: 50px;
+  --iconSize: 40px;
   --final-turn: 0turn;
   --final-left-position: 0;
   --final-top-position: 0;
@@ -17,13 +17,25 @@
   height: var(--iconSize);
   width: var(--iconSize);
   border-radius: 50%;
-  border: 1px solid #fff;
+  /* border: 1px solid #fff; */
 
   animation-duration: 1s;
   animation-fill-mode: forwards;
 
-  display: grid;
-  place-content: center;
+  /* display: grid;
+  place-content: center; */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* padding: 15px; */
+}
+
+.listItem a {
+  opacity: 0;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
 }
 
 .showUp {
@@ -32,6 +44,14 @@
 
 .wrapUp {
   animation-name: scrollShrink;
+}
+
+.showUp > a {
+  animation-name: unhideAnim;
+}
+
+.wrapUp > a {
+  animation-name: hideAnim;
 }
 
 @keyframes scrollExpand {
@@ -53,5 +73,25 @@
 
   100% {
     transform: translate(0%) rotate(0turn);
+  }
+}
+
+@keyframes hideAnim {
+  0% {
+    opacity: 100%;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes unhideAnim {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 100%;
   }
 }

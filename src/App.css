@@ -22,7 +22,7 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  --primary-color: #000;
+  --primary-color: #08051b;
   --secondary-color: #fff;
   --tertiary-color: transparent;
   --primary-bg-color: var(--primary-color);
@@ -52,7 +52,6 @@ body {
   height: 100vh;
   width: 100%;
   /* overflow: hidden; */
-  background-color: #000;
   color: #fff;
 }
 
