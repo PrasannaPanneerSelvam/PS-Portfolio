@@ -1,35 +1,64 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import SocialMediaButtons from '../components/SocialMediaButtons';
 
 import styles from './css/contact.module.css';
+import ContentWrapper from '../components/ContentWrapper';
+import { getAppStateContext } from '../context/AppContext';
+
+const mailId = 'prasannaps2610@gmail.com';
+// const mailId = 'hello@prasannaps.com';
+
+// TODO :: Add some view for success & failure cases
+const copyMailIdToClipBoard = () => {
+  navigator.clipboard.writeText(mailId).then(
+    function () {
+      console.log('Async: Copying to clipboard was successful!');
+    },
+    function (err) {
+      console.error('Async: Could not copy text: ', err);
+    }
+  );
+};
 
 function Contact({ reference }) {
-  const [expand, setExpand] = useState(true);
-
-  // useEffect(() => {
-  //   const timeoutId = setTimeout(() => {
-  //     setExpand((i) => !i);
-  //   }, 2000);
-
-  //   return () => clearTimeout(timeoutId);
-  // }, [expand]);
+  const { currentPageIndex } = getAppStateContext();
+  const expand = currentPageIndex == 3;
 
   return useMemo(
     () => (
       <section ref={reference} className={styles.section}>
-        <div>
-          <h1>Get In Touch</h1>
+        <ContentWrapper headerText="Get In Touch">
           <p>
             I am interested in new opportunities, especially ambitious and
-            challenging projects. My inbox is always open. I'll try my best to
-            get back to you!
+            challenging projects. My inbox is always open. I&apos;ll try my best
+            to get back to you!
           </p>
 
-          <SocialMediaButtons expand={expand}></SocialMediaButtons>
-        </div>
+          <div
+            style={{
+              marginTop: '2rem',
+              display: 'flex',
+              gap: '2rem',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <div className={styles.copyMailBox} onClick={copyMailIdToClipBoard}>
+              <svg viewBox="0 0 64 64" height="25" width="25">
+                <use href="#copy-svg"></use>
+              </svg>
+              <span>{mailId}</span>
+            </div>
+
+            <SocialMediaButtons
+              items={['linkedin', 'github', 'instagram', 'slack']}
+              expand={expand}
+            />
+          </div>
+        </ContentWrapper>
       </section>
     ),
-    [expand]
+    [expand, reference]
   );
 }
 

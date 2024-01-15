@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import './App.css';
+import styles from './common.module.css';
 
 import Navbar from './components/Navbar';
 import { getAppStateContext } from './context/AppContext';
@@ -45,12 +46,12 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className={styles.topWrapper}>
         {/* <Navbar sections={sections} currentPageIndex={currentPageIndex}></Navbar> */}
         {!isMobileView && <ContactStick></ContactStick>}
-
-        <Home reference={(el) => (pagesRef.current[0] = el)}></Home>
-        <Contact reference={(el) => (pagesRef.current[1] = el)}></Contact>
+        <main className={styles.mainContent}>
+          <Home reference={(el) => (pagesRef.current[0] = el)}></Home>
+          {/* <Contact reference={(el) => (pagesRef.current[1] = el)}></Contact>
 
         {sectionsForMap.map((sectionName, idx) => (
           <section
@@ -64,7 +65,8 @@ function App() {
           >
             {sectionName}
           </section>
-        ))}
+        ))} */}
+        </main>
       </div>
       <ContactIcons></ContactIcons>
     </>

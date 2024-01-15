@@ -2,9 +2,12 @@ import { useEffect, useMemo, useRef } from 'react';
 import styles from './css/socialMediaButtons.module.css';
 import { socialMediaSvgs } from './ContactIcons';
 
-const socialMediaItems = ['linkedin', 'github', 'instagram', 'mail'];
-
-function SocialMediaButtons({ expand, showAsHorizontal = true }) {
+function SocialMediaButtons({
+  items,
+  expand,
+  showAsHorizontal = true,
+  onAnimEnd = () => {},
+}) {
   const buttonRefs = useRef([]);
   const showOrHideRef = useRef(null);
 
@@ -33,11 +36,7 @@ function SocialMediaButtons({ expand, showAsHorizontal = true }) {
       iconSize = 40, // 50
       halfIconSize = iconSize / 2;
 
-    const processedSocialMediaItems = showAsHorizontal
-      ? socialMediaItems
-      : socialMediaItems.map((_, idx, arr) => arr[arr.length - idx - 1]);
-
-    const itemsCount = processedSocialMediaItems.length,
+    const itemsCount = items.length,
       halfLength = Math.floor(itemsCount / 2),
       isEvenSize = itemsCount % 2 === 0,
       maxLength = (iconSize + gap) * itemsCount - gap,
@@ -58,7 +57,7 @@ function SocialMediaButtons({ expand, showAsHorizontal = true }) {
           width: `${containerWidth}px`,
         }}
       >
-        {processedSocialMediaItems.map((mediaItem, idx) => {
+        {items.map((mediaItem, idx) => {
           const elementStyles = { left: startingLeftPosition };
 
           if (!showAsHorizontal) {
@@ -102,6 +101,10 @@ function SocialMediaButtons({ expand, showAsHorizontal = true }) {
               ref={(refVal) => {
                 buttonRefs.current[idx] = refVal;
               }}
+              onAnimationEnd={(e) => {
+                e.stopPropagation();
+                onAnimEnd();
+              }}
             >
               {socialMediaSvgs[mediaItem]}
             </li>
@@ -109,7 +112,7 @@ function SocialMediaButtons({ expand, showAsHorizontal = true }) {
         })}
       </ul>
     );
-  }, []);
+  }, [onAnimEnd, items, showAsHorizontal]);
 }
 
 export default SocialMediaButtons;

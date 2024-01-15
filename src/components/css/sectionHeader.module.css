@@ -1,0 +1,17 @@
+.headerWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.line {
+  height: 0.5px;
+  border-radius: 50%;
+  background-color: #eee;
+  max-width: 17rem;
+}
+
+.headerWrapper > h1 {
+  font-size: 2rem;
+  font-weight: 600;
+}

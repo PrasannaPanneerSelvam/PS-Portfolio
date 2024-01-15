@@ -8,7 +8,7 @@
   left: 50px;
   bottom: 0px;
 
-  --icon-stroke-color: #fff;
+  --contact-icon-border: none;
   --hamburger-level: 11;
 
   overflow: hidden;
@@ -23,12 +23,25 @@
   animation-name: showStickAnim;
 }
 
+.hideStick {
+  animation-name: hideStickAnim;
+}
+
 @keyframes showStickAnim {
   0% {
     translate: 0 150%;
   }
   100% {
     translate: 0;
+  }
+}
+
+@keyframes hideStickAnim {
+  0% {
+    translate: 0;
+  }
+  100% {
+    translate: 0 100%;
   }
 }
 

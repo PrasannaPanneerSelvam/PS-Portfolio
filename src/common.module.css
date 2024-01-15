@@ -1,0 +1,24 @@
+.topWrapper {
+  display: flex;
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.mainContent > section {
+  max-width: 100rem;
+  min-height: 100vh;
+  padding: 0 9.375rem;
+  display: grid;
+  place-items: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .mainContent > section {
+    padding: 0 4rem;
+  }
+}

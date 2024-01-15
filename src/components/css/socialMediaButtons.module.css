@@ -32,6 +32,16 @@
   /* padding: 15px; */
 }
 
+.listItem::after {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  border: var(--contact-icon-border, 1px solid white);
+  rotate: 45deg;
+  border-radius: 10px;
+}
+
 .listItem a {
   opacity: 0;
   animation-duration: 1s;

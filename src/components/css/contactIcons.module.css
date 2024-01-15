@@ -16,10 +16,5 @@
 }
 
 .fillColor {
-  fill: var(--icon-secondary-fill-color);
-}
-
-.fillWithPrimaryColor {
-  fill: #fff;
-  stroke: #fff;
+  fill: var(--icon-stroke-color);
 }
