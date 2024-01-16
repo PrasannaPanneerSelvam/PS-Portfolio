@@ -15,7 +15,8 @@
   top: 1vh;
   right: 1vh;
 
-  z-index: var(--hamburger-level);
+  /* z-index: var(--hamburger-level); */
+  z-index: 9999;
 }
 
 .hamburgerButton {
@@ -52,4 +53,10 @@
 .hamburgerButton.active::after {
   top: 0;
   transform: rotate(45deg);
+}
+
+@media (min-width: 769px) {
+  .hamburgerButtonHolder {
+    display: none;
+  }
 }

@@ -9,10 +9,16 @@ import Home from './pages/Home';
 import navBarHandler from './components/navBarHandler';
 import ContactStick from './components/ContactStick';
 import ContactIcons from './components/ContactIcons';
+import About from './pages/About';
 
 function App() {
-  const { currentPageIndex, isMobileView, rootFontSize, setCurrentPageIndex } =
-    getAppStateContext();
+  const {
+    currentPageIndex,
+    isMobileView,
+    rootFontSize,
+    setCurrentPageIndex,
+    isHeroAnimPending,
+  } = getAppStateContext();
 
   const pagesRef = useRef([]);
 
@@ -28,7 +34,7 @@ function App() {
     return () => {
       window.removeEventListener('scroll', onScrollListener);
     };
-  }, []);
+  }, [rootFontSize, setCurrentPageIndex]);
 
   const dummyPageStyles = {
     width: '100%',
@@ -39,36 +45,50 @@ function App() {
     placeItems: 'center',
   };
 
-  const colors = ['teal', 'indigo', 'darkgreen', 'darkslateblue'];
-  const sectionsForMap = ['About', 'Projects'];
+  const colors = [
+    'darkslateblue',
+    'teal',
+    'indigo',
+    'darkgreen',
+    'darkslateblue',
+  ];
+  const sectionsForMap = ['Projects'];
 
   const sections = ['Home', 'About', 'Projects', 'Contact'];
 
   return (
     <>
+      <Navbar sections={sections} />
       <div className={styles.topWrapper}>
-        {/* <Navbar sections={sections} currentPageIndex={currentPageIndex}></Navbar> */}
-        {!isMobileView && <ContactStick></ContactStick>}
+        {!isMobileView && (
+          <ContactStick
+            show={
+              (currentPageIndex !== 0 || !isHeroAnimPending) &&
+              currentPageIndex !== 3
+            }
+          />
+        )}
         <main className={styles.mainContent}>
-          <Home reference={(el) => (pagesRef.current[0] = el)}></Home>
-          {/* <Contact reference={(el) => (pagesRef.current[1] = el)}></Contact>
+          <Home reference={(el) => (pagesRef.current[0] = el)} />
+          <About reference={(el) => (pagesRef.current[1] = el)} />
 
-        {sectionsForMap.map((sectionName, idx) => (
-          <section
-            key={`section-page-${idx}`}
-            ref={(el) => (pagesRef.current[idx + 2] = el)}
-            id={`${sectionName.toLowerCase()}`}
-            style={{
-              ...dummyPageStyles,
-              background: colors[idx],
-            }}
-          >
-            {sectionName}
-          </section>
-        ))} */}
+          {sectionsForMap.map((sectionName, idx) => (
+            <section
+              key={`section-page-${idx}`}
+              ref={(el) => (pagesRef.current[idx + 2] = el)}
+              id={`${sectionName.toLowerCase()}`}
+              style={{
+                ...dummyPageStyles,
+                background: colors[idx],
+              }}
+            >
+              {sectionName}
+            </section>
+          ))}
+          <Contact reference={(el) => (pagesRef.current[3] = el)} />
         </main>
       </div>
-      <ContactIcons></ContactIcons>
+      <ContactIcons />
     </>
   );
 }

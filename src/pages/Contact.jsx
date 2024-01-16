@@ -26,7 +26,7 @@ function Contact({ reference }) {
 
   return useMemo(
     () => (
-      <section ref={reference} className={styles.section}>
+      <section ref={reference} className={styles.section} id="contact">
         <ContentWrapper headerText="Get In Touch">
           <p>
             I am interested in new opportunities, especially ambitious and

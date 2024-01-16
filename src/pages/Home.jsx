@@ -15,11 +15,13 @@ const options = {
 };
 
 function Home({ reference }) {
-  const { isMobileView, setHeroAnimPending } = getAppStateContext();
+  const { setHeroAnimPending } = getAppStateContext();
+
+  const isMobileView = true;
 
   const textToBeChanged = (isMobileView ? '' : introPrefix) + 'Prasanna';
 
-  if (isMobileView) options.timing = 20;
+  if (isMobileView) options.timing = 30;
 
   const [text, isDone] = useRandomText(textToBeChanged, options);
 
@@ -34,7 +36,7 @@ function Home({ reference }) {
     // };
 
     return (
-      <section ref={reference} className={styles.section}>
+      <section ref={reference} className={styles.section} id="home">
         <div>
           <h1 className={styles.heroText}>
             {isMobileView ? introPrefix + text : text}

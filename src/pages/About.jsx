@@ -2,7 +2,7 @@ import ContentWrapper from '../components/ContentWrapper';
 
 function About({ reference }) {
   return (
-    <section ref={reference}>
+    <section ref={reference} id="about">
       <ContentWrapper headerText="About me">
         <p style={{ maxWidth: '60ch', textIndent: '2rem' }}>
           Hi, I am Prasanna. I&apos;ve stepped into programming world from

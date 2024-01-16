@@ -1,93 +1,75 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import styles from './css/navbar.module.css';
 
 import Hamburger from './Hamburger';
 import { getAppStateContext } from '../context/AppContext';
 
-function Navbar({ currentPageIndex, sections }) {
-  const { isMobileView } = getAppStateContext();
+function Navbar({ sections }) {
+  const { currentPageIndex, isMobileView } = getAppStateContext();
+
   const [isHamburgerOn, setIsHamburgerOn] = useState(false);
 
-  const navbarClasses = [styles.navBar],
-    navItemsClasses = [styles.navItemsList];
-
-  if (isMobileView) {
-    navItemsClasses.push(styles.mobile);
-  }
-
-  if (isHamburgerOn) {
-    navbarClasses.push(styles.active);
-    navItemsClasses.push(styles.active);
-  }
+  const navItemClickCb = (idx) => {
+    console.log('Clicked Nav item', sections[idx]);
+  };
 
   return (
-    <nav className={navbarClasses.join(' ')}>
-      {isMobileView && (
-        <Hamburger
-          isTurnedOn={isHamburgerOn}
-          onClickCallback={() => {
-            setIsHamburgerOn((prev) => !prev);
-          }}
-        ></Hamburger>
-      )}
-      <ul className={navItemsClasses.join(' ')}>
-        {sections.map((section, idx) => (
+    <header className={styles.primaryHeader}>
+      <div className={styles.logo}></div>
+      <Hamburger
+        isTurnedOn={isHamburgerOn}
+        onClickCallback={setIsHamburgerOn}
+      />
+      <nav>
+        <ul
+          className={
+            styles.primaryNavBar + (isHamburgerOn ? ' ' + styles.active : '')
+          }
+        >
+          {sections.map((sectionName, idx) => (
+            <li
+              className={styles.primaryNavItem}
+              key={`nav-${sectionName}`}
+              onClick={() => {
+                if (isMobileView) setIsHamburgerOn((prev) => !prev);
+                navItemClickCb(idx);
+              }}
+            >
+              <a
+                className={currentPageIndex === idx ? styles.activeNavItem : ''}
+                href={`#${sectionName.toLowerCase()}`}
+              >
+                {sectionName}
+              </a>
+            </li>
+          ))}
+
+          {isMobileView || (
+            <div
+              className={styles.slider}
+              style={{
+                translate: `${currentPageIndex * 100}%`,
+              }}
+            ></div>
+          )}
+
           <li
-            key={`nav-idx-${idx}`}
-            className={styles.navItem}
-            onClick={() => {
-              if (!isMobileView) return;
-              setIsHamburgerOn((prev) => !prev);
+            className={styles.primaryNavItem}
+            style={{
+              paddingTop: isMobileView ? '1.25rem' : '0',
             }}
           >
-            <a href={`#${section.toLowerCase()}`}>{section}</a>
-
-            {isMobileView && (
-              <div
-                className={styles.growingBar}
-                style={{
-                  display: currentPageIndex === idx ? 'inline-block' : 'none',
-                  //   scale: currentPageIndex === idx ? '1 1' : '0 1',
-                  //   transformOrigin:
-                  //     currentPageIndex === idx ? 'center left' : 'center right',
-                }}
-              ></div>
-            )}
+            <button className={styles.auxilaryButton}>Resume</button>
           </li>
-        ))}
-
-        {isMobileView || (
-          <div
-            className={styles.slider}
-            style={{
-              translate: `${currentPageIndex * 100}%`,
-            }}
-          ></div>
-        )}
-
-        {/* <div
-          className={styles.slider2}
-          style={{
-            translate: `${currentPageIndex * 100}%`,
-          }}
-        >
-          <div className={styles.quater}></div>
-          <div className={styles.quater}></div>
-          <div className={styles.quater}></div>
-          <div className={styles.quater}></div>
-        </div> */}
-
-        <li
-          className={styles.navItem}
-          style={{
-            paddingTop: isMobileView ? '1.25rem' : '0',
-          }}
-        >
-          <button className={styles.auxilaryButton}>Resume</button>
-        </li>
-      </ul>
-    </nav>
+        </ul>
+      </nav>
+    </header>
   );
 }
+
+Navbar.propTypes = {
+  sections: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export default Navbar;
