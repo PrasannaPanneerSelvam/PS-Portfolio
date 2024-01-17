@@ -3,7 +3,6 @@ import SocialMediaButtons from '../components/SocialMediaButtons';
 
 import styles from './css/contact.module.css';
 import ContentWrapper from '../components/ContentWrapper';
-import { getAppStateContext } from '../context/AppContext';
 
 const mailId = 'prasannaps2610@gmail.com';
 // const mailId = 'hello@prasannaps.com';
@@ -24,7 +23,6 @@ const copyMailIdToClipBoard = (onCopiedCb) => {
 };
 
 function Contact({ reference, expand }) {
-  const { currentPageIndex } = getAppStateContext();
   const [isCopied, setCopied] = useState(false);
   const timeOutRef = useRef(null);
 

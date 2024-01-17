@@ -218,7 +218,7 @@ function Planet() {
   // const size = useResize();
 
   useEffect(() => {
-    console.clear();
+    // console.clear();
     addPlanetAnimation(canvasRef.current, animationFrameIdRef);
     return () => {
       cancelAnimationFrame(animationFrameIdRef.current);

@@ -7,7 +7,7 @@
   display: flex;
   list-style: none;
   /* background-color: rgba(255, 255, 0, 0.4); */
-  z-index: -1;
+  /* z-index: -1; */
 }
 
 .listItem {
@@ -39,9 +39,20 @@
   content: '';
   width: 100%;
   height: 100%;
-  border: var(--contact-icon-border, 1px solid white);
+  border: var(--contact-icon-border, 1px solid #fff);
   rotate: 45deg;
   border-radius: 10px;
+  z-index: -1;
+}
+
+.listItem:hover {
+  --icon-primary-fill-color: #64ffda;
+  --icon-stroke-color: #64ffda;
+  translate: 0 -8%;
+}
+
+.listItem:hover::before {
+  border: var(--contact-icon-border, 1px solid #64ffda);
 }
 
 .listItem a {

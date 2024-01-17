@@ -11,7 +11,7 @@
 }
 
 .justStroke {
-  fill: var(--icon-primary-fill-color);
+  /* fill: var(--icon-primary-fill-color); */
   stroke: var(--icon-stroke-color);
 }
 
