@@ -10,6 +10,7 @@ import navBarHandler from './components/navBarHandler';
 import ContactStick from './components/ContactStick';
 import ContactIcons from './components/ContactIcons';
 import About from './pages/About';
+import Planet from './components/Planet';
 
 function App() {
   const {
@@ -58,6 +59,7 @@ function App() {
 
   return (
     <>
+      <Planet />
       <Navbar sections={sections} />
       <div className={styles.topWrapper}>
         {!isMobileView && (
@@ -79,7 +81,8 @@ function App() {
               id={`${sectionName.toLowerCase()}`}
               style={{
                 ...dummyPageStyles,
-                background: colors[idx],
+                // background: colors[idx],
+                border: `2px solid ${colors[idx]}`,
               }}
             >
               {sectionName}

@@ -22,15 +22,18 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  --primary-color: #08051b;
-  --secondary-color: #fff;
+  /* --primary-color: rgb(30, 68, 100); */
+  --primary-color: rgb(0, 0, 0);
+  /* --primary-color: #08051b; */
+  /* --primary-color: rgb(144, 199, 150); */
+  --secondary-color: #040404;
   --tertiary-color: transparent;
   --primary-bg-color: var(--primary-color);
   --secondary-bg-color: var(--tertiary-color);
   --primary-text-color: var(--secondary-color);
   --button-outline-color: var(--secondary-color);
   --nav-text-color: var(--secondary-color);
-  --icon-stroke-color: var(--secondary-color);
+  --icon-stroke-color: #fff; /* var(--secondary-color); */
   --icon-primary-fill-color: var(--tertiary-color);
   --icon-secondary-fill-color: var(--secondary-color);
   --card-stroke-color: var(--secondary-color);
@@ -47,12 +50,20 @@ body {
 
 body {
   position: relative;
-  background-color: var(--primary-bg-color);
+  /* background-color: var(--primary-bg-color); */
+  background-color: #08051b;
+  --primary-color: #08051b;
 
   height: 100vh;
   width: 100%;
   /* overflow: hidden; */
   color: #fff;
+}
+
+p {
+  max-width: 50ch;
+  text-indent: 2em;
+  text-align: justify;
 }
 
 @media only screen and (max-width: 768px) {

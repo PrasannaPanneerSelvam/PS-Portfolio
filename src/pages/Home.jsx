@@ -46,6 +46,7 @@ function Home({ reference }) {
             className={introDescriptionClassList.join(' ')}
             onAnimationEnd={() => setHeroAnimPending(false)}
           >
+            {/* Coding the future, pixel by pixel */}
             Front end developer, I build things to make web cleaner
           </h2>
         </div>
