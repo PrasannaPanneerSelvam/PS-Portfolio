@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { useEffect, useRef } from 'react';
 import styles from './css/planet.module.css';
-import useResize from '../hooks/useResize';
+// import useResize from '../hooks/useResize';
 import { oscillateBetween, createRange } from '../utils/rangeUtils';
 
 function createPointLight(color, coordinates = [-1500, 500, 10]) {
@@ -215,7 +215,7 @@ function addPlanetAnimation(canvasNode, animationFrameIdRef) {
 function Planet() {
   const canvasRef = useRef();
   const animationFrameIdRef = useRef(null);
-  const size = useResize();
+  // const size = useResize();
 
   useEffect(() => {
     console.clear();
@@ -223,7 +223,7 @@ function Planet() {
     return () => {
       cancelAnimationFrame(animationFrameIdRef.current);
     };
-  }, [size]);
+  }, []);
 
   return <canvas className={styles.planetCanvas} ref={canvasRef}></canvas>;
 }

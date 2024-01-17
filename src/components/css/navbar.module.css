@@ -75,6 +75,11 @@
   text-decoration: none;
 }
 
+/* .auxilaryButton:hover {
+  box-shadow: 1px 1px 0 0 #fff;
+  transform: translate(-2px, -2px);
+} */
+
 .slider {
   position: absolute;
   bottom: -0.125rem;

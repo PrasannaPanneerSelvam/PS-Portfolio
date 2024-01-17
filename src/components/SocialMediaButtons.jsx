@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef } from 'react';
 import styles from './css/socialMediaButtons.module.css';
-import { socialMediaSvgs } from './ContactIcons';
+import ContactIcons from './ContactIcons';
 
 function SocialMediaButtons({
   items,
@@ -106,7 +106,7 @@ function SocialMediaButtons({
                 onAnimEnd();
               }}
             >
-              {socialMediaSvgs[mediaItem]}
+              {ContactIcons[mediaItem]}
             </li>
           );
         })}

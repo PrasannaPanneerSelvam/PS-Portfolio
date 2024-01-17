@@ -8,9 +8,9 @@ import Contact from './pages/Contact';
 import Home from './pages/Home';
 import navBarHandler from './components/navBarHandler';
 import ContactStick from './components/ContactStick';
-import ContactIcons from './components/ContactIcons';
 import About from './pages/About';
 import Planet from './components/Planet';
+import SvgStore from './components/SvgStore';
 
 function App() {
   const {
@@ -95,7 +95,7 @@ function App() {
           />
         </main>
       </div>
-      <ContactIcons />
+      <SvgStore />
     </>
   );
 }
