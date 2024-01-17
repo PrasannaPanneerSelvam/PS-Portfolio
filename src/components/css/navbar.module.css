@@ -11,7 +11,7 @@
   display: inline-block;
   height: 50px;
   aspect-ratio: 1 / 1;
-  background-color: #eee;
+  /* background-color: #eee; */
   margin: 2rem;
 }
 

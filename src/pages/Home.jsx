@@ -5,7 +5,7 @@ import { useMemo } from 'react';
 
 // const changeOneLetterAtOnce = Math.random() < 0.5;
 
-const introPrefix = 'Hi, I am ';
+const introPrefix = "Hi, I'm ";
 
 const options = {
   changeOneLetterAtOnce: true,
@@ -30,6 +30,7 @@ function Home({ reference }) {
   }, [isDone]);
 
   const returnValue = useMemo(() => {
+    const textValue = text === null ? '' : text;
     // const introTextStyles = {
     //   '--animationDuration': `${subText.length * 10}ms`,
     //   '--animationTimingFunction': `steps(${subText.length})`,
@@ -38,16 +39,17 @@ function Home({ reference }) {
     return (
       <section ref={reference} className={styles.section} id="home">
         <div>
-          <h1 className={styles.heroText}>
-            {isMobileView ? introPrefix + text : text}
-          </h1>
+          <h2 className={styles.hiText}>{introPrefix}</h2>
+          <h1 className={styles.heroText}>{textValue}</h1>
 
           <h2
+            style={{ display: 'block' }}
             className={introDescriptionClassList.join(' ')}
             onAnimationEnd={() => setHeroAnimPending(false)}
           >
             {/* Coding the future, pixel by pixel */}
-            Front end developer, I build things to make web cleaner
+            Designing the Future with Code and Elegance
+            {/* Front end developer, I build things to make web cleaner */}
           </h2>
         </div>
       </section>
