@@ -23,9 +23,8 @@ const copyMailIdToClipBoard = (onCopiedCb) => {
   );
 };
 
-function Contact({ reference }) {
+function Contact({ reference, expand }) {
   const { currentPageIndex } = getAppStateContext();
-  const expand = currentPageIndex == 3;
   const [isCopied, setCopied] = useState(false);
   const timeOutRef = useRef(null);
 
@@ -103,7 +102,7 @@ function Contact({ reference }) {
             </div>
 
             <SocialMediaButtons
-              items={['linkedin', 'github', 'instagram', 'slack']}
+              items={['linkedin', 'github', 'instagram', 'mail']}
               expand={expand}
             />
           </div>

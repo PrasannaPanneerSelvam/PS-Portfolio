@@ -72,6 +72,7 @@
   cursor: pointer;
   color: #fff;
   border-color: #fff;
+  text-decoration: none;
 }
 
 .slider {

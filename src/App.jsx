@@ -55,7 +55,9 @@ function App() {
   ];
   const sectionsForMap = ['Projects'];
 
-  const sections = ['Home', 'About', 'Projects', 'Contact'];
+  const sections = ['Home', 'About', 'Contact'];
+
+  const isContactPage = currentPageIndex === 2;
 
   return (
     <>
@@ -65,8 +67,7 @@ function App() {
         {!isMobileView && (
           <ContactStick
             show={
-              (currentPageIndex !== 0 || !isHeroAnimPending) &&
-              currentPageIndex !== 3
+              (currentPageIndex !== 0 || !isHeroAnimPending) && !isContactPage
             }
           />
         )}
@@ -74,7 +75,7 @@ function App() {
           <Home reference={(el) => (pagesRef.current[0] = el)} />
           <About reference={(el) => (pagesRef.current[1] = el)} />
 
-          {sectionsForMap.map((sectionName, idx) => (
+          {/* {sectionsForMap.map((sectionName, idx) => (
             <section
               key={`section-page-${idx}`}
               ref={(el) => (pagesRef.current[idx + 2] = el)}
@@ -87,8 +88,11 @@ function App() {
             >
               {sectionName}
             </section>
-          ))}
-          <Contact reference={(el) => (pagesRef.current[3] = el)} />
+          ))} */}
+          <Contact
+            reference={(el) => (pagesRef.current[2] = el)}
+            expand={isContactPage}
+          />
         </main>
       </div>
       <ContactIcons />

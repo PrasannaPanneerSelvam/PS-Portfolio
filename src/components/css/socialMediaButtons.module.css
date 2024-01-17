@@ -31,6 +31,7 @@
   justify-content: center;
 
   /* padding: 15px; */
+  opacity: 0%;
 }
 
 .listItem::before {
@@ -68,11 +69,13 @@
 @keyframes scrollExpand {
   0% {
     transform: translate(0%) rotate(0turn);
+    opacity: 0%;
   }
 
   100% {
     transform: translate(var(--final-left-position), var(--final-top-position))
       rotate(var(--final-turn));
+    opacity: 100%;
   }
 }
 
@@ -80,10 +83,12 @@
   0% {
     transform: translate(var(--final-left-position), var(--final-top-position))
       rotate(var(--final-turn));
+    opacity: 100%;
   }
 
   100% {
     transform: translate(0%) rotate(0turn);
+    opacity: 0%;
   }
 }
 

@@ -27,7 +27,7 @@ function ContactStick({ show }) {
       }}
     >
       <SocialMediaButtons
-        items={['slack', 'mail', 'instagram', 'github', 'linkedin']}
+        items={['mail', 'instagram', 'github', 'linkedin']}
         expand={expand}
         showAsHorizontal={false}
         onAnimEnd={() => {
