@@ -9,28 +9,20 @@ const introPrefix = "Hi, I'm ";
 
 const options = {
   changeOneLetterAtOnce: true,
-  timing: 15,
+  timing: 30,
   doMaxSwaps: false,
   maxSwaps: 3,
 };
 
 function Home({ reference }) {
   const { setHeroAnimPending } = getAppStateContext();
-
-  const isMobileView = true;
-
-  const textToBeChanged = (isMobileView ? '' : introPrefix) + 'Prasanna';
-
-  if (isMobileView) options.timing = 30;
-
-  const [text, isDone] = useRandomText(textToBeChanged, options);
-
-  const introDescriptionClassList = useMemo(() => {
-    return [styles.slider, styles.introText, isDone ? styles.show : ''];
-  }, [isDone]);
+  const [text, isDone] = useRandomText('Prasanna', options);
 
   const returnValue = useMemo(() => {
-    const textValue = text === null ? '' : text;
+    const introDescriptionClassList = `${styles.slider} ${styles.introText} ${
+      isDone ? styles.show : ''
+    }`;
+    const isEmptyHeroText = text === null;
     // const introTextStyles = {
     //   '--animationDuration': `${subText.length * 10}ms`,
     //   '--animationTimingFunction': `steps(${subText.length})`,
@@ -39,12 +31,14 @@ function Home({ reference }) {
     return (
       <section ref={reference} className={styles.section} id="home">
         <div>
-          <h2 className={styles.hiText}>{introPrefix}</h2>
-          <h1 className={styles.heroText}>{textValue}</h1>
+          <h2 className={styles.hiText}>
+            {isEmptyHeroText ? '' : introPrefix}
+          </h2>
+          <h1 className={styles.heroText}>{isEmptyHeroText ? '' : text}</h1>
 
           <h2
             style={{ display: 'block' }}
-            className={introDescriptionClassList.join(' ')}
+            className={introDescriptionClassList}
             onAnimationEnd={() => setHeroAnimPending(false)}
           >
             {/* Coding the future, pixel by pixel */}
@@ -54,13 +48,7 @@ function Home({ reference }) {
         </div>
       </section>
     );
-  }, [
-    text,
-    isMobileView,
-    introDescriptionClassList,
-    reference,
-    setHeroAnimPending,
-  ]);
+  }, [text, reference, setHeroAnimPending, isDone]);
 
   return returnValue;
 }

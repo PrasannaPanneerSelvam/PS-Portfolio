@@ -64,6 +64,7 @@ p {
   max-width: 50ch;
   text-indent: 2em;
   text-align: justify;
+  user-select: none;
 }
 
 @media only screen and (max-width: 768px) {
