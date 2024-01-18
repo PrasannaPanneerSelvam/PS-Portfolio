@@ -7,8 +7,11 @@ export const oscillateBetween = (minRange, maxRange, step = 5) => {
     };
 };
 
-
 export const createRange = (length, midPoint = 0) => {
     const halfLength = length / 2;
     return [midPoint - halfLength, midPoint + halfLength];
+}
+
+export const createOneStep = (start, end, noOfSteps) => {
+    return ((end - start) / noOfSteps);
 }
