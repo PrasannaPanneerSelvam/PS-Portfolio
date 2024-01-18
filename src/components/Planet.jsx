@@ -1,9 +1,19 @@
 import * as THREE from 'three';
 import { useEffect, useRef, useState } from 'react';
-import styles from './css/planet.module.css';
+// import styles from './css/planet.module.css';
 // import useResize from '../hooks/useResize';
 import { createRange, createOneStep } from '../utils/rangeUtils';
 import { getAppStateContext } from '../context/AppContext';
+
+const planetCanvasStyles = {
+  position: 'fixed',
+  left: '0',
+  top: '0',
+  display: 'inline-block',
+  width: '100%',
+  height: '100%',
+  'z-index': '-1',
+};
 
 function createPlanetTextureFromImage(imageName) {
   const textureLoader = new THREE.TextureLoader();
@@ -351,7 +361,7 @@ function Planet() {
     gotoFn(currentPageIndex);
   }, [gotoFn, currentPageIndex]);
 
-  return <canvas className={styles.planetCanvas} ref={canvasRef}></canvas>;
+  return <canvas style={planetCanvasStyles} ref={canvasRef}></canvas>;
 }
 
 export default Planet;

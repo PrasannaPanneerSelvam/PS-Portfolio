@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, lazy, Suspense } from 'react';
 import './App.css';
 import styles from './common.module.css';
 
@@ -9,8 +9,9 @@ import Home from './pages/Home';
 import navBarHandler from './components/navBarHandler';
 import ContactStick from './components/ContactStick';
 import About from './pages/About';
-import Planet from './components/Planet';
 import SvgStore from './components/SvgStore';
+
+const Planet = lazy(() => import('./components/Planet'));
 
 function App() {
   const {
@@ -61,7 +62,9 @@ function App() {
 
   return (
     <>
-      <Planet />
+      <Suspense fallback={null}>
+        <Planet />
+      </Suspense>
       <Navbar sections={sections} />
       <div className={styles.topWrapper}>
         {!isMobileView && (
