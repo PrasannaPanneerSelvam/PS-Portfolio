@@ -2,8 +2,8 @@ import styles from './css/contactIcons.module.css';
 
 function SvgStore() {
   return (
-    <>
-      <svg className={styles.hideSvg}>
+    <span className={styles.hideSvg}>
+      <svg>
         <symbol id="mail-svg">
           <title>Mail id</title>
           <path
@@ -13,7 +13,7 @@ function SvgStore() {
         </symbol>
       </svg>
 
-      <svg className={styles.hideSvg}>
+      <svg>
         <symbol id="instagram-svg">
           <title>Instagram</title>
           <rect
@@ -39,7 +39,7 @@ function SvgStore() {
         </symbol>
       </svg>
 
-      <svg className={styles.hideSvg}>
+      <svg>
         <symbol id="github-svg">
           <title>GitHub</title>
           <path
@@ -49,7 +49,7 @@ function SvgStore() {
         </symbol>
       </svg>
 
-      <svg className={styles.hideSvg}>
+      <svg>
         <symbol id="linkedin-svg">
           <title>LinkedIn</title>
           <path
@@ -67,7 +67,7 @@ function SvgStore() {
         </symbol>
       </svg>
 
-      <svg className={styles.hideSvg}>
+      <svg>
         <symbol id="copy-svg">
           <path
             className={styles.fillColor}
@@ -80,7 +80,7 @@ function SvgStore() {
         </symbol>
       </svg>
 
-      <svg className={styles.hideSvg}>
+      <svg>
         <symbol id="slack-svg">
           <title>Slack</title>
           {/* <path
@@ -110,7 +110,7 @@ function SvgStore() {
         </symbol>
       </svg>
 
-      <svg className={styles.hideSvg}>
+      <svg>
         <symbol id="tick-svg">
           <svg className={styles.fillColor}>
             <path
@@ -121,7 +121,7 @@ function SvgStore() {
           </svg>
         </symbol>
       </svg>
-    </>
+    </span>
   );
 }
 

@@ -12,7 +12,7 @@ const planetCanvasStyles = {
   display: 'inline-block',
   width: '100%',
   height: '100%',
-  'z-index': '-1',
+  zIndex: '-1',
 };
 
 function createPlanetTextureFromImage(imageName) {
@@ -171,9 +171,10 @@ function createAsteroidCluster(options = {}) {
   return asteroidCluster;
 }
 
-function createPlanetSystem(imageName) {
-  const planetRadius = 100,
-    orbitRadius = planetRadius + 100;
+function createPlanetSystem(imageName, planetRadius = 100) {
+  planetRadius = Math.max(planetRadius, 60);
+
+  const orbitRadius = planetRadius + planetRadius;
 
   const planetSystem = new THREE.Group();
 
@@ -197,11 +198,20 @@ function addPlanetAnimation(canvasNode, animationFrameIdRef, initialPageIndex) {
 
   const extractPixelValue = (value) => parseInt(value.slice(0, -2));
 
+  const idealWidth = 1792,
+    idealHeight = 923,
+    idealAspectRation = idealWidth / idealHeight;
+
   const calculatedStyles = getComputedStyle(canvasNode),
     width = extractPixelValue(calculatedStyles.width),
     height = extractPixelValue(calculatedStyles.height),
     aspectRatio = width / height,
-    oneFourthWidth = width * 0.25;
+    oneFourthWidth = width * 0.25,
+    cameraDistance = 900;
+
+  const planetRadius = 100 * (aspectRatio / idealAspectRation);
+
+  // console.log(width, height);
 
   const renderer = new THREE.WebGLRenderer({
     alpha: true,
@@ -212,12 +222,11 @@ function addPlanetAnimation(canvasNode, animationFrameIdRef, initialPageIndex) {
 
   const scene = new THREE.Scene();
 
-  const cameraDistance = 900;
-
   const camera = new THREE.PerspectiveCamera(50, aspectRatio, 0.1, 10000);
   // camera.position.z = cameraDistance;
 
   camera.position.x = -initialPageIndex * 2 * oneFourthWidth;
+  // camera.position.y += 20;
   camera.position.z = -initialPageIndex * 2 * cameraDistance + cameraDistance;
 
   // const planetIdx = 1;
@@ -235,8 +244,10 @@ function addPlanetAnimation(canvasNode, animationFrameIdRef, initialPageIndex) {
     asteroidClusters = [];
 
   for (const imageName of imageNames) {
-    const [planetSystem, planet, asteroidCluster] =
-      createPlanetSystem(imageName);
+    const [planetSystem, planet, asteroidCluster] = createPlanetSystem(
+      imageName,
+      planetRadius
+    );
 
     planetSystems.push(planetSystem);
     planets.push(planet);
@@ -253,7 +264,7 @@ function addPlanetAnimation(canvasNode, animationFrameIdRef, initialPageIndex) {
   for (let idx = 0; idx < imageNames.length; idx++) {
     const planetCoordinates = {
       x: -idx * 2 * oneFourthWidth,
-      y: 0,
+      y: 50, //(imageNames.length - idx - 1) * 200,
       z: -idx * 2 * cameraDistance,
     };
 
@@ -286,10 +297,14 @@ function addPlanetAnimation(canvasNode, animationFrameIdRef, initialPageIndex) {
     targetPlanetIdx = currentPlanetIdx;
 
   let targetX = camera.position.x,
+    targetY = camera.position.y,
     targetZ = camera.position.z;
 
   let xStep = 0,
+    yStep = 0,
     zStep = 0;
+
+  let changeHappened = false;
 
   function animationLoop() {
     if (currentPlanetIdx !== targetPlanetIdx) {
@@ -299,9 +314,21 @@ function addPlanetAnimation(canvasNode, animationFrameIdRef, initialPageIndex) {
 
       if (yetToReachDestiation) {
         camera.position.x += xStep;
+        camera.position.y += yStep;
         camera.position.z += zStep;
       } else {
         currentPlanetIdx = targetPlanetIdx;
+        changeHappened = false;
+      }
+    } else if (changeHappened) {
+      const yetToReachDestiation = targetX < camera.position.x;
+      if (yetToReachDestiation) {
+        camera.position.x += xStep;
+        camera.position.y += yStep;
+        camera.position.z += zStep;
+      } else {
+        currentPlanetIdx = targetPlanetIdx;
+        changeHappened = false;
       }
     }
 
@@ -318,19 +345,27 @@ function addPlanetAnimation(canvasNode, animationFrameIdRef, initialPageIndex) {
 
   animationLoop();
 
-  return function (idx) {
-    idx = imageNames.length - idx - 1;
+  return function (idx1) {
+    const idx = imageNames.length - idx1 - 1;
 
-    if (currentPlanetIdx === idx || targetPlanetIdx === idx) return;
+    console.log('Changing =>', idx);
+
+    // if (currentPlanetIdx === idx || targetPlanetIdx === idx) return;
+
+    // console.log('Changing =>', idx);
 
     targetPlanetIdx = idx;
     console.log('Moving from', currentPlanetIdx, 'to', targetPlanetIdx);
 
     targetX = -targetPlanetIdx * 2 * oneFourthWidth;
     targetZ = -targetPlanetIdx * 2 * cameraDistance + cameraDistance;
+    targetY = -idx1 * 100;
 
     xStep = createOneStep(camera.position.x, targetX, numberOfStep);
+    yStep = createOneStep(camera.position.y, targetY, numberOfStep);
     zStep = createOneStep(camera.position.z, targetZ, numberOfStep);
+
+    changeHappened = true;
   };
 }
 
@@ -358,6 +393,7 @@ function Planet() {
   }, []);
 
   useEffect(() => {
+    console.log('Changing ', currentPageIndex);
     gotoFn(currentPageIndex);
   }, [gotoFn, currentPageIndex]);
 

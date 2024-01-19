@@ -1,5 +1,14 @@
 .contentWrapper {
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  background-color: rgba(8, 5, 27, 0.6);
+}
+
+@supports (backdrop-filter: blur(2rem)) {
+  .contentWrapper {
+    background-color: rgba(8, 5, 27, 0.05);
+    backdrop-filter: blur(0.125rem);
+  }
 }

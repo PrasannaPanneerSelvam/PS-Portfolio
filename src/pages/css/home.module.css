@@ -17,9 +17,6 @@
   line-height: 3.25rem;
   font-family: 'Space Mono', monospace;
   cursor: default;
-}
-
-.heroText::selection {
   color: #64ffda;
 }
 
