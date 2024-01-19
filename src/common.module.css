@@ -22,3 +22,77 @@
     padding: 0 4rem;
   }
 }
+
+/* @media only screen and (min-width: 769px) { */
+.mainContent {
+  /* position: relative; */
+  height: 100vh;
+  width: 100%;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+}
+
+.mainContent > section {
+  /* position: absolute; */
+  scroll-snap-align: start;
+  /* scale: 3000; */
+  /* opacity: 0; */
+  animation-duration: 1000ms;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  /* animation-name: var(--page-anim, none); */
+
+  transform-origin: -50%;
+}
+
+@keyframes showAnim {
+  to {
+    scale: 1;
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    scale: 1;
+    opacity: 1;
+  }
+  to {
+    scale: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes zoomOut {
+  to {
+    /* scale: 3000; */
+    opacity: 0;
+  }
+}
+
+@keyframes show {
+  from {
+    scale: 0;
+    opacity: 0;
+  }
+  to {
+    scale: 1;
+    opacity: 1;
+  }
+}
+
+@keyframes hide {
+  0% {
+    scale: 1;
+    opacity: 1;
+  }
+
+  60% {
+    opacity: 0;
+  }
+
+  100% {
+    scale: 0;
+  }
+}
+/* } */

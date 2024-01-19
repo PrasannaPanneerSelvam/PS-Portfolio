@@ -171,7 +171,7 @@ function createAsteroidCluster(options = {}) {
   return asteroidCluster;
 }
 
-function createPlanetSystem(imageName, planetRadius = 100) {
+function createPlanetSystem(imageName, planetRadius = 100, addAsteroid = true) {
   planetRadius = Math.max(planetRadius, 60);
 
   const orbitRadius = planetRadius + planetRadius;
@@ -188,7 +188,7 @@ function createPlanetSystem(imageName, planetRadius = 100) {
   planetSystem.add(planet);
 
   const asteroidCluster = createAsteroidCluster({ orbitRadius });
-  planetSystem.add(asteroidCluster);
+  if (addAsteroid) planetSystem.add(asteroidCluster);
 
   return [planetSystem, planet, asteroidCluster];
 }
@@ -243,10 +243,19 @@ function addPlanetAnimation(canvasNode, animationFrameIdRef, initialPageIndex) {
     planets = [],
     asteroidClusters = [];
 
-  for (const imageName of imageNames) {
+  // But why?
+  // for (const [idx, imageName] of Object.entries(imageNames)) {
+  for (let idx = 0; idx < imageNames.length; idx++) {
+    const imageName = imageNames[idx];
+    let addAsteroid = true;
+    if (idx === 1) {
+      addAsteroid = false;
+    }
+    // console.log(idx, imageName, addAsteroid);
     const [planetSystem, planet, asteroidCluster] = createPlanetSystem(
       imageName,
-      planetRadius
+      planetRadius,
+      addAsteroid
     );
 
     planetSystems.push(planetSystem);
@@ -348,14 +357,14 @@ function addPlanetAnimation(canvasNode, animationFrameIdRef, initialPageIndex) {
   return function (idx1) {
     const idx = imageNames.length - idx1 - 1;
 
-    console.log('Changing =>', idx);
+    // console.log('Changing =>', idx);
 
     // if (currentPlanetIdx === idx || targetPlanetIdx === idx) return;
 
     // console.log('Changing =>', idx);
 
     targetPlanetIdx = idx;
-    console.log('Moving from', currentPlanetIdx, 'to', targetPlanetIdx);
+    // console.log('Moving from', currentPlanetIdx, 'to', targetPlanetIdx);
 
     targetX = -targetPlanetIdx * 2 * oneFourthWidth;
     targetZ = -targetPlanetIdx * 2 * cameraDistance + cameraDistance;

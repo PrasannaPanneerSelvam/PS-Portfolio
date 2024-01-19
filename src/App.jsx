@@ -23,18 +23,18 @@ function App() {
   } = getAppStateContext();
 
   const pagesRef = useRef([]);
+  const mainContent = useRef();
 
   useEffect(() => {
     const onScrollListener = navBarHandler(
+      mainContent.current,
       pagesRef.current,
       setCurrentPageIndex,
       rootFontSize
     );
-
-    window.addEventListener('scroll', onScrollListener);
-
+    mainContent.current.addEventListener('scroll', onScrollListener);
     return () => {
-      window.removeEventListener('scroll', onScrollListener);
+      mainContent.current.removeEventListener('scroll', onScrollListener);
     };
   }, [rootFontSize, setCurrentPageIndex]);
 
@@ -74,7 +74,7 @@ function App() {
             }
           />
         )}
-        <main className={styles.mainContent}>
+        <main className={styles.mainContent} ref={mainContent}>
           <Home reference={(el) => (pagesRef.current[0] = el)} />
           <About reference={(el) => (pagesRef.current[1] = el)} />
 
