@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './css/navbar.module.css';
 
 import Hamburger from './Hamburger';
 import { getAppStateContext } from '../context/AppContext';
 
-function Navbar({ sections }) {
+function Navbar({ sections, isHamburgerOn, setIsHamburgerOn }) {
   const { currentPageIndex, isMobileView } = getAppStateContext();
 
-  const [isHamburgerOn, setIsHamburgerOn] = useState(false);
+  // const [isHamburgerOn, setIsHamburgerOn] = useState(false);
 
   const navItemClickCb = (idx) => {
     console.log('Clicked Nav item', sections[idx]);

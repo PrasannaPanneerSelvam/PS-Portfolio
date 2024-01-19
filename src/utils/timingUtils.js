@@ -1,4 +1,4 @@
-export const throttle = function (cb, delay = 300) {
+export const throttle = function (cb, delay = 100) {
     let shouldWait = false,
         isSomeCallOnQueue = false;
 

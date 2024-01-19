@@ -402,7 +402,7 @@ function Planet() {
   }, []);
 
   useEffect(() => {
-    console.log('Changing ', currentPageIndex);
+    // console.log('Changing ', currentPageIndex);
     gotoFn(currentPageIndex);
   }, [gotoFn, currentPageIndex]);
 

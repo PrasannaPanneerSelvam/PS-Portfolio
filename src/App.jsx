@@ -1,4 +1,4 @@
-import { useEffect, useRef, lazy, Suspense } from 'react';
+import { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import './App.css';
 import styles from './common.module.css';
 
@@ -21,6 +21,8 @@ function App() {
     setCurrentPageIndex,
     isHeroAnimPending,
   } = getAppStateContext();
+
+  const [isHamburgerOn, setIsHamburgerOn] = useState(false);
 
   const pagesRef = useRef([]);
   const mainContent = useRef();
@@ -65,7 +67,11 @@ function App() {
       <Suspense fallback={null}>
         <Planet />
       </Suspense>
-      <Navbar sections={sections} />
+      <Navbar
+        sections={sections}
+        isHamburgerOn={isHamburgerOn}
+        setIsHamburgerOn={setIsHamburgerOn}
+      />
       <div className={styles.topWrapper}>
         {!isMobileView && (
           <ContactStick
@@ -74,7 +80,13 @@ function App() {
             }
           />
         )}
-        <main className={styles.mainContent} ref={mainContent}>
+        <main
+          className={[
+            styles.mainContent,
+            isHamburgerOn ? styles.blockMouseEvents : '',
+          ].join(' ')}
+          ref={mainContent}
+        >
           <Home reference={(el) => (pagesRef.current[0] = el)} />
           <About reference={(el) => (pagesRef.current[1] = el)} />
 
