@@ -5,7 +5,7 @@ export default {
     <a
       className={styles.contactIconAnchor}
       style={{ paddingLeft: '2px' }}
-      href="https://www.linkedin.com/in/prasanna-p-61956a163/"
+      href="https://www.linkedin.com/in/prasanna-ps/"
       target="blank"
       aria-label="LinkedIn"
       rel="noreferrer"

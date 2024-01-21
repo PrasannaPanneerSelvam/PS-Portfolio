@@ -12,7 +12,7 @@ const planetCanvasStyles = {
   display: 'inline-block',
   width: '100%',
   height: '100%',
-  zIndex: '-1',
+  // zIndex: '-1',
 };
 
 function createPlanetTextureFromImage(imageName) {
@@ -385,7 +385,7 @@ function Planet() {
   const { currentPageIndex } = getAppStateContext();
   const canvasRef = useRef();
   const animationFrameIdRef = useRef(null);
-  const [gotoFn, setGotoFn] = useState(() => () => {});
+  const [gotoFn, setGotoFn] = useState(() => () => { });
 
   useEffect(() => {
     const gotoPlanetFn = addPlanetAnimation(

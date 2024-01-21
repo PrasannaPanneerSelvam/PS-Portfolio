@@ -10,9 +10,9 @@ function Navbar({ sections, isHamburgerOn, setIsHamburgerOn }) {
 
   // const [isHamburgerOn, setIsHamburgerOn] = useState(false);
 
-  const navItemClickCb = (idx) => {
-    console.log('Clicked Nav item', sections[idx]);
-  };
+  // const navItemClickCb = (idx) => {
+  //   console.log('Clicked Nav item', sections[idx]);
+  // };
 
   return (
     <header className={styles.primaryHeader}>
@@ -33,7 +33,7 @@ function Navbar({ sections, isHamburgerOn, setIsHamburgerOn }) {
               key={`nav-${sectionName}`}
               onClick={() => {
                 if (isMobileView) setIsHamburgerOn((prev) => !prev);
-                navItemClickCb(idx);
+                // navItemClickCb(idx);
               }}
             >
               <a
