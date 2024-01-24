@@ -2,8 +2,9 @@ import * as THREE from 'three';
 import { useEffect, useRef, useState } from 'react';
 // import styles from './css/planet.module.css';
 // import useResize from '../hooks/useResize';
-import { createRange, createOneStep } from '../utils/rangeUtils';
+import { createRange, createOneStep, getRandomPointsBetween } from '../utils/rangeUtils';
 import { getAppStateContext } from '../context/AppContext';
+import { throttle } from './../utils/timingUtils'
 
 const planetCanvasStyles = {
   position: 'fixed',
@@ -13,6 +14,10 @@ const planetCanvasStyles = {
   width: '100%',
   height: '100%',
   // zIndex: '-1',
+  // backgroundImage: "url('./../../../images/galaxy.jpg')",
+  // backgroundImage: "url('./../../../images/space.webp')",
+
+  // backgroundSize: 'contain',
 };
 
 function createPlanetTextureFromImage(imageName) {
@@ -128,14 +133,47 @@ function createPlanet(options = {}) {
   return planet;
 }
 
+function getStars(width, height, idealAspectRatio, numberOfPlanets) {
+  const aspectRatio = width / height,
+    particlesCount = 1000,
+    noOfParticlesByScreenSize = Math.floor(particlesCount * (aspectRatio / idealAspectRatio)),
+    positions = new Float32Array(noOfParticlesByScreenSize * 3),
+    cameraDistance = 900;
+
+  const farDistance = -numberOfPlanets * 3 * cameraDistance - cameraDistance;
+
+  for (let i = 0; i < positions.length; i += 3) {
+    positions[i + 0] = getRandomPointsBetween(4.5 * width);
+    positions[i + 1] = getRandomPointsBetween(4.5 * height);
+    positions[i + 2] = getRandomPointsBetween(farDistance, 0);
+  }
+
+  const particlesGeometry = new THREE.BufferGeometry()
+  particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+
+  // Material
+  const particlesMaterial = new THREE.PointsMaterial({
+    color: '#ffeded',
+    sizeAttenuation: true,
+    size: 0.002, // getRandomPointsBetween(0.001, 0.01)
+  })
+
+  return new THREE.Points(particlesGeometry, particlesMaterial)
+}
+
 function createAsteroidCluster(options = {}) {
   const color = new THREE.Color(options?.color ?? '#0c2d4d');
   const radiusOfOrbit = options.orbitRadius ?? 200;
 
   const asteroidCluster = new THREE.Group();
 
-  const material = new THREE.MeshLambertMaterial({
-    color,
+  // const material = new THREE.MeshLambertMaterial({
+  //   color,
+  // });
+
+  const planetTexture = createPlanetTextureFromImage('moon.jpg');
+  const material = new THREE.MeshStandardMaterial({
+    map: planetTexture,
   });
 
   const [minDeviation, maxDeviation] = createRange(10),
@@ -187,7 +225,17 @@ function createPlanetSystem(imageName, planetRadius = 100, addAsteroid = true) {
   const planet = createPlanet({ radius: planetRadius, imageName });
   planetSystem.add(planet);
 
-  const asteroidCluster = createAsteroidCluster({ orbitRadius });
+  let asteroidCluster = createAsteroidCluster({ orbitRadius });
+  if (imageName === 'earth.jpg') {
+    const moonGroup = new THREE.Group();
+    const earthRadius = 6371, moonRadius = 1737, distance = 4e5;
+    const moon = createPlanet({ radius: planetRadius * (moonRadius / earthRadius), imageName: 'moon.jpg' });
+    moon.position.x = planetRadius * 3;// * (distance / earthRadius);
+    moonGroup.add(moon);
+
+    asteroidCluster = moonGroup;
+  }
+
   if (addAsteroid) planetSystem.add(asteroidCluster);
 
   return [planetSystem, planet, asteroidCluster];
@@ -200,7 +248,7 @@ function addPlanetAnimation(canvasNode, animationFrameIdRef, initialPageIndex) {
 
   const idealWidth = 1792,
     idealHeight = 923,
-    idealAspectRation = idealWidth / idealHeight;
+    idealAspectRatio = idealWidth / idealHeight;
 
   const calculatedStyles = getComputedStyle(canvasNode),
     width = extractPixelValue(calculatedStyles.width),
@@ -209,7 +257,7 @@ function addPlanetAnimation(canvasNode, animationFrameIdRef, initialPageIndex) {
     oneFourthWidth = width * 0.25,
     cameraDistance = 900;
 
-  const planetRadius = 100 * (aspectRatio / idealAspectRation);
+  const planetRadius = 100 * (aspectRatio / idealAspectRatio);
 
   // console.log(width, height);
 
@@ -248,7 +296,7 @@ function addPlanetAnimation(canvasNode, animationFrameIdRef, initialPageIndex) {
   for (let idx = 0; idx < imageNames.length; idx++) {
     const imageName = imageNames[idx];
     let addAsteroid = true;
-    if (idx === 1) {
+    if (idx === 1 || idx === 2) {
       addAsteroid = false;
     }
     // console.log(idx, imageName, addAsteroid);
@@ -273,7 +321,7 @@ function addPlanetAnimation(canvasNode, animationFrameIdRef, initialPageIndex) {
   for (let idx = 0; idx < imageNames.length; idx++) {
     const planetCoordinates = {
       x: -idx * 2 * oneFourthWidth,
-      y: 50, //(imageNames.length - idx - 1) * 200,
+      y: 0, //(imageNames.length - idx - 1) * 200,
       z: -idx * 2 * cameraDistance,
     };
 
@@ -291,12 +339,15 @@ function addPlanetAnimation(canvasNode, animationFrameIdRef, initialPageIndex) {
     scene.add(planetSystem);
   }
 
+  const stars = getStars(width, height, idealAspectRatio, planets.length + 1);
+  scene.add(stars);
+
   scene.position.x += oneFourthWidth;
 
   const planetYSpeeds = [0.001, 0.002, -0.001, -0.002],
     planetZSpeeds = [-0.0005, 0.00075, 0.0005, -0.00075];
 
-  const asteroidClusterYSpeed = [0.003, -0.003, 0.005, -0.004];
+  const asteroidClusterYSpeed = [0.003, -0.003, 0.005, -0.0008];
 
   /******************************************************************************************************************/
 
@@ -318,8 +369,8 @@ function addPlanetAnimation(canvasNode, animationFrameIdRef, initialPageIndex) {
   function animationLoop() {
     if (currentPlanetIdx !== targetPlanetIdx) {
       const yetToReachDestiation =
-        (currentPlanetIdx < targetPlanetIdx && targetX < camera.position.x) ||
-        (currentPlanetIdx > targetPlanetIdx && targetX > camera.position.x);
+        (currentPlanetIdx < targetPlanetIdx && targetZ < camera.position.z) ||
+        (currentPlanetIdx > targetPlanetIdx && targetZ > camera.position.z);
 
       if (yetToReachDestiation) {
         camera.position.x += xStep;
@@ -330,7 +381,7 @@ function addPlanetAnimation(canvasNode, animationFrameIdRef, initialPageIndex) {
         changeHappened = false;
       }
     } else if (changeHappened) {
-      const yetToReachDestiation = targetX < camera.position.x;
+      const yetToReachDestiation = targetZ < camera.position.z;
       if (yetToReachDestiation) {
         camera.position.x += xStep;
         camera.position.y += yStep;
@@ -354,7 +405,7 @@ function addPlanetAnimation(canvasNode, animationFrameIdRef, initialPageIndex) {
 
   animationLoop();
 
-  return function (idx1) {
+  const gotoPlanet = function (idx1) {
     const idx = imageNames.length - idx1 - 1;
 
     // console.log('Changing =>', idx);
@@ -376,6 +427,27 @@ function addPlanetAnimation(canvasNode, animationFrameIdRef, initialPageIndex) {
 
     changeHappened = true;
   };
+
+  const cursorMoveAnimation = (function () {
+    const cursor = { x: 0, y: 0 };
+    return throttle((event) => {
+      const prevX = cursor.x,
+        prevY = cursor.y;
+
+      // console.log("Prasanna")
+      cursor.x = event.clientX / width - 0.5;
+      cursor.y = event.clientY / height - 0.5;
+
+      const deltaX = cursor.x - prevX,
+        deltaY = cursor.y - prevY;
+
+      camera.position.x += deltaX * 50;
+      camera.position.y -= deltaY * 50;
+    });
+
+  })();
+
+  return [gotoPlanet, cursorMoveAnimation]
 }
 
 const imageNames = ['earth.jpg', 'mars.jpg', 'moon.jpg', 'saturn.png'];
@@ -388,15 +460,19 @@ function Planet() {
   const [gotoFn, setGotoFn] = useState(() => () => { });
 
   useEffect(() => {
-    const gotoPlanetFn = addPlanetAnimation(
+    const [gotoPlanetFn, cursorMoveAnimation] = addPlanetAnimation(
       canvasRef.current,
       animationFrameIdRef,
       currentPageIndex
     );
 
+    window.addEventListener('mousemove', cursorMoveAnimation)
+
+
     setGotoFn(() => gotoPlanetFn);
 
     return () => {
+      window.removeEventListener('mousemove', cursorMoveAnimation)
       cancelAnimationFrame(animationFrameIdRef.current);
     };
   }, []);
