@@ -8,6 +8,13 @@
   align-items: center;
   width: 100%;
   position: fixed;
+
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.mainContent::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
 }
 
 .mainContent > section {
