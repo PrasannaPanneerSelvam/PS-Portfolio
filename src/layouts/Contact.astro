@@ -1,12 +1,12 @@
 ---
-import ContentWrapper from '../components/ContentWrapper.astro';
-import SocialMediaButtons from '../components/SocialMediaButtons.astro';
+import ContentWrapper from "../components/ContentWrapper.astro";
+import SocialMediaButtons from "../components/SocialMediaButtons.astro";
 
-const mailId = 'prasannaps2610@gmail.com';
+const mailId = "prasannaps2610@gmail.com";
 // const mailId = 'hello@prasannaps.com';
 
 // const copiedText = 'Mail id copied';
-const copiedText = 'Mail id copied to clipboard';
+const copiedText = "Mail id copied to clipboard";
 ---
 
 <section class="section" id="contact">
@@ -20,11 +20,11 @@ const copiedText = 'Mail id copied to clipboard';
 
       <div
         style={{
-          marginTop: '2rem',
-          display: 'flex',
-          gap: '2rem',
-          flexDirection: 'column',
-          alignItems: 'center',
+          marginTop: "2rem",
+          display: "flex",
+          gap: "2rem",
+          flexDirection: "column",
+          alignItems: "center",
         }}
       >
         <div class="copyMailBox">
@@ -47,7 +47,7 @@ const copiedText = 'Mail id copied to clipboard';
         </div>
 
         <SocialMediaButtons
-          items={['linkedin', 'github', 'instagram', 'mail']}
+          items={["linkedin", "github", "instagram", "mail"]}
         />
       </div>
     </ContentWrapper>
@@ -55,48 +55,40 @@ const copiedText = 'Mail id copied to clipboard';
 </section>
 
 <script>
-  import isCopied from './../store/mailIdCopied.js';
-
-  const copyMailBoxNode = document.getElementsByClassName('copyMailBox')[0],
+  const copyMailBoxNode = document.getElementsByClassName("copyMailBox")[0],
     copyMailContainer =
-      copyMailBoxNode.getElementsByClassName('copyMailContainer')[1],
+      copyMailBoxNode.getElementsByClassName("copyMailContainer")[1],
+    elementsForCopy = [...copyMailBoxNode.getElementsByClassName("cp")],
     mailId = copyMailContainer.children[1].textContent;
 
+  let isCopied = false;
+  const setIsCopied = function (val) {
+    isCopied = val;
+    elementsForCopy.forEach((i) => i.classList.toggle("hide"));
+  };
+
   // TODO :: Add some view for success & failure cases
-  const copyMailIdToClipBoard = (onCopiedCb) => {
+  const copyMailIdToClipBoard = () => {
     navigator.clipboard.writeText(mailId).then(
       function () {
-        onCopiedCb(true);
+        setIsCopied(true);
       },
       function (err) {
-        console.error('Async: Could not copy text: ', err);
+        console.error("Async: Could not copy text: ", err);
       }
     );
   };
 
-  copyMailBoxNode.addEventListener('click', function () {
-    if (!isCopied.get()) copyMailIdToClipBoard(isCopied.set.bind(isCopied));
+  copyMailBoxNode.addEventListener("click", function () {
+    if (!isCopied) copyMailIdToClipBoard();
   });
 
-  copyMailContainer.addEventListener('transitionend', function () {
-    if (isCopied.get())
+  copyMailContainer.children[0].addEventListener("transitionend", function () {
+    if (isCopied) {
       setTimeout(function () {
-        isCopied.set(false);
+        setIsCopied(false);
       }, 800);
-  });
-
-  const elementsForCopy = [...copyMailBoxNode.getElementsByClassName('cp')];
-
-  let isCopiedLocal = true;
-
-  isCopied.subscribe(function () {
-    // For first render
-    if (isCopiedLocal) {
-      isCopiedLocal = false;
-      return;
     }
-
-    elementsForCopy.forEach((i) => i.classList.toggle('hide'));
   });
 </script>
 

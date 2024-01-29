@@ -3,18 +3,18 @@
 </div>
 
 <script>
-  import isHamburgerOn from './../store/hamburgerState';
+  import { isHamburgerOn } from "./../store/Context";
 
-  const hamburgerButton = document.getElementById('hamburgerButton');
-  hamburgerButton.addEventListener('click', function () {
+  const hamburgerButton = document.getElementById("hamburgerButton");
+  hamburgerButton.addEventListener("click", function () {
     isHamburgerOn.set(!isHamburgerOn.get());
   });
 
   isHamburgerOn.subscribe((value) => {
     if (value) {
-      hamburgerButton.classList.add('active');
+      hamburgerButton.classList.add("active");
     } else {
-      hamburgerButton.classList.remove('active');
+      hamburgerButton.classList.remove("active");
     }
   });
 </script>
@@ -52,7 +52,7 @@
   }
   .hamburgerButton::before,
   .hamburgerButton::after {
-    content: '';
+    content: "";
     display: inherit;
     position: absolute;
     background-color: var(--icon-stroke-color);

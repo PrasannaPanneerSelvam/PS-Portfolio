@@ -36,8 +36,11 @@ const { sections } = Astro.props;
 </header>
 
 <script>
-  import { currentPageIndex, isInContactPage } from "../store/Context";
-  import isHamburgerOn from "./../store/hamburgerState";
+  import {
+    currentPageIndex,
+    isInContactPage,
+    isHamburgerOn,
+  } from "../store/Context";
 
   const primaryNavBarNode = document.getElementsByClassName("primaryNavBar")[0],
     navlinkNodes = [...document.getElementsByClassName("navlinks")],

@@ -4,7 +4,7 @@
       <h2 class="hiText">Hi, I'm</h2>
       <h1 class="heroText" id="heroText">Prasanna</h1>
 
-      <h2 style={{ display: 'block' }} class="slider introText" id="introText">
+      <h2 style={{ display: "block" }} class="slider introText" id="introText">
         {/* Coding the future, pixel by pixel */}
          Designing the Future with Code and Elegance
         {/* Front end developer, I build things to make web cleaner */}
@@ -14,17 +14,17 @@
 </section>
 
 <script>
-  import { getNewRandomText, getRandomText } from './randomUtils';
-  import { isHeroAnimPending } from './../store/Context';
+  import { getNewRandomText, getRandomText } from "./randomUtils";
+  import { isHeroAnimPending } from "./../store/Context";
 
-  const heroTextNode = document.getElementById('heroText'),
-    introTextNode = document.getElementById('introText');
+  const heroTextNode = document.getElementById("heroText"),
+    introTextNode = document.getElementById("introText");
 
-  introTextNode.addEventListener('animationend', function () {
+  introTextNode.addEventListener("animationend", function () {
     isHeroAnimPending.set(false);
   });
 
-  const finalText = 'Prasanna';
+  const finalText = "Prasanna";
 
   const options = {
     changeOneLetterAtOnce: true,
@@ -46,11 +46,11 @@
     const { timing, doMaxSwaps, maxSwaps, changeOneLetterAtOnce } = options;
 
     if (text === finalText || currentIndex === text.length) {
-      introTextNode.classList.add('show');
+      introTextNode.classList.add("show");
       return;
     }
 
-    if (finalText[currentIndex] === ' ') {
+    if (finalText[currentIndex] === " ") {
       incrementCurrentIndexWrapper();
       return;
     }
@@ -98,7 +98,7 @@
   .heroText {
     font-size: 3rem;
     line-height: 3.25rem;
-    font-family: 'Space Mono', monospace;
+    font-family: "Space Mono", monospace;
     cursor: default;
     color: #64ffda;
   }
@@ -121,7 +121,7 @@
   }
 
   .slider::after {
-    content: '';
+    content: "";
     position: absolute;
     display: inline-block;
     width: 100%;
