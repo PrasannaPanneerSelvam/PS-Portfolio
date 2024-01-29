@@ -12,14 +12,14 @@
 
   isHamburgerOn.subscribe((value) => {
     if (value) {
-      hamburgerButton.classList.add("active");
+      hamburgerButton.classList.add("criss-cross");
     } else {
-      hamburgerButton.classList.remove("active");
+      hamburgerButton.classList.remove("criss-cross");
     }
   });
 </script>
 
-<style>
+<style is:global>
   .hamburgerButtonHolder {
     --hamburger-line-height: 3px;
     --hamburger-line-width: 30px;
@@ -65,14 +65,14 @@
   .hamburgerButton::after {
     top: -7px;
   }
-  .hamburgerButton.active {
+  .hamburgerButton.criss-cross {
     background-color: transparent;
   }
-  .hamburgerButton.active::before {
+  .hamburgerButton.criss-cross::before {
     top: 0;
     transform: rotate(-45deg);
   }
-  .hamburgerButton.active::after {
+  .hamburgerButton.criss-cross::after {
     top: 0;
     transform: rotate(45deg);
   }

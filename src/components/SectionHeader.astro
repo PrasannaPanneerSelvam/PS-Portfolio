@@ -7,19 +7,19 @@ const { headerText } = Astro.props;
 ---
 
 <div class="headerWrapper">
-  <div class="line" style={{ width: "1.75rem" }}></div>
+  <div class="heading-strip" style={{ width: "1.75rem" }}></div>
   <h1>{headerText}</h1>
-  <div class="line" style={{ flex: "1" }}></div>
+  <div class="heading-strip" style={{ flex: "1" }}></div>
 </div>
 
-<style>
+<style is:global>
   .headerWrapper {
     display: flex;
     align-items: center;
     gap: 0.25rem;
   }
 
-  .line {
+  .heading-strip {
     height: 0.5px;
     border-radius: 50%;
     background-color: #eee;

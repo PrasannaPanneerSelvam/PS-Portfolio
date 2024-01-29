@@ -17,7 +17,7 @@ const sections = ["Home", "About", "Contact"];
   <Navbar sections={sections} />
   <div class="topWrapper">
     <ContactStick />
-    <main class="mainContent">
+    <main class="mainContent scrollSnapMainContent">
       <Home />
       <About />
       <Contact />
@@ -26,25 +26,17 @@ const sections = ["Home", "About", "Contact"];
   <SvgStore />
 </Layout>
 
-<style>
+<style is:global>
   .topWrapper {
     display: flex;
     background: inherit;
   }
 
-  .blockMouseEvents {
-    pointer-events: none;
-  }
-</style>
-
-<style is:global>
   .mainContent {
     flex-direction: column;
     align-items: center;
     width: 100%;
     position: sticky;
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
 
     -ms-overflow-style: none; /* Internet Explorer 10+ */
     scrollbar-width: none; /* Firefox */
@@ -68,37 +60,19 @@ const sections = ["Home", "About", "Contact"];
     }
   }
 
-  /* .mainContent {
-  display: flex;
-  position: fixed;
-  height: 100vh;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.mainContent::-webkit-scrollbar {
-  display: none;
-}
-*/
-
-  /* @media only screen and (min-width: 769px) { */
-  .mainContent > section {
-    /* position: absolute; */
-    scroll-snap-align: start;
-    /* scale: 3000; */
-    /* opacity: 0;
-  animation-duration: 1000ms;
-  animation-timing-function: linear;
-  animation-fill-mode: forwards; */
-    /* animation-name: var(--page-anim, none); */
-
-    transform-origin: -50%;
+  .scrollSnapMainContent {
+    display: flex;
+    position: fixed;
+    height: 100vh;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
   }
 
-  .mainContent > section > div {
-    /* opacity: 0; */
-    animation-duration: 500ms;
-    animation-timing-function: linear;
-    animation-fill-mode: forwards;
+  .scrollSnapMainContent > section {
+    scroll-snap-align: start;
+  }
+
+  .blockMouseEvents {
+    pointer-events: none;
   }
 </style>

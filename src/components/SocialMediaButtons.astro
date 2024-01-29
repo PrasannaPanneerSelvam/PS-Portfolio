@@ -25,7 +25,7 @@ const startingLeftPosition = `${containerWidth / 2 - halfIconSize}px`,
 ---
 
 <ul
-  class={"listHolder" + (showAsHorizontal ? " showUp" : "")}
+  class={"coinListHolder" + (showAsHorizontal ? " rollCoin" : "")}
   style={{
     "--iconSize": `${iconSize}px`,
     height: `${containerHeight}px`,
@@ -143,7 +143,7 @@ const startingLeftPosition = `${containerWidth / 2 - halfIconSize}px`,
         }
 
         return (
-          <li class="listItem" style={elementStyles}>
+          <li class="coinItem" style={elementStyles}>
             {ContactIcons[mediaItem]}
           </li>
         );
@@ -158,12 +158,12 @@ const startingLeftPosition = `${containerWidth / 2 - halfIconSize}px`,
   const horizontalHolder = document.getElementById("horiz-list");
 
   isInContactPage.subscribe(function () {
-    horizontalHolder.classList.toggle("showUp");
+    horizontalHolder.classList.toggle("rollCoin");
   });
 </script>
 
-<style>
-  .listHolder {
+<style is:global>
+  .coinListHolder {
     --iconSize: 40px;
     --final-turn: 0turn;
     --final-left-position: 0;
@@ -175,7 +175,7 @@ const startingLeftPosition = `${containerWidth / 2 - halfIconSize}px`,
     /* z-index: -1; */
   }
 
-  .listItem {
+  .coinItem {
     position: absolute;
     display: inline-block;
 
@@ -200,7 +200,7 @@ const startingLeftPosition = `${containerWidth / 2 - halfIconSize}px`,
     transition-property: transform, opacity;
   }
 
-  .listItem::before {
+  .coinItem::before {
     position: absolute;
     content: "";
     width: 100%;
@@ -211,30 +211,30 @@ const startingLeftPosition = `${containerWidth / 2 - halfIconSize}px`,
     z-index: -1;
   }
 
-  .listItem:hover {
+  .coinItem:hover {
     --icon-primary-fill-color: #64ffda;
     --icon-stroke-color: #64ffda;
     margin-bottom: 8%;
   }
 
-  .listItem:hover::before {
+  .coinItem:hover::before {
     border: var(--contact-icon-border, 1px solid #64ffda);
   }
 
-  .listItem a {
+  .coinItem a {
     opacity: 0;
     transition-duration: 1s;
     transition-property: all;
   }
 
-  .showUp .listItem {
+  .rollCoin .coinItem {
     transition-delay: var(--anim-delay, 0ms);
     transform: translate(var(--final-left-position), var(--final-top-position))
       rotate(var(--final-turn));
     opacity: 1;
   }
 
-  .showUp .listItem > a {
+  .rollCoin .coinItem > a {
     transition-delay: var(--anim-delay, 0ms);
     opacity: 1;
   }

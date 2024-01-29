@@ -4,19 +4,19 @@ const introText = "Designing the Future with Code and Elegance";
 // const introText = "Front end developer, I build things to make web cleaner";
 ---
 
-<section class="section" id="home">
+<section class="home" id="home">
   <div>
     <div>
       <h2 class="hiText">Hi, I'm</h2>
       <h1 class="heroText" id="heroText">Prasanna</h1>
 
-      <h2 style={{ display: "block" }} class="slider introText" id="introText">
+      <h2 style={{ display: "block" }} class="mask introText" id="introText">
         {introText}
       </h2>
       <noscript>
         <h2
           style={{ display: "block", transform: "translate(0%, -150%)" }}
-          class="slider introText show"
+          class="mask introText removeMask"
           id="introText"
         >
           {introText}
@@ -59,7 +59,7 @@ const introText = "Designing the Future with Code and Elegance";
     const { timing, doMaxSwaps, maxSwaps, changeOneLetterAtOnce } = options;
 
     if (text === finalText || currentIndex === text.length) {
-      introTextNode.classList.add("show");
+      introTextNode.classList.add("removeMask");
       return;
     }
 
@@ -93,8 +93,8 @@ const introText = "Designing the Future with Code and Elegance";
   loop();
 </script>
 
-<style>
-  .section {
+<style is:global>
+  .home {
     display: grid;
     place-items: center;
     scroll-snap-align: start;
@@ -129,11 +129,11 @@ const introText = "Designing the Future with Code and Elegance";
     user-select: none;
   }
 
-  .slider {
+  .mask {
     display: inline-block;
   }
 
-  .slider::after {
+  .mask::after {
     content: "";
     position: absolute;
     display: inline-block;
@@ -147,13 +147,13 @@ const introText = "Designing the Future with Code and Elegance";
     transform-origin: right center;
   }
 
-  .show {
+  .removeMask {
     opacity: 1;
     transform: translate(0%);
     z-index: -1;
   }
 
-  .show::after {
+  .removeMask::after {
     animation: move var(--animationDuration, 300ms)
       var(--animationTimingFunction, ease-in-out) forwards;
   }

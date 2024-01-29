@@ -9,7 +9,7 @@ const { sections } = Astro.props;
 ---
 
 <header class="primaryHeader">
-  <div class="logo"></div>
+  <div class="nav-logo"></div>
   <Hamburger />
   <nav>
     <ul class="primaryNavBar">
@@ -61,7 +61,7 @@ const { sections } = Astro.props;
       return;
     }
 
-    primaryNavBarNode.classList.toggle("active");
+    primaryNavBarNode.classList.toggle("movein");
   });
 
   currentPageIndex.subscribe((value) => {
@@ -73,7 +73,7 @@ const { sections } = Astro.props;
   });
 </script>
 
-<style>
+<style is:global>
   .primaryHeader {
     position: fixed;
     width: 100%;
@@ -84,7 +84,7 @@ const { sections } = Astro.props;
     z-index: 9999;
   }
 
-  .logo {
+  .nav-logo {
     display: inline-block;
     height: 50px;
     aspect-ratio: 1 / 1;
@@ -223,12 +223,8 @@ const { sections } = Astro.props;
       content: unset;
     }
 
-    .active {
+    .movein {
       transform: translate(0%);
-    }
-
-    .navItem {
-      width: unset;
     }
 
     .activeNavItem:after {

@@ -9,7 +9,7 @@ const mailId = "prasannaps2610@gmail.com";
 const copiedText = "Mail id copied to clipboard";
 ---
 
-<section class="section" id="contact">
+<section class="contact-section" id="contact">
   <div>
     <ContentWrapper headerText="Get In Touch">
       <p>
@@ -29,7 +29,12 @@ const copiedText = "Mail id copied to clipboard";
       >
         <div class="copyMailBox">
           <div class="copyMailContainer iconHolder">
-            <svg width="25" height="25" viewBox="0 0 16 16" class="cp hide">
+            <svg
+              width="25"
+              height="25"
+              viewBox="0 0 16 16"
+              class="cp hide-copy"
+            >
               <use href="#tick-svg"></use>
             </svg>
             <svg width="25" height="25" viewBox="0 0 64 64" class="cp">
@@ -38,7 +43,7 @@ const copiedText = "Mail id copied to clipboard";
           </div>
 
           <span class="copyMailContainer">
-            <span class="cp hide">
+            <span class="cp hide-copy">
               {copiedText}
             </span>
             <span class="cp">{mailId}</span>
@@ -64,7 +69,7 @@ const copiedText = "Mail id copied to clipboard";
   let isCopied = false;
   const setIsCopied = function (val) {
     isCopied = val;
-    elementsForCopy.forEach((i) => i.classList.toggle("hide"));
+    elementsForCopy.forEach((i) => i.classList.toggle("hide-copy"));
   };
 
   // TODO :: Add some view for success & failure cases
@@ -92,12 +97,12 @@ const copiedText = "Mail id copied to clipboard";
   });
 </script>
 
-<style>
-  .hide {
+<style is:global>
+  .hide-copy {
     opacity: 0;
   }
 
-  .section {
+  .contact-section {
     display: grid;
     place-items: center;
   }

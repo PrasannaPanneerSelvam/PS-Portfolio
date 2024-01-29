@@ -21,12 +21,12 @@ import SocialMediaButtons from "./SocialMediaButtons.astro";
 
   function viewStick() {
     contactStickWrapper.classList.add("showStick");
-    verticalHolder.classList.add("showUp");
+    verticalHolder.classList.add("rollCoin");
   }
 
   function pullDownStick() {
     contactStickWrapper.classList.remove("showStick");
-    verticalHolder.classList.remove("showUp");
+    verticalHolder.classList.remove("rollCoin");
   }
 
   let isHeroAnimPendingLocal = true;
@@ -45,7 +45,7 @@ import SocialMediaButtons from "./SocialMediaButtons.astro";
   });
 </script>
 
-<style>
+<style is:global>
   .contactStickWrapper {
     display: flex;
     flex-direction: column;
