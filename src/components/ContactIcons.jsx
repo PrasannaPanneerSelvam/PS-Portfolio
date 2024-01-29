@@ -8,7 +8,7 @@ export default {
       href="https://www.linkedin.com/in/prasanna-ps/"
       target="blank"
       aria-label="LinkedIn"
-      rel="noreferrer"
+      rel="noreferrer noopener"
     >
       <svg height="30" width="30" viewBox="0 0 25 25">
         <use href="#linkedin-svg"></use>
@@ -22,7 +22,7 @@ export default {
       href="https://github.com/PrasannaPanneerSelvam"
       target="blank"
       aria-label="GitHub"
-      rel="noreferrer"
+      rel="noreferrer noopener"
     >
       <svg height="30" width="30" viewBox="0 0 25 25">
         <use href="#github-svg"></use>
@@ -35,7 +35,7 @@ export default {
       href="https://www.instagram.com/prithiv_krish/"
       target="blank"
       aria-label="Instagram"
-      rel="noreferrer"
+      rel="noreferrer noopener"
     >
       <svg height="25" width="25" viewBox="0 0 25 25">
         <use href="#instagram-svg"></use>
@@ -48,7 +48,7 @@ export default {
       href="mailto:prasannaps2610@gmail.com"
       target="blank"
       aria-label="Mail"
-      rel="noreferrer"
+      rel="noreferrer noopener"
     >
       <svg height="35" width="35" viewBox="110 110 790 790">
         <use href="#mail-svg"></use>
@@ -61,7 +61,7 @@ export default {
       href="mailto:prasannaps2610@gmail.com"
       target="blank"
       aria-label="Mail"
-      rel="noreferrer"
+      rel="noreferrer noopener"
     >
       <svg height="35" width="35" viewBox="0 0 48 48">
         {/* <svg height="28" width="28" viewBox="0 0 32 32"> */}
