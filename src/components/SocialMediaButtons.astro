@@ -25,7 +25,7 @@ const startingLeftPosition = `${containerWidth / 2 - halfIconSize}px`,
 ---
 
 <ul
-  class="listHolder"
+  class={"listHolder" + (showAsHorizontal ? " showUp" : "")}
   style={{
     "--iconSize": `${iconSize}px`,
     height: `${containerHeight}px`,
@@ -157,14 +157,7 @@ const startingLeftPosition = `${containerWidth / 2 - halfIconSize}px`,
 
   const horizontalHolder = document.getElementById("horiz-list");
 
-  let isFirstTime = true;
-
   isInContactPage.subscribe(function () {
-    if (isFirstTime) {
-      isFirstTime = !isFirstTime;
-      return;
-    }
-
     horizontalHolder.classList.toggle("showUp");
   });
 </script>

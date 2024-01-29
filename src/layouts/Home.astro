@@ -1,3 +1,9 @@
+---
+// const introText = "Coding the future, pixel by pixel";
+const introText = "Designing the Future with Code and Elegance";
+// const introText = "Front end developer, I build things to make web cleaner";
+---
+
 <section class="section" id="home">
   <div>
     <div>
@@ -5,10 +11,17 @@
       <h1 class="heroText" id="heroText">Prasanna</h1>
 
       <h2 style={{ display: "block" }} class="slider introText" id="introText">
-        {/* Coding the future, pixel by pixel */}
-         Designing the Future with Code and Elegance
-        {/* Front end developer, I build things to make web cleaner */}
+        {introText}
       </h2>
+      <noscript>
+        <h2
+          style={{ display: "block", transform: "translate(0%, -150%)" }}
+          class="slider introText show"
+          id="introText"
+        >
+          {introText}
+        </h2>
+      </noscript>
     </div>
   </div>
 </section>
