@@ -1,0 +1,256 @@
+---
+interface Props {
+  items: string[];
+  showAsHorizontal?: boolean;
+  startDelay?: string;
+}
+
+const { items, showAsHorizontal = true, startDelay = "0ms" } = Astro.props;
+
+const gap = 20, // 50
+  iconSize = 40, // 50
+  halfIconSize = iconSize / 2;
+
+const itemsCount = items.length,
+  halfLength = Math.floor(itemsCount / 2),
+  isEvenSize = itemsCount % 2 === 0,
+  maxLength = (iconSize + gap) * itemsCount - gap,
+  minLength = iconSize;
+
+const containerHeight = showAsHorizontal ? minLength : maxLength,
+  containerWidth = showAsHorizontal ? maxLength : minLength;
+
+const startingLeftPosition = `${containerWidth / 2 - halfIconSize}px`,
+  startingTopPosition = `${containerHeight / 2 - halfIconSize}px`;
+---
+
+<ul
+  class="listHolder"
+  style={{
+    "--iconSize": `${iconSize}px`,
+    height: `${containerHeight}px`,
+    width: `${containerWidth}px`,
+    "--anim-delay": startDelay,
+  }}
+  id={showAsHorizontal ? "horiz-list" : "verti-list"}
+>
+  {
+    (function () {
+      const ContactIcons = {
+        linkedin: (
+          <a
+            class="contactIconAnchor"
+            style={{ paddingLeft: "2px" }}
+            href="https://www.linkedin.com/in/prasanna-ps/"
+            target="blank"
+            aria-label="LinkedIn"
+            rel="noreferrer noopener"
+          >
+            <svg height="30" width="30" viewBox="0 0 25 25">
+              <use href="#linkedin-svg" />
+            </svg>
+          </a>
+        ),
+        github: (
+          <a
+            class="contactIconAnchor"
+            style={{ paddingLeft: "2px", paddingTop: "2px" }}
+            href="https://github.com/PrasannaPanneerSelvam"
+            target="blank"
+            aria-label="GitHub"
+            rel="noreferrer noopener"
+          >
+            <svg height="30" width="30" viewBox="0 0 25 25">
+              <use href="#github-svg" />
+            </svg>
+          </a>
+        ),
+        instagram: (
+          <a
+            class="contactIconAnchor"
+            href="https://www.instagram.com/prithiv_krish/"
+            target="blank"
+            aria-label="Instagram"
+            rel="noreferrer noopener"
+          >
+            <svg height="25" width="25" viewBox="0 0 25 25">
+              <use href="#instagram-svg" />
+            </svg>
+          </a>
+        ),
+        mail: (
+          <a
+            class="contactIconAnchor"
+            href="mailto:prasannaps2610@gmail.com"
+            target="blank"
+            aria-label="Mail"
+            rel="noreferrer noopener"
+          >
+            <svg height="35" width="35" viewBox="110 110 790 790">
+              <use href="#mail-svg" />
+            </svg>
+          </a>
+        ),
+        slack: (
+          <a
+            class="contactIconAnchor"
+            href="mailto:prasannaps2610@gmail.com"
+            target="blank"
+            aria-label="Mail"
+            rel="noreferrer noopener"
+          >
+            <svg height="35" width="35" viewBox="0 0 48 48">
+              {/* <svg height="28" width="28" viewBox="0 0 32 32"> */}
+              <use href="#slack-svg" />
+            </svg>
+          </a>
+        ),
+      };
+      return items.map((mediaItem, idx) => {
+        const elementStyles = { left: startingLeftPosition };
+
+        if (!showAsHorizontal) {
+          const finalTopPosition = idx * 100,
+            verticalGapCount = idx;
+          elementStyles["bottom"] = "0";
+          elementStyles[
+            "--final-top-position"
+          ] = `calc(-${finalTopPosition}% - ${verticalGapCount * gap}px)`;
+        } else {
+          let finalLeftPosition = 0,
+            finalTurn = 0,
+            horizontalGapCount = 0;
+
+          // Not a center one
+          if (!(!isEvenSize && (idx + 1) * 2 === itemsCount + 1)) {
+            const awayFromMiddle = idx - halfLength;
+
+            horizontalGapCount = awayFromMiddle;
+            finalLeftPosition = awayFromMiddle * 100;
+            finalTurn = idx < itemsCount / 2 ? 1 : -1;
+          }
+
+          if (isEvenSize) {
+            finalLeftPosition += 50;
+            horizontalGapCount += 0.5;
+          }
+
+          elementStyles["top"] = startingTopPosition;
+          elementStyles[
+            "--final-left-position"
+          ] = `calc(${finalLeftPosition}% + ${horizontalGapCount * gap}px)`;
+          elementStyles["--final-turn"] = `${finalTurn}turn`;
+        }
+
+        return (
+          <li class="listItem" style={elementStyles}>
+            {ContactIcons[mediaItem]}
+          </li>
+        );
+      });
+    })()
+  }
+</ul>
+
+<script>
+  import { isInContactPage } from "../store/Context";
+
+  const horizontalHolder = document.getElementById("horiz-list");
+
+  let isFirstTime = true;
+
+  isInContactPage.subscribe(function () {
+    if (isFirstTime) {
+      isFirstTime = !isFirstTime;
+      return;
+    }
+
+    horizontalHolder.classList.toggle("showUp");
+  });
+</script>
+
+<style>
+  .listHolder {
+    --iconSize: 40px;
+    --final-turn: 0turn;
+    --final-left-position: 0;
+    --final-top-position: 0;
+    position: relative;
+    display: flex;
+    list-style: none;
+    /* background-color: rgba(255, 255, 0, 0.4); */
+    /* z-index: -1; */
+  }
+
+  .listItem {
+    position: absolute;
+    display: inline-block;
+
+    text-align: center;
+    height: var(--iconSize);
+    width: var(--iconSize);
+    border-radius: 50%;
+    /* border: 1px solid #fff; */
+
+    transition-duration: 1s;
+
+    /* display: grid;
+  place-content: center; */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* padding: 15px; */
+    opacity: 0%;
+    transform: translate(0%) rotate(0turn);
+    transition-property: transform, opacity;
+  }
+
+  .listItem::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    border: var(--contact-icon-border, 1px solid #888);
+    rotate: 45deg;
+    border-radius: 10px;
+    z-index: -1;
+  }
+
+  .listItem:hover {
+    --icon-primary-fill-color: #64ffda;
+    --icon-stroke-color: #64ffda;
+    margin-bottom: 8%;
+  }
+
+  .listItem:hover::before {
+    border: var(--contact-icon-border, 1px solid #64ffda);
+  }
+
+  .listItem a {
+    opacity: 0;
+    transition-duration: 1s;
+    transition-property: all;
+  }
+
+  .showUp .listItem {
+    transition-delay: var(--anim-delay, 0ms);
+    transform: translate(var(--final-left-position), var(--final-top-position))
+      rotate(var(--final-turn));
+    opacity: 1;
+  }
+
+  .showUp .listItem > a {
+    transition-delay: var(--anim-delay, 0ms);
+    opacity: 1;
+  }
+
+  .contactIconAnchor {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>

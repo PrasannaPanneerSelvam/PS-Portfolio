@@ -1,0 +1,148 @@
+---
+import ContentWrapper from '../components/ContentWrapper.astro';
+import SocialMediaButtons from '../components/SocialMediaButtons.astro';
+
+const mailId = 'prasannaps2610@gmail.com';
+// const mailId = 'hello@prasannaps.com';
+
+// const copiedText = 'Mail id copied';
+const copiedText = 'Mail id copied to clipboard';
+---
+
+<section class="section" id="contact">
+  <div>
+    <ContentWrapper headerText="Get In Touch">
+      <p>
+        I am interested in new opportunities, especially ambitious and
+        challenging projects. My inbox is always open. I&apos;ll try my best to
+        get back to you!
+      </p>
+
+      <div
+        style={{
+          marginTop: '2rem',
+          display: 'flex',
+          gap: '2rem',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <div class="copyMailBox">
+          <div class="copyMailContainer iconHolder">
+            <svg width="25" height="25" viewBox="0 0 16 16" class="cp hide">
+              <use href="#tick-svg"></use>
+            </svg>
+            <svg width="25" height="25" viewBox="0 0 64 64" class="cp">
+              <use href="#copy-svg"></use>
+            </svg>
+          </div>
+
+          <span class="copyMailContainer">
+            <span class="cp hide">
+              {copiedText}
+            </span>
+            <span class="cp">{mailId}</span>
+            {mailId}
+          </span>
+        </div>
+
+        <SocialMediaButtons
+          items={['linkedin', 'github', 'instagram', 'mail']}
+        />
+      </div>
+    </ContentWrapper>
+  </div>
+</section>
+
+<script>
+  import isCopied from './../store/mailIdCopied.js';
+
+  const copyMailBoxNode = document.getElementsByClassName('copyMailBox')[0],
+    copyMailContainer =
+      copyMailBoxNode.getElementsByClassName('copyMailContainer')[1],
+    mailId = copyMailContainer.children[1].textContent;
+
+  // TODO :: Add some view for success & failure cases
+  const copyMailIdToClipBoard = (onCopiedCb) => {
+    navigator.clipboard.writeText(mailId).then(
+      function () {
+        onCopiedCb(true);
+      },
+      function (err) {
+        console.error('Async: Could not copy text: ', err);
+      }
+    );
+  };
+
+  copyMailBoxNode.addEventListener('click', function () {
+    if (!isCopied.get()) copyMailIdToClipBoard(isCopied.set.bind(isCopied));
+  });
+
+  copyMailContainer.addEventListener('transitionend', function () {
+    if (isCopied.get())
+      setTimeout(function () {
+        isCopied.set(false);
+      }, 800);
+  });
+
+  const elementsForCopy = [...copyMailBoxNode.getElementsByClassName('cp')];
+
+  let isCopiedLocal = true;
+
+  isCopied.subscribe(function () {
+    // For first render
+    if (isCopiedLocal) {
+      isCopiedLocal = false;
+      return;
+    }
+
+    elementsForCopy.forEach((i) => i.classList.toggle('hide'));
+  });
+</script>
+
+<style>
+  .hide {
+    opacity: 0;
+  }
+
+  .section {
+    display: grid;
+    place-items: center;
+  }
+
+  .copyMailBox {
+    border: 1px solid #888;
+    border-radius: 10px;
+    padding: 7px 10px;
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .copyMailBox:hover {
+    border-color: #64ffda;
+  }
+
+  .copyMailContainer {
+    position: relative;
+    color: transparent;
+  }
+
+  .copyMailContainer > * {
+    color: #fff;
+    text-wrap: nowrap;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 200ms linear;
+  }
+
+  .iconHolder {
+    position: relative;
+    height: 25px;
+    width: 25px;
+    display: inline-block;
+  }
+</style>

@@ -1,0 +1,36 @@
+---
+interface Props {
+    headerText: string;
+}
+
+const { headerText } = Astro.props;
+---
+
+<div class="headerWrapper">
+    <div class="line" style={{ width: '1.75rem' }}></div>
+    <h1>{headerText}</h1>
+    <div class="line" style={{ flex: '1' }}></div>
+</div>
+
+
+<style>
+    .headerWrapper {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    .line {
+        height: 0.5px;
+        border-radius: 50%;
+        background-color: #eee;
+        max-width: 17rem;
+    }
+
+    .headerWrapper > h1 {
+        font-size: 2rem;
+        font-weight: 600;
+        user-select: none;
+        color: #64ffda;
+    }
+</style>

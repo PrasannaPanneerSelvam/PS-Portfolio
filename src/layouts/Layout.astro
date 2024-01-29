@@ -1,6 +1,6 @@
 ---
 interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
@@ -8,44 +8,130 @@ const { title } = Astro.props;
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="description"
+      content="Prasanna - Software development engineer who builds responsive sites for digital experiences."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
+    <title>{title}</title>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com/" />
+  </head>
+  <body>
+    <slot />
+  </body>
 </html>
+
 <style is:global>
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
-		background-size: 224px;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+  *,
+  *::after,
+  *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', 'Monserrat', sans-serif;
+  }
+
+  :root {
+    font-size: 16px;
+    line-height: 1.5rem;
+    font-weight: 400;
+
+    color-scheme: light dark;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+
+    /* --primary-color: rgb(30, 68, 100); */
+    --primary-color: rgb(0, 0, 0);
+    /* --primary-color: #08051b; */
+    /* --primary-color: rgb(144, 199, 150); */
+    --secondary-color: #040404;
+    --tertiary-color: transparent;
+    --primary-bg-color: var(--primary-color);
+    --secondary-bg-color: var(--tertiary-color);
+    --primary-text-color: var(--secondary-color);
+    --button-outline-color: var(--secondary-color);
+    --nav-text-color: var(--secondary-color);
+    --icon-stroke-color: #fff; /* var(--secondary-color); */
+    --icon-primary-fill-color: var(--tertiary-color);
+    --icon-secondary-fill-color: var(--secondary-color);
+    --card-stroke-color: var(--secondary-color);
+    --constellation-particle-color: var(--secondary-color);
+    --constellation-link-color: rgba(0, 181, 255);
+    --border-radius: 4px;
+    --is-mobile-view: 'false';
+  }
+
+  html,
+  body {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    position: relative;
+    /* background-color: var(--primary-bg-color); */
+    background-color: #08051b;
+    --primary-color: #08051b;
+
+    height: 100vh;
+    width: 100%;
+    /* overflow: hidden; */
+    color: #fff;
+
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  body::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+
+  p {
+    max-width: 50ch;
+    text-indent: 2em;
+    text-align: justify;
+    user-select: none;
+  }
+
+  p > a {
+    text-decoration: none;
+    color: #64ffda;
+    position: relative;
+  }
+
+  p > a::after {
+    content: '';
+    display: inline-block;
+    height: 1px;
+    width: 100%;
+
+    position: absolute;
+    left: 0;
+    bottom: -0.125em;
+
+    background-color: #64ffda;
+    opacity: 0.5;
+    transform: scale(0, 1);
+    transform-origin: left;
+    transition: all 250ms linear;
+  }
+
+  p > a:hover::after {
+    transform: scale(1);
+  }
+
+  @media only screen and (max-width: 768px) {
+    :root {
+      font-size: 12px;
+    }
+  }
 </style>

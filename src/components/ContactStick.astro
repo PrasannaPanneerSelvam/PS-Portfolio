@@ -1,0 +1,89 @@
+---
+import SocialMediaButtons from "./SocialMediaButtons.astro";
+---
+
+<div class="contactStickWrapper">
+  <SocialMediaButtons
+    items={["mail", "instagram", "github", "linkedin"]}
+    showAsHorizontal={false}
+    startDelay="400ms"
+  />
+  <div class="stick"></div>
+</div>
+
+<script>
+  import { isHeroAnimPending, isInContactPage } from "../store/Context";
+
+  const verticalHolder = document.getElementById("verti-list"),
+    contactStickWrapper = document.getElementsByClassName(
+      "contactStickWrapper"
+    )[0];
+
+  function viewStick() {
+    contactStickWrapper.classList.add("showStick");
+    verticalHolder.classList.add("showUp");
+  }
+
+  function pullDownStick() {
+    contactStickWrapper.classList.remove("showStick");
+    verticalHolder.classList.remove("showUp");
+  }
+
+  let isHeroAnimPendingLocal = true;
+
+  isHeroAnimPending.subscribe(function (val) {
+    if (val === true) return;
+
+    isHeroAnimPendingLocal = false;
+    if (!isInContactPage.get()) {
+      viewStick();
+    }
+  });
+
+  isInContactPage.subscribe(function (val) {
+    val ? pullDownStick() : isHeroAnimPendingLocal ? 0 : viewStick();
+  });
+</script>
+
+<style>
+  .contactStickWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    position: fixed;
+
+    left: 50px;
+    bottom: 0px;
+
+    --contact-icon-border: none;
+    --hamburger-level: 11;
+
+    overflow: hidden;
+
+    transform: translate(0, 100%);
+
+    transition-duration: 500ms;
+    transition-property: transform;
+    z-index: 1;
+    transition-delay: 700ms;
+  }
+
+  .showStick {
+    transition-delay: 0ms;
+    transform: translate(0);
+  }
+
+  .stick {
+    margin-top: 10px;
+    height: 100px;
+    width: 2px;
+    background-color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .contactStickWrapper {
+      display: none;
+    }
+  }
+</style>

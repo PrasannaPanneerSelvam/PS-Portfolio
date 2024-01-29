@@ -1,0 +1,249 @@
+---
+import Hamburger from "./Hamburger.astro";
+
+interface Props {
+  sections: string[];
+}
+
+const { sections } = Astro.props;
+---
+
+<header class="primaryHeader">
+  <div class="logo"></div>
+  <Hamburger />
+  <nav>
+    <ul class="primaryNavBar">
+      {
+        sections.map((sectionName) => (
+          <li class="primaryNavItem navlinks">
+            <a href={`#${sectionName.toLowerCase()}`}>{sectionName}</a>
+          </li>
+        ))
+      }
+      <div class="slider"></div>
+      <li class="primaryNavItem auxilaryNavItem">
+        <a
+          class="auxilaryButton"
+          href="/resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Resume
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<script>
+  import { currentPageIndex, isInContactPage } from "../store/Context";
+  import isHamburgerOn from "./../store/hamburgerState";
+
+  const primaryNavBarNode = document.getElementsByClassName("primaryNavBar")[0],
+    navlinkNodes = [...document.getElementsByClassName("navlinks")],
+    navAnchorNodes = navlinkNodes.map((i) => i.children[0]);
+
+  navlinkNodes.forEach((i, idx) => {
+    i.addEventListener("click", function () {
+      isHamburgerOn.set(false);
+      isInContactPage.set(idx === 2);
+    });
+  });
+
+  let isFirstRender = true;
+
+  isHamburgerOn.subscribe(function (value) {
+    if (isFirstRender) {
+      isFirstRender = false;
+      return;
+    }
+
+    primaryNavBarNode.classList.toggle("active");
+  });
+
+  currentPageIndex.subscribe((value) => {
+    navAnchorNodes.forEach(function (_, idx) {
+      idx === value
+        ? navAnchorNodes[idx].classList.add("activeNavItem")
+        : navAnchorNodes[idx].classList.remove("activeNavItem");
+    });
+  });
+</script>
+
+<style>
+  .primaryHeader {
+    position: fixed;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+    z-index: 9999;
+  }
+
+  .logo {
+    display: inline-block;
+    height: 50px;
+    aspect-ratio: 1 / 1;
+    /* background-color: #eee; */
+    margin: 2rem;
+  }
+
+  .primaryNavBar {
+    margin-right: 2rem;
+    display: flex;
+    list-style: none;
+    position: relative;
+  }
+
+  .primaryNavBar:before {
+    position: absolute;
+    content: "";
+    left: 50%;
+    top: 50%;
+    height: 200%;
+    width: 120%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.95);
+
+    /* border-radius: 1rem; */
+  }
+
+  @supports (backdrop-filter: blur(2rem)) {
+    .primaryNavBar:before {
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(2rem);
+    }
+  }
+
+  .primaryNavItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    text-align: center;
+
+    width: 7rem;
+    overflow: hidden;
+    z-index: 1002;
+  }
+
+  .primaryNavItem a {
+    position: relative;
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .auxilaryButton {
+    height: 100%;
+    padding: 0.25rem 0.7rem !important;
+    margin-left: 1.25rem;
+    color: var(--primary-text-color);
+    border: 1px solid var(--button-outline-color);
+    border-radius: var(--border-radius);
+    background: transparent;
+    cursor: pointer;
+    color: #fff;
+    border-color: #fff;
+    text-decoration: none;
+  }
+
+  /* .auxilaryButton:hover {
+  box-shadow: 1px 1px 0 0 #fff;
+  transform: translate(-2px, -2px);
+} */
+
+  .slider {
+    position: absolute;
+    bottom: -0.125rem;
+    height: 0.25rem;
+    /* height: 100%; */
+
+    width: 7rem;
+
+    background: transparent;
+    border: 2px solid #64ffda;
+
+    border-radius: 1rem;
+
+    transform: translate(0%);
+    transition: all 250ms linear;
+
+    z-index: 1001;
+
+    cursor: pointer;
+
+    left: 0;
+  }
+
+  @media (max-width: 768px) {
+    .slider {
+      display: none;
+    }
+
+    .auxilaryNavItem {
+      padding: 1.25rem;
+    }
+
+    .primaryNavBar {
+      z-index: 1000;
+      position: fixed;
+      left: 30%;
+      right: 0;
+      top: 0;
+      bottom: 0;
+
+      flex-direction: column;
+      gap: 2rem;
+
+      padding: min(30vh, 10rem) 2rem;
+      background-color: rgba(0, 0, 0, 0.95);
+
+      transform: translate(100%);
+      transition: translate 300ms ease-out;
+
+      /* height: min-content; */
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
+
+    @supports (backdrop-filter: blur(1rem)) {
+      .primaryNavBar {
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(1rem);
+      }
+    }
+
+    .primaryNavBar:before {
+      content: unset;
+    }
+
+    .active {
+      transform: translate(0%);
+    }
+
+    .navItem {
+      width: unset;
+    }
+
+    .activeNavItem:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.125rem;
+
+      width: 100%;
+      height: 0.25rem;
+
+      background: #fff;
+      border-radius: 1rem;
+    }
+
+    .auxilaryButton {
+      width: unset;
+      margin-left: 0px;
+    }
+  }
+</style>
