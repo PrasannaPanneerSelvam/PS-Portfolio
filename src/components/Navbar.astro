@@ -11,11 +11,11 @@ const { sections } = Astro.props;
 <header class="primaryHeader">
   <div class="nav-logo"></div>
   <Hamburger />
-  <nav>
+  <nav id="navbar-overlay">
     <ul class="primaryNavBar">
       {
         sections.map((sectionName) => (
-          <li class="primaryNavItem navlinks">
+          <li class="primaryNavItem navlink">
             <a href={`#${sectionName.toLowerCase()}`}>{sectionName}</a>
           </li>
         ))
@@ -37,29 +37,27 @@ const { sections } = Astro.props;
 
 <script>
   import { currentPageIndex, currentHash } from "../store/Context";
-  import { addClassName, removeClassName } from "./className";
+  import { addClassName, removeClassName, toggleClassName } from "./className";
 
-  const primaryNavBarNode = document.getElementsByClassName("primaryNavBar")[0],
-    navlinkNodes = [...document.getElementsByClassName("navlinks")],
-    navAnchorNodes = navlinkNodes.map(function (i) {
-      return i.children[0];
-    }),
-    hamburgerButton = document.getElementById("hamburgerButton");
+  const navbarOverlay = document.getElementById("navbar-overlay"),
+    navAnchorNodes = [...document.querySelectorAll(".navlink a")],
+    navbarSlider = document.getElementsByClassName("slider")[0];
 
-  const toggleSideNavBar = function () {
-    primaryNavBarNode.classList.toggle("movein");
+  const hamburgerButton = document.getElementById("hamburgerButton");
+
+  const toggleSideNavBarForMWeb = function () {
+    toggleClassName(navbarOverlay, "navbar-overlay");
   };
-  hamburgerButton.addEventListener("click", toggleSideNavBar);
 
-  navlinkNodes.forEach(function (linkNode, idx) {
-    linkNode.addEventListener("click", function () {
-      toggleSideNavBar();
+  hamburgerButton.addEventListener("click", toggleSideNavBarForMWeb);
+
+  navAnchorNodes.forEach(function (atag, idx) {
+    atag.addEventListener("click", function () {
+      toggleSideNavBarForMWeb();
       hamburgerButton.checked ^= 1;
       currentPageIndex.set(idx);
     });
   });
-
-  addClassName(navAnchorNodes[currentPageIndex.get()], "activeNavItem");
 
   currentPageIndex.subscribe((value) => {
     navAnchorNodes.forEach(function (_, idx) {
@@ -67,6 +65,7 @@ const { sections } = Astro.props;
         ? addClassName(navAnchorNodes[idx], "activeNavItem")
         : removeClassName(navAnchorNodes[idx], "activeNavItem");
     });
+    navbarSlider.style.setProperty("--slider-left", value * 100 + "%");
   });
 
   if (currentHash !== "") {
@@ -78,6 +77,8 @@ const { sections } = Astro.props;
         break;
       }
     }
+  } else {
+    addClassName(navAnchorNodes[0], "activeNavItem");
   }
 </script>
 
@@ -115,7 +116,7 @@ const { sections } = Astro.props;
     height: 200%;
     width: 120%;
     transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.95);
+    background-color: rgba(8, 5, 27, 0.95);
 
     /* border-radius: 1rem; */
   }
@@ -136,7 +137,7 @@ const { sections } = Astro.props;
     text-align: center;
 
     width: 7rem;
-    overflow: hidden;
+    /* overflow: hidden; */
     z-index: 1002;
   }
 
@@ -144,6 +145,10 @@ const { sections } = Astro.props;
     position: relative;
     text-decoration: none;
     color: #fff;
+  }
+
+  .primaryNavItem a:hover {
+    translate: 0 -5%;
   }
 
   .auxilaryButton {
@@ -166,6 +171,7 @@ const { sections } = Astro.props;
 } */
 
   .slider {
+    --slider-left: 0%;
     position: absolute;
     bottom: -0.125rem;
     height: 0.25rem;
@@ -178,7 +184,7 @@ const { sections } = Astro.props;
 
     border-radius: 1rem;
 
-    transform: translate(0%);
+    transform: translate(var(--slider-left, 0%));
     transition: all 250ms linear;
 
     z-index: 1001;
@@ -188,9 +194,26 @@ const { sections } = Astro.props;
     left: 0;
   }
 
+  @media (min-width: 769px) {
+    .primaryNavItem a {
+      display: flex;
+      height: 100%;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+  }
   @media (max-width: 768px) {
     .slider {
       display: none;
+    }
+
+    .navbar-overlay {
+      position: fixed;
+      top: 0;
+      display: inline-block;
+      height: 100vh;
+      width: 100vw;
     }
 
     .auxilaryNavItem {
@@ -231,7 +254,7 @@ const { sections } = Astro.props;
       content: unset;
     }
 
-    .movein {
+    .navbar-overlay > .primaryNavBar {
       transform: translate(0%);
     }
 
