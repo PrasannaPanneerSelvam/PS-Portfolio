@@ -12,7 +12,7 @@ import SocialMediaButtons from "./SocialMediaButtons.astro";
 </div>
 
 <script>
-  import { isHeroAnimPending, isInContactPage } from "../store/Context";
+  import { currentPageIndex, isHeroAnimPending } from "../store/Context";
 
   const verticalHolder = document.getElementById("verti-list"),
     contactStickWrapper = document.getElementsByClassName(
@@ -29,19 +29,15 @@ import SocialMediaButtons from "./SocialMediaButtons.astro";
     verticalHolder.classList.remove("rollCoin");
   }
 
-  let isHeroAnimPendingLocal = true;
-
-  isHeroAnimPending.subscribe(function (val) {
-    if (val === true) return;
-
-    isHeroAnimPendingLocal = false;
-    if (!isInContactPage.get()) {
+  isHeroAnimPending.subscribe(function () {
+    if (currentPageIndex.get() !== 2) {
       viewStick();
     }
   });
 
-  isInContactPage.subscribe(function (val) {
-    val ? pullDownStick() : isHeroAnimPendingLocal ? 0 : viewStick();
+  currentPageIndex.subscribe(function (pageIdx) {
+    const val = pageIdx === 2;
+    val ? pullDownStick() : isHeroAnimPending.get() ? 0 : viewStick();
   });
 </script>
 

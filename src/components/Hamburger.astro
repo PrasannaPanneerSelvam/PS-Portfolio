@@ -1,23 +1,7 @@
 <div class="hamburgerButtonHolder">
-  <div class="hamburgerButton" id="hamburgerButton"></div>
+  <input type="checkbox" class="hamburger-inp" id="hamburgerButton" />
+  <div class="criss-cross"></div>
 </div>
-
-<script>
-  import { isHamburgerOn } from "./../store/Context";
-
-  const hamburgerButton = document.getElementById("hamburgerButton");
-  hamburgerButton.addEventListener("click", function () {
-    isHamburgerOn.set(!isHamburgerOn.get());
-  });
-
-  isHamburgerOn.subscribe((value) => {
-    if (value) {
-      hamburgerButton.classList.add("criss-cross");
-    } else {
-      hamburgerButton.classList.remove("criss-cross");
-    }
-  });
-</script>
 
 <style is:global>
   .hamburgerButtonHolder {
@@ -41,7 +25,7 @@
     z-index: 9999;
   }
 
-  .hamburgerButton {
+  .criss-cross {
     display: inline-block;
     position: relative;
     height: var(--hamburger-line-height);
@@ -50,8 +34,8 @@
     border-radius: 10px;
     transition: all 0.2s ease-out;
   }
-  .hamburgerButton::before,
-  .hamburgerButton::after {
+  .criss-cross::before,
+  .criss-cross::after {
     content: "";
     display: inherit;
     position: absolute;
@@ -62,17 +46,27 @@
     top: 7px;
     transition: all 0.2s ease-out;
   }
-  .hamburgerButton::after {
+  .criss-cross::after {
     top: -7px;
   }
-  .hamburgerButton.criss-cross {
+
+  .hamburger-inp {
+    position: absolute;
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    z-index: 1;
+  }
+
+  .hamburger-inp:checked + .criss-cross {
     background-color: transparent;
   }
-  .hamburgerButton.criss-cross::before {
+  .hamburger-inp:checked + .criss-cross::before {
     top: 0;
     transform: rotate(-45deg);
   }
-  .hamburgerButton.criss-cross::after {
+  .hamburger-inp:checked + .criss-cross::after {
     top: 0;
     transform: rotate(45deg);
   }

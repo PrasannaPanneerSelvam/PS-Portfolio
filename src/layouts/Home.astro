@@ -46,7 +46,12 @@ const introText = "Designing the Future with Code and Elegance";
     maxSwaps: 3,
   };
 
-  let text = getRandomText(finalText),
+  const currentHash = window.location.hash;
+
+  let text =
+      currentHash.length && currentHash !== "#home"
+        ? finalText
+        : getRandomText(finalText),
     currentIndex = 0,
     swapCount = 0;
 

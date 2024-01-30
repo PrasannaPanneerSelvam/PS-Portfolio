@@ -13,7 +13,6 @@ const sections = ["Home", "About", "Contact"];
 
 <Layout title="Prasanna Ps">
   <!-- <canvas></canvas> -->
-
   <Navbar sections={sections} />
   <div class="topWrapper">
     <ContactStick />
@@ -24,6 +23,11 @@ const sections = ["Home", "About", "Contact"];
     </main>
   </div>
   <SvgStore />
+  <script aria-label="dev-easter-egg">
+    console.log(
+      "You seems like a curios dev!\nCheckout my other projects at https://github.com/PrasannaPanneerSelvam"
+    );
+  </script>
 </Layout>
 
 <style is:global>

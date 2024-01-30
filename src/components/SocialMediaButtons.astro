@@ -156,6 +156,7 @@ const startingLeftPosition = `${containerWidth / 2 - halfIconSize}px`,
   import { isInContactPage } from "../store/Context";
 
   const horizontalHolder = document.getElementById("horiz-list");
+  horizontalHolder.classList.remove("rollCoin");
 
   isInContactPage.subscribe(function () {
     horizontalHolder.classList.toggle("rollCoin");
