@@ -13,20 +13,23 @@ import SocialMediaButtons from "./SocialMediaButtons.astro";
 
 <script>
   import { currentPageIndex, isHeroAnimPending } from "../store/Context";
+  import { removeClassName, addClassName } from "./className";
 
   const verticalHolder = document.getElementById("verti-list"),
     contactStickWrapper = document.getElementsByClassName(
       "contactStickWrapper"
-    )[0];
+    )[0],
+    showStickClassName = "showStick",
+    rollCoinClassName = "rollCoin";
 
   function viewStick() {
-    contactStickWrapper.classList.add("showStick");
-    verticalHolder.classList.add("rollCoin");
+    addClassName(contactStickWrapper, showStickClassName);
+    addClassName(verticalHolder, rollCoinClassName);
   }
 
   function pullDownStick() {
-    contactStickWrapper.classList.remove("showStick");
-    verticalHolder.classList.remove("rollCoin");
+    removeClassName(contactStickWrapper, showStickClassName);
+    removeClassName(verticalHolder, rollCoinClassName);
   }
 
   isHeroAnimPending.subscribe(function () {

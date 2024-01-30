@@ -28,7 +28,8 @@ const introText = "Designing the Future with Code and Elegance";
 
 <script>
   import { getNewRandomText, getRandomText } from "./randomUtils";
-  import { isHeroAnimPending } from "./../store/Context";
+  import { currentHash, isHeroAnimPending } from "./../store/Context";
+  import { addClassName } from "../components/className";
 
   const heroTextNode = document.getElementById("heroText"),
     introTextNode = document.getElementById("introText");
@@ -37,7 +38,7 @@ const introText = "Designing the Future with Code and Elegance";
     isHeroAnimPending.set(false);
   });
 
-  const finalText = "Prasanna";
+  const finalText = heroTextNode.textContent;
 
   const options = {
     changeOneLetterAtOnce: true,
@@ -45,8 +46,6 @@ const introText = "Designing the Future with Code and Elegance";
     doMaxSwaps: false,
     maxSwaps: 3,
   };
-
-  const currentHash = window.location.hash;
 
   let text =
       currentHash.length && currentHash !== "#home"
@@ -64,7 +63,7 @@ const introText = "Designing the Future with Code and Elegance";
     const { timing, doMaxSwaps, maxSwaps, changeOneLetterAtOnce } = options;
 
     if (text === finalText || currentIndex === text.length) {
-      introTextNode.classList.add("removeMask");
+      addClassName(introTextNode, "removeMask");
       return;
     }
 

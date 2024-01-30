@@ -154,12 +154,15 @@ const startingLeftPosition = `${containerWidth / 2 - halfIconSize}px`,
 
 <script>
   import { isInContactPage } from "../store/Context";
+  import { addClassName, removeClassName } from "./className";
 
-  const horizontalHolder = document.getElementById("horiz-list");
-  horizontalHolder.classList.remove("rollCoin");
+  const horizontalHolder = document.getElementById("horiz-list"),
+    rollCoinClassName = "rollCoin";
 
-  isInContactPage.subscribe(function () {
-    horizontalHolder.classList.toggle("rollCoin");
+  isInContactPage.subscribe(function (val) {
+    val
+      ? addClassName(horizontalHolder, rollCoinClassName)
+      : removeClassName(horizontalHolder, rollCoinClassName);
   });
 </script>
 
@@ -215,7 +218,8 @@ const startingLeftPosition = `${containerWidth / 2 - halfIconSize}px`,
   .coinItem:hover {
     --icon-primary-fill-color: #64ffda;
     --icon-stroke-color: #64ffda;
-    margin-bottom: 8%;
+    /* margin-bottom: 8%; */
+    translate: 0 -8%;
   }
 
   .coinItem:hover::before {
@@ -225,7 +229,7 @@ const startingLeftPosition = `${containerWidth / 2 - halfIconSize}px`,
   .coinItem a {
     opacity: 0;
     transition-duration: 1s;
-    transition-property: all;
+    transition-property: opacity;
   }
 
   .rollCoin .coinItem {

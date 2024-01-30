@@ -32,3 +32,5 @@ currentPageIndex.subscribe(function (idx) {
 delete isInContactPage["set"];
 
 export { currentPageIndex, isHeroAnimPending, isInContactPage };
+
+export const currentHash = window.location.hash;

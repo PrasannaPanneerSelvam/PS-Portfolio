@@ -36,7 +36,8 @@ const { sections } = Astro.props;
 </header>
 
 <script>
-  import { currentPageIndex } from "../store/Context";
+  import { currentPageIndex, currentHash } from "../store/Context";
+  import { addClassName, removeClassName } from "./className";
 
   const primaryNavBarNode = document.getElementsByClassName("primaryNavBar")[0],
     navlinkNodes = [...document.getElementsByClassName("navlinks")],
@@ -58,17 +59,16 @@ const { sections } = Astro.props;
     });
   });
 
-  navAnchorNodes[currentPageIndex.get()].classList.add("activeNavItem");
+  addClassName(navAnchorNodes[currentPageIndex.get()], "activeNavItem");
 
   currentPageIndex.subscribe((value) => {
     navAnchorNodes.forEach(function (_, idx) {
       idx === value
-        ? navAnchorNodes[idx].classList.add("activeNavItem")
-        : navAnchorNodes[idx].classList.remove("activeNavItem");
+        ? addClassName(navAnchorNodes[idx], "activeNavItem")
+        : removeClassName(navAnchorNodes[idx], "activeNavItem");
     });
   });
 
-  const currentHash = window.location.hash;
   if (currentHash !== "") {
     for (let idx = 0; idx < navAnchorNodes.length; idx++) {
       const sectionId = navAnchorNodes[idx].textContent.toLowerCase();
