@@ -8,12 +8,12 @@ import SvgStore from "./../layouts/SvgStore.astro";
 import ContactStick from "../components/ContactStick.astro";
 import Navbar from "../components/Navbar.astro";
 
-const sections = ["Home", "About", "Contact"];
+import sectionNames from "../sectionNames";
 ---
 
 <Layout title="Prasanna Ps">
   <!-- <canvas></canvas> -->
-  <Navbar sections={sections} />
+  <Navbar sections={sectionNames} />
   <div class="topWrapper">
     <ContactStick />
     <main class="mainContent scrollSnapMainContent">

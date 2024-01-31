@@ -153,14 +153,17 @@ const startingLeftPosition = `${containerWidth / 2 - halfIconSize}px`,
 </ul>
 
 <script>
-  import { isInContactPage } from "../store/Context";
+  import { currentPageIndex } from "../store/Context";
   import { addClassName, removeClassName } from "./className";
 
   const horizontalHolder = document.getElementById("horiz-list"),
     rollCoinClassName = "rollCoin";
 
-  isInContactPage.subscribe(function (val) {
-    val
+  // To remove class set for Js disabled browsers
+  removeClassName(horizontalHolder, rollCoinClassName);
+
+  currentPageIndex.subscribe(function (pageIndex) {
+    pageIndex === 2
       ? addClassName(horizontalHolder, rollCoinClassName)
       : removeClassName(horizontalHolder, rollCoinClassName);
   });

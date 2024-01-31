@@ -32,8 +32,8 @@ import SocialMediaButtons from "./SocialMediaButtons.astro";
     removeClassName(verticalHolder, rollCoinClassName);
   }
 
-  isHeroAnimPending.subscribe(function () {
-    if (currentPageIndex.get() !== 2) {
+  isHeroAnimPending.subscribe(function (val) {
+    if (!val && currentPageIndex.get() !== 2) {
       viewStick();
     }
   });

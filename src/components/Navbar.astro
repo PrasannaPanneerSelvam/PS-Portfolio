@@ -36,7 +36,7 @@ const { sections } = Astro.props;
 </header>
 
 <script>
-  import { currentPageIndex, currentHash } from "../store/Context";
+  import { currentPageIndex } from "../store/Context";
   import { addClassName, removeClassName, toggleClassName } from "./className";
 
   const navbarOverlay = document.getElementById("navbar-overlay"),
@@ -67,19 +67,6 @@ const { sections } = Astro.props;
     });
     navbarSlider.style.setProperty("--slider-left", value * 100 + "%");
   });
-
-  if (currentHash !== "") {
-    for (let idx = 0; idx < navAnchorNodes.length; idx++) {
-      const sectionId = navAnchorNodes[idx].textContent.toLowerCase();
-      if ("#" + sectionId === currentHash) {
-        document.getElementById(sectionId).scrollIntoView();
-        currentPageIndex.set(idx);
-        break;
-      }
-    }
-  } else {
-    addClassName(navAnchorNodes[0], "activeNavItem");
-  }
 </script>
 
 <style is:global>

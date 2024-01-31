@@ -28,7 +28,7 @@ const introText = "Designing the Future with Code and Elegance";
 
 <script>
   import { getNewRandomText, getRandomText } from "./randomUtils";
-  import { currentHash, isHeroAnimPending } from "./../store/Context";
+  import { currentPageIndex, isHeroAnimPending } from "./../store/Context";
   import { addClassName } from "../components/className";
 
   const heroTextNode = document.getElementById("heroText"),
@@ -48,9 +48,7 @@ const introText = "Designing the Future with Code and Elegance";
   };
 
   let text =
-      currentHash.length && currentHash !== "#home"
-        ? finalText
-        : getRandomText(finalText),
+      currentPageIndex.get() !== 0 ? finalText : getRandomText(finalText),
     currentIndex = 0,
     swapCount = 0;
 
